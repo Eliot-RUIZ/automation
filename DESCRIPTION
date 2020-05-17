@@ -1,12 +1,13 @@
 Package: automation
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Automation of time-consumming tasks in R
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Author: Eliot RUIZ
+Maintainer: The package maintainer <leliotruiz@gmail.com>
+Description: This package currently provide two functions for automation of 
+    non-linear model comparison. All associated calculations, plotting and
+    ordering related functionalities are also implemented.
+License: GNU v3.0
 Encoding: UTF-8
 LazyData: true
 Depends: aomisc
