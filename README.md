@@ -43,8 +43,8 @@ The models with the lowest estimators (i.e. best models) are then placed on the 
 
 Here is an example obtained with the *mtcars* package, and easily exported using the *kable* function in the "knitr" package:
 ```r
-result = compare_nlm(mpg ~ wt, mtcars, digits = 1, c("Nb_coeffs", "AIC"), increase = F)
-kable(head(result, 15))
+result = compare_nlm(mpg ~ wt, mtcars, digits = 1, increase = F, arrange = c("Nb_coeffs", "AIC"))
+kable(head(result, 15), row.names = F)
 ```
 
 |Rank  |ID   |    Function      |RMSE  | AIC   | BIC   |Nb_coeffs  | Coeff_1    | Coeff_2   |  Coeff_3     | Coeff_4   | Coeff_5   |Coeff_6   |Coeff_7  |
@@ -67,12 +67,15 @@ kable(head(result, 15))
 
 In R, the results are printed in a convenient way to allows maximum visibility for detecting the best model rapidly:
 ```r
-compare_nlm(mpg ~ wt, mtcars, digits = 2, increase = F, arrange = c("RMSE", "Nb_coeffs", "AIC", "BIC"))
+compare_nlm(mpg ~ wt, mtcars)
 ```
 
 ![Capture](https://user-images.githubusercontent.com/15387266/84198162-6d65ca00-aaa3-11ea-942e-534d4e07876e.PNG)
 
-
+The argument *plot_model* allows to automatically plot 1 to 9 model by entering the ID:
+```r
+compare_nlm(mpg ~ wt, mtcars, plot_model = c(75,23,34,88,44,46))
+```
 
 
 
