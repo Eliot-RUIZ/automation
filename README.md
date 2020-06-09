@@ -33,7 +33,9 @@ The decision tree can also be downloaded by clicking on the top right corner but
 
 The function *compare_nlm* is fully functionnal and serves to choose the most appropriate non-linear model to a set of data consisting in 1 dependent variable (Y) and 1 factor. Both variables must be quantitative.
 
-After 4 to 5s of computation (on a usual laptop), the function a table containing the coefficients (1 to 7) of 112 non-linear and 2 linear models (intercept = 0 or not).
+After 4 to 5s of computation (on a usual laptop), the function dispaly a table containing the coefficients (1 to 7) of 112 non-linear and 2 linear models (intercept = 0 or not). The self-starters for all those models are found in the packages "drc" and "aomisc", and *compare_nlm* uses internally the function *drm* (package "drc) to run the computation. 
+
+Sometimes, the convergence of the self-starters might fail (model not appropried to the data), but the function will jump to the other model and print a message with the ID of model (stored at the end of the table).
 
 The user can choose to order the table (*arrange* argument), according to the AIC, and/or the BIC, and/or the RMSE and/or the number of coefficients. 
 
@@ -65,9 +67,10 @@ kable(head(result, 15), row.names = F)
 |14    |56   |ml4a              |2.5   |160.6  |169.4  |5 coeffs   |b: 2.6      |c: 8.7     |d: -294.2     |e: 0.9     |f: 792.2   |          |         |
 |+99 other lines  |   |          |   |     |     |  |      |     |        |     |     |    |   |
 
-In R, the results are printed in a convenient way to allows maximum visibility for detecting the best model rapidly:
+In R, the results are printed in a convenient way to allows maximum visibility for detecting the best model rapidly. They can also be printed using the *View* function:
 ```r
 compare_nlm(mpg ~ wt, mtcars)
+View(compare_nlm(mpg ~ wt, mtcars))
 ```
 
 ![Capture](https://user-images.githubusercontent.com/15387266/84198162-6d65ca00-aaa3-11ea-942e-534d4e07876e.PNG)
@@ -83,6 +86,9 @@ Information on the non-linear model (e.g. formula, coefficients) can be directly
 ```r
 ?UCRS.5c
 ```
+
+If the name of the package implementing the function appear in front of the name of the model if the argument *package* is switched to *TRUE*.
+
 The names of the 21 remaining model (in package "aomisc") are displayed below and more informations on them can be obtained following this [link1](https://www.statforbiology.com/2020/stat_nls_usefulfunctions/#exponential-function) and this [link2](https://www.statforbiology.com/nonlinearregression/usefulequations):
 
 |Aomisc functions used | Name of the model | Formula of the model  |
@@ -107,4 +113,9 @@ The names of the 21 remaining model (in package "aomisc") are displayed below an
 |E.3              | Modified Gompertz equation (3 parameters) | ![Y = c + (1 - c) \left\{ 1 - \exp \left\{- \exp \left\[ b \, (X - e) \right\] \right\} \right\} \quad \quad \quad](https://render.githubusercontent.com/render/math?math=Y%20%3D%20c%20%2B%20(1%20-%20c)%20%5Cleft%5C%7B%201%20-%20%5Cexp%20%5Cleft%5C%7B-%20%5Cexp%20%5Cleft%5B%20b%20%5C%2C%20(X%20-%20e)%20%5Cright%5D%20%5Cright%5C%7D%20%5Cright%5C%7D%20%5Cquad%20%5Cquad%20%5Cquad) |
 |E.4              | Modified Gompertz equation (4 parameters) | ![Y = c + (d - c) \left\{ 1 - \exp \left\{- \exp \left\[ b \, (X - e) \right\] \right\} \right\} \quad \quad \quad](https://render.githubusercontent.com/render/math?math=Y%20%3D%20c%20%2B%20(d%20-%20c)%20%5Cleft%5C%7B%201%20-%20%5Cexp%20%5Cleft%5C%7B-%20%5Cexp%20%5Cleft%5B%20b%20%5C%2C%20(X%20-%20e)%20%5Cright%5D%20%5Cright%5C%7D%20%5Cright%5C%7D%20%5Cquad%20%5Cquad%20%5Cquad) |
 |L.2              | Logistic (2 parameters) | ![Y = \frac{1}{1 + exp(- b (X - e))} \quad \quad \quad](https://render.githubusercontent.com/render/math?math=Y%20%3D%20%5Cfrac%7B1%7D%7B1%20%2B%20exp(-%20b%20(X%20-%20e))%7D%20%5Cquad%20%5Cquad%20%5Cquad) |
+
+In case of error, different messages will be printed to explain to the user why the error he made : error of syntax of the estimators, error in the number of digits or the ID of the models etc.
+
+
+## Automation of the comparison and plotting of non-linear models
 
