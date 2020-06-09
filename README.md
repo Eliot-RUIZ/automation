@@ -88,7 +88,7 @@ The 21 remaining model (in package "aomisc") are commonly used models thus infor
 |:----------------|:------------------------------|
 |DRC.asymReg      | Asymptotic Regression Model |
 |DRC.beta         | Beta Regression Models |
-|DRC.bragg.3      | Bragg Regression model (Type 3) | Y=dexp[−b(X−e)2] |
+|DRC.bragg.3      | Bragg Regression model (Type 3) | 
 |DRC.bragg.4      | Bragg Regression model (Type 4) |
 |DRC.cousens85    |  |
 |DRC.expoDecay    |  |
@@ -107,4 +107,4 @@ The 21 remaining model (in package "aomisc") are commonly used models thus infor
 |E.4              |  |
 |L.2              |  |
 
-  
+  Y=dexp[−b(X−e)2]
