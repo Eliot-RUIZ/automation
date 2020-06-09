@@ -3,7 +3,13 @@
 The goal of this package is to provide functions automating usual time-consuming tasks in R.
 
 
+
 ## Automation of usual statistical tests
+
+```r
+### Actual default values ###
+auto_stats = function(data, Y, X1 = NULL, X2 = NULL, paired = "none", ID = NULL, theoric_mean = NULL, digits = 3)
+```
 
 The function *auto_stats* aims at choosing the appropriate statistical test for the data provided by the user. 
 
@@ -29,9 +35,15 @@ This decision tree can be viewed online following this link: http://www.xmind.ne
 The decision tree can also be downloaded by clicking on the top right corner button and then "Download". The decision tree could then be opened in Xmind (prior download of the software necessary) to get access to the content of the boxes (R code), and also see it in the text preview (as it is organized in the function).
 
 
+
 ## Automation of the comparison and plotting of non-linear models
 
 The function *compare_nlm* is fully functionnal and serves to choose the most appropriate non-linear model to a set of data consisting in 1 dependent variable (Y) and 1 factor. Both variables must be quantitative.
+
+```r
+### Default values ###
+compare_nlm = function(formula, data, digits = 2, arrange = c("AIC", "RMSE", "BIC"), increase = T, plot_model = NA, package = F)
+```
 
 After 4 to 5s of computation (on a usual laptop), the function dispaly a table containing the best coefficients (1 to 7) of 112 non-linear and 2 linear models (intercept = 0 or not). The self-starters for all those models are found in the packages "drc" and "aomisc", and *compare_nlm* uses internally the function *drm* (package "drc) to run the computation. 
 
@@ -117,3 +129,10 @@ The names of the 21 remaining model (in package "aomisc") are displayed below an
 In case of error, different messages will be printed to explain to the user why the error he made : error of syntax of the estimators, error in the number of digits or the ID of the models etc.
 
 
+
+## To complete
+
+```r
+### Default values ###
+compare_nlm = function(formula, data, digits = 2, arrange = c("AIC", "RMSE", "BIC"), increase = T, plot_model = NA, package = F)
+```
