@@ -1,6 +1,6 @@
 # Package "automation" - Eliot RUIZ
 
-The goal of this package is to provide functions automating usual time-consuming tasks in R.
+The goal of this package is to provide functions automating time-consuming tasks in R: statistical testing & non-linear model choice/plotting.
 
 
 
@@ -36,7 +36,7 @@ The decision tree can also be downloaded by clicking on the top right corner but
 
 
 
-## Automation of the comparison and plotting of non-linear models
+## Automation of the comparison using different estimators + automatic plotting of non-linear models of interest
 
 The function *compare_nlm* is fully functionnal and serves to choose the most appropriate non-linear model to a set of data consisting in 1 dependent variable (Y) and 1 factor. Both variables must be quantitative.
 
