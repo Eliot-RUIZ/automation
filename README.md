@@ -1,9 +1,7 @@
 # Package "automation" - Eliot RUIZ
 
 The goal of this package is to provide functions automating usual time-consuming tasks in R.
-```math
-a^2+b^2=c^2
-```
+
 
 ## Automation of usual statistical tests
 
@@ -85,9 +83,10 @@ Information on the non-linear model (e.g. formula, coefficients) can be directly
 ```r
 ?UCRS.5c
 ```
-The 21 remaining model (in package "aomisc") are commonly used models thus information on them can easily be found on Internet by typing their names
+The names of the 21 remaining model (in package "aomisc") are displayed below
+
 |Aomisc functions |  | 
-|:----------------|:------------------------------|
+|:----------------|:----------------------------------------------|
 |DRC.asymReg      | Asymptotic Regression Model |
 |DRC.beta         | Beta function |
 |DRC.bragg.3      | Bragg equation (3 parameters) | 
@@ -109,4 +108,34 @@ The 21 remaining model (in package "aomisc") are commonly used models thus infor
 |E.4              | Modified Gompertz equation (4 parameters) |
 |L.2              | Logistic (ED50 as parameter) |
 
-  ![equation]Y=b0+b1X+b2X2
+ <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+  <mi>Y</mi>
+  <mo>=</mo>
+  <msub>
+    <mi>b</mi>
+    <mn>0</mn>
+  </msub>
+  <mo>+</mo>
+  <msub>
+    <mi>b</mi>
+    <mn>1</mn>
+  </msub>
+  <mspace width="thinmathspace" />
+  <mi>X</mi>
+  <mo>+</mo>
+  <msub>
+    <mi>b</mi>
+    <mn>2</mn>
+  </msub>
+  <mspace width="thinmathspace" />
+  <msup>
+    <mi>X</mi>
+    <mn>2</mn>
+  </msup>
+  <mspace width="1em" />
+  <mspace width="1em" />
+  <mspace width="1em" />
+  <mo stretchy="false">(</mo>
+  <mn>2</mn>
+  <mo stretchy="false">)</mo>
+</math>
