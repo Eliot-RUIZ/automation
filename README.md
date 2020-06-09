@@ -55,7 +55,7 @@ The user can choose to order the table ("arrange" argument), according to the AI
 |14    |45   |llogistic         |2.44   |159.98  |168.77  |5 coeffs   |b: 28.47     |c: 1.6      |d: 31.11       |e: 1.86     |f: 0.03     |           |          |
 |15    |15   |CRS.6             |2.44   |161.94  |172.2   |6 coeffs   |b: 1.53      |c: 5.17     |d: 87.88       |e: 1.11     |f: -394.28  |g: -2.73   |          |
 |16    |28   |L.5               |2.45   |160.18  |168.97  |5 coeffs   |b: 18.12     |c: 9.57     |d: 31.04       |e: 1.82     |f: 0.03     |           |          |
-
+|+99 other lines  |   |          |   |     |     |  |      |     |        |     |     |    |   |
 
 
 
