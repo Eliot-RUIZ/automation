@@ -134,7 +134,7 @@ auto_stats = function(data, Y, X1 = NULL, X2 = NULL, paired = "none", ID = NULL,
       
       else
         
-        # Taille d'effet : Phi coefficient
+        # Effect size: Phi coefficient
         
         sqrt(prop.test(tab_n, correct = F)[[1]][[1]]/sum(tab_n))
       
@@ -1292,7 +1292,7 @@ else if(paired == "first" || paired == "second")
   if(ID == NULL)
     stop("Please provide the name of the column containing the blocking variable (i.e. id of the subjects) in the ID argument.")
 
-# A ADAPTER : Homogénéité des covariances
+# A ADAPTER : HomogÃ©nÃ©itÃ© des covariances
 
 if(paired == "first") {
   if(box_m(data[, "Y", drop = F], data$X2)[2] < 0.001)
