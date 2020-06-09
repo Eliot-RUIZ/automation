@@ -1492,7 +1492,7 @@ if(gvlma(mod.lm)$GlobalTest$GlobalStat4$pvalue <= 0.05)
           Therefore, you should consider transforming the variables (e.g. log, sqrt, polynomial regression) or using a 
           GAM (i.e performing a non-linear regression).")
   
-  # Absence of multicolinearity
+  # Absence of multicolinearity (VIF)
   
   if(vif(mod.lm)[1]>4) {warning("Multicolinearity between factors. Please consider removing the 1st factor from the formula (highest VIF)") }
   
