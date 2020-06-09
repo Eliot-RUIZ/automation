@@ -83,7 +83,7 @@ Information on the non-linear model (e.g. formula, coefficients) can be directly
 ```r
 ?UCRS.5c
 ```
-The names of the 21 remaining model (in package "aomisc") are displayed below
+The names of the 21 remaining model (in package "aomisc") are displayed below and more informations on them can be obtained following this [link1](https://www.statforbiology.com/2020/stat_nls_usefulfunctions/#exponential-function) and this [link2](https://www.statforbiology.com/nonlinearregression/usefulequations):
 
 |Aomisc functions used | Name of the model | Formula of the model  |
 |:----------------|:----------------------------------------------|:-----------------|
@@ -92,8 +92,8 @@ The names of the 21 remaining model (in package "aomisc") are displayed below
 |DRC.bragg.3      | Bragg equation (3 parameters) | ![Y = d \, \exp \left\[ - b (X - e)^2 \right\] \quad \quad \quad](https://render.githubusercontent.com/render/math?math=Y%20%3D%20d%20%5C%2C%20%5Cexp%20%5Cleft%5B%20-%20b%20(X%20-%20e)%5E2%20%5Cright%5D%20%5Cquad%20%5Cquad%20%5Cquad) |
 |DRC.bragg.4      | Bragg equation (4 parameters) | ![Y = c + (d - c) \, \exp \left\[ - b (X - e)^2 \right\] \quad \quad \quad](https://render.githubusercontent.com/render/math?math=Y%20%3D%20c%20%2B%20(d%20-%20c)%20%5C%2C%20%5Cexp%20%5Cleft%5B%20-%20b%20(X%20-%20e)%5E2%20%5Cright%5D%20%5Cquad%20%5Cquad%20%5Cquad) |
 |DRC.cousens85    | Yield-Weed Density function (Cousens, 1985) | ![Y_W  = Y_{WF} \left( 1 - \frac{i\, X}{100 \left( 1 + \frac{i \, X}{a} \right) } \right)](https://render.githubusercontent.com/render/math?math=Y_W%20%20%3D%20Y_%7BWF%7D%20%5Cleft(%201%20-%20%5Cfrac%7Bi%5C%2C%20X%7D%7B100%20%5Cleft(%201%20%2B%20%5Cfrac%7Bi%20%5C%2C%20X%7D%7Ba%7D%20%5Cright)%20%7D%20%5Cright)) |
-|DRC.expoDecay    | Exponential Decay Model (k < 0) | ![Y = a  e^{k X} \quad \quad \quad (k < 0)](https://render.githubusercontent.com/render/math?math=Y%20%3D%20a%20%20e%5E%7Bk%20X%7D%20%5Cquad%20%5Cquad%20%5Cquad%20(k%20%3C%200)) |
-|DRC.expoGrowth   | Exponential Growth Model (k > 0) | ![Y = a  e^{k X} \quad \quad \quad (k > 0)](https://render.githubusercontent.com/render/math?math=Y%20%3D%20a%20%20e%5E%7Bk%20X%7D%20%5Cquad%20%5Cquad%20%5Cquad%20(k%20%3E%200)) |
+|DRC.expoDecay    | Exponential Decay Model | ![Y = a  e^{k X} \quad (k < 0)](https://render.githubusercontent.com/render/math?math=Y%20%3D%20a%20%20e%5E%7Bk%20X%7D%20%5Cquad%20(k%20%3C%200)) |
+|DRC.expoGrowth   | Exponential Growth Model | ![Y = a  e^{k X} \quad (k > 0)](https://render.githubusercontent.com/render/math?math=Y%20%3D%20a%20%20e%5E%7Bk%20X%7D%20%5Cquad%20(k%20%3E%200)) |
 |DRC.linear       | Straight line | ![Y = b_0 + b_1 \, X \quad \quad \quad](https://render.githubusercontent.com/render/math?math=Y%20%3D%20b_0%20%2B%20b_1%20%5C%2C%20X%20%5Cquad%20%5Cquad%20%5Cquad) | b0  is the value of Y when X=0, b1 is the slope |
 |DRC.linearOrigin | Straight line through origin | ![Y = b_1 \, X \quad \quad \quad](https://render.githubusercontent.com/render/math?math=Y%20%3D%20b_1%20%5C%2C%20X%20%5Cquad%20%5Cquad%20%5Cquad) |
 |DRC.logCurve     | Linear regression on log-transformed x | ![y = a + b \, \log(X) \quad \quad \quad](https://render.githubusercontent.com/render/math?math=y%20%3D%20a%20%2B%20b%20%5C%2C%20%5Clog(X)%20%5Cquad%20%5Cquad%20%5Cquad) |
