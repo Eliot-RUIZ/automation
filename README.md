@@ -75,7 +75,7 @@ View(compare_nlm(mpg ~ wt, mtcars))
 
 ![Capture](https://user-images.githubusercontent.com/15387266/84198162-6d65ca00-aaa3-11ea-942e-534d4e07876e.PNG)
 
-The argument *plot_model* allows to automatically plot 1 to 9 model by entering the ID:
+The argument *plot_model* allows to automatically plot 1 to 9 model with their RMSE by entering the ID, the partition of the graphical window being automatically adapted to the number of graphics to plot:
 ```r
 compare_nlm(mpg ~ wt, mtcars, plot_model = c(75,23,34,88,44,46))
 ```
@@ -116,6 +116,4 @@ The names of the 21 remaining model (in package "aomisc") are displayed below an
 
 In case of error, different messages will be printed to explain to the user why the error he made : error of syntax of the estimators, error in the number of digits or the ID of the models etc.
 
-
-## Automation of the comparison and plotting of non-linear models
 
