@@ -94,7 +94,7 @@ compare_nlm(mpg ~ wt, mtcars, plot_model = c(75,23,34,88,44,46))
 
 ![Rplot](https://user-images.githubusercontent.com/15387266/84199785-0b5a9400-aaa6-11ea-9080-672bdfbd2145.png)
 
-Information on the non-linear model (e.g. formula, coefficients) can be directly accessed for 93 models (in package "drc") like this:
+Information on the non-linear model (e.g. formula, coefficients) can be directly accessed for 93 models (in package "drc") by typing their names preceded by a question mark:
 ```r
 ?UCRS.5c
 ```
