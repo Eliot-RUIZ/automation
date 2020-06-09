@@ -28,9 +28,9 @@ The last section is of major importance since many different messages have been 
 
 Currently, this function is still in the making but will be functionnal in the next few days.
 
-For more transparency due to the length of the function (approximately 1500 lines of code), I created on Xmind the decisional tree the algorithm follows, for the statistical part. 
+For more transparency due to the length of the function (approximately 1500 lines of code), I created on Xmind the decision tree the algorithm follows, for the statistical part. 
 
-This decision tree can be viewed online following this link: http://www.xmind.net/m/MikJA4
+This decision tree can be viewed online following this link: http://www.xmind.net/m/3QZV9X
 
 The decision tree can also be downloaded by clicking on the top right corner button and then "Download". The decision tree could then be opened in Xmind (prior download of the software necessary) to get access to the content of the boxes (R code), and also see it in the text preview (as it is organized in the function).
 
