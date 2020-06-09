@@ -108,34 +108,4 @@ The names of the 21 remaining model (in package "aomisc") are displayed below
 |E.4              | Modified Gompertz equation (4 parameters) |
 |L.2              | Logistic (ED50 as parameter) |
 
- <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
-  <mi>Y</mi>
-  <mo>=</mo>
-  <msub>
-    <mi>b</mi>
-    <mn>0</mn>
-  </msub>
-  <mo>+</mo>
-  <msub>
-    <mi>b</mi>
-    <mn>1</mn>
-  </msub>
-  <mspace width="thinmathspace" />
-  <mi>X</mi>
-  <mo>+</mo>
-  <msub>
-    <mi>b</mi>
-    <mn>2</mn>
-  </msub>
-  <mspace width="thinmathspace" />
-  <msup>
-    <mi>X</mi>
-    <mn>2</mn>
-  </msup>
-  <mspace width="1em" />
-  <mspace width="1em" />
-  <mspace width="1em" />
-  <mo stretchy="false">(</mo>
-  <mn>2</mn>
-  <mo stretchy="false">)</mo>
-</math>
+![Y = b_0 + b_1\, X + b_2 \, X^2 \quad \quad \quad](https://render.githubusercontent.com/render/math?math=Y%20%3D%20b_0%20%2B%20b_1%5C%2C%20X%20%2B%20b_2%20%5C%2C%20X%5E2%20%5Cquad%20%5Cquad%20%5Cquad)
