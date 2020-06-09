@@ -5,11 +5,11 @@ The goal of this package is to provide functions automating usual time-consuming
 
 ## Automation of usual statistical tests
 
-The function auto_stats aims at choosing the appropriate statistical test for the data provided by the user. 
+The function *auto_stats* aims at choosing the appropriate statistical test for the data provided by the user. 
 
 The data could consist in an independant variable (Y) explained by 0 to 2 factors (X).
 
-After checking each assumptions, the function compute the main test and all usually associated calculations (e.g. effect size, post-hoc tests).
+After checking each assumptions, the function compute the main test and all usually associated tasks (e.g. effect size, post-hoc tests, interaction plot).
 
 It then returns all the results in APA format to ease insertion in a text document, except for the post-hoc analysis results. The output is separated in 5 sections: 
   - Assumptions
@@ -22,7 +22,7 @@ The last section is of major importance since many different messages have been 
 
 Currently, this function is still in the making but will be functionnal in the next few days.
 
-For more transparency due to the length of the function (approximately 1500 lines of code), I created on Xmind the decisional tree the algorithm follows, for the statistical part (main part). 
+For more transparency due to the length of the function (approximately 1500 lines of code), I created on Xmind the decisional tree the algorithm follows, for the statistical part. 
 
 This decision tree can be viewed online following this link: http://www.xmind.net/m/MikJA4
 
@@ -31,11 +31,16 @@ The decision tree can also be downloaded by clicking on the top right corner but
 
 ## Automation of the comparison and plotting of non-linear models
 
-The function compare_nlm is fully functionnal and serves to choose the most appropriate non-linear model to a set of data consisting in 1 dependent variable (Y) and 1 factor. Both variables must be quantitative.
+The function *compare_nlm* is fully functionnal and serves to choose the most appropriate non-linear model to a set of data consisting in 1 dependent variable (Y) and 1 factor. Both variables must be quantitative.
 
 After 4 to 5s of computation (on a usual laptop), the function a table containing the coefficients (1 to 7) of 112 non-linear and 2 linear models (intercept = 0 or not).
 
-The user can choose to order the table ("arrange" argument), according to the AIC, the BIC, the RMSE or the number of coefficients 
+The user can choose to order the table (*arrange* argument), according to the AIC, and/or the BIC, and/or the RMSE and/or the number of coefficients; their order reflecting the importance the used gives to each estimator. The models with the lowest estimators (i.e. best models) are then placed on the top of the dataframe (i.e. Rank 1, Rank 2 etc). However, the dataframe could also be ordered by descending order if the argument *increase* is shifted to *FALSE*.
+
+Here is an example obtained with the *mtcars* package (*mpg ~ wt*):
+```r
+compare_nlm(mpg ~ wt, mtcars)
+```
 
 |Rank  |ID   |    Function      |RMSE   | AIC    | BIC    |Nb_coeffs  |  Coeff_1    | Coeff_2    |   Coeff_3     | Coeff_4    | Coeff_5    | Coeff_6   |Coeff_7   |
 |:-----|:----|:-----------------|:------|:-------|:-------|:----------|:------------|:-----------|:--------------|:-----------|:-----------|:----------|:---------|
