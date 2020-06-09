@@ -85,27 +85,26 @@ Information on the non-linear model (e.g. formula, coefficients) can be directly
 ```
 The names of the 21 remaining model (in package "aomisc") are displayed below
 
-|Aomisc functions |  | 
-|:----------------|:----------------------------------------------|
-|DRC.asymReg      | Asymptotic Regression Model |
-|DRC.beta         | Beta function |
-|DRC.bragg.3      | Bragg equation (3 parameters) | 
-|DRC.bragg.4      | Bragg equation (4 parameters) |
-|DRC.cousens85    | Yield-Weed Density function (Cousens, 1985) |
-|DRC.expoDecay    | Exponential Decay Model |
-|DRC.expoGrowth   | Exponential Growth Model |
-|DRC.linear       | Straight line |
-|DRC.linearOrigin | Straight line through origin |
-|DRC.logCurve     | Linear regression on log-transformed x |
-|DRC.lorentz.3    | Lorentz equation (3 parameters) |
-|DRC.lorentz.4    | Lorentz equation (4 parameters) |
-|DRC.negExp       | Negative exponential function |
-|DRC.poly2        | Second Order Polynomial |
-|DRC.powerCurve   | Power curve (Freundlich equation) |
-|DRC.SSasymp      | Asymptotic regression model |
-|DRC.YL           | Yield-Loss function (Cousens, 1985) |
-|E.3              | Modified Gompertz equation (3 parameters) |
-|E.4              | Modified Gompertz equation (4 parameters) |
-|L.2              | Logistic (ED50 as parameter) |
+|Aomisc functions |  |   |
+|:----------------|:----------------------------------------------|:----------------------------|
+|DRC.asymReg      | Asymptotic Regression Model |  |
+|DRC.beta         | Beta function |  |
+|DRC.bragg.3      | Bragg equation (3 parameters) |   |
+|DRC.bragg.4      | Bragg equation (4 parameters) |  |
+|DRC.cousens85    | Yield-Weed Density function (Cousens, 1985) |  |
+|DRC.expoDecay    | Exponential Decay Model |  |
+|DRC.expoGrowth   | Exponential Growth Model |  |
+|DRC.linear       | Straight line |![Y = b_0 + b_1 \, X \quad \quad \quad](https://render.githubusercontent.com/render/math?math=Y%20%3D%20b_0%20%2B%20b_1%20%5C%2C%20X%20%5Cquad%20%5Cquad%20%5Cquad) |
+|DRC.linearOrigin | Straight line through origin |  |
+|DRC.logCurve     | Linear regression on log-transformed x |  |
+|DRC.lorentz.3    | Lorentz equation (3 parameters) |  |
+|DRC.lorentz.4    | Lorentz equation (4 parameters) |  |
+|DRC.negExp       | Negative exponential function |  |
+|DRC.poly2        | Second Order Polynomial |  |
+|DRC.powerCurve   | Power curve (Freundlich equation) |  |
+|DRC.SSasymp      | Asymptotic regression model |  |
+|DRC.YL           | Yield-Loss function (Cousens, 1985) |  |
+|E.3              | Modified Gompertz equation (3 parameters) |  |
+|E.4              | Modified Gompertz equation (4 parameters) |  |
+|L.2              | Logistic (ED50 as parameter) |  |
 
-![Y = b_0 + b_1\, X + b_2 \, X^2 \quad \quad \quad](https://render.githubusercontent.com/render/math?math=Y%20%3D%20b_0%20%2B%20b_1%5C%2C%20X%20%2B%20b_2%20%5C%2C%20X%5E2%20%5Cquad%20%5Cquad%20%5Cquad)
