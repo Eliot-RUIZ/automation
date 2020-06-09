@@ -64,7 +64,7 @@ kable(head(result, 15))
 |+99 other lines  |   |          |   |     |     |  |      |     |        |     |     |    |   |
 
 In R, the results are printed in a convenient way to allows maximum visibility for detecting the best model rapidly:
-
+![Capture](https://user-images.githubusercontent.com/15387266/84198162-6d65ca00-aaa3-11ea-942e-534d4e07876e.PNG)
 
 
 
