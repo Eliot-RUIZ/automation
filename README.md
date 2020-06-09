@@ -87,24 +87,24 @@ The names of the 21 remaining model (in package "aomisc") are displayed below
 
 |Aomisc functions |  |   |
 |:----------------|:----------------------------------------------|:----------------------------|
-|DRC.asymReg      | Asymptotic Regression Model |  |
-|DRC.beta         | Beta function |  |
-|DRC.bragg.3      | Bragg equation (3 parameters) |   |
-|DRC.bragg.4      | Bragg equation (4 parameters) |  |
+|DRC.asymReg      | Asymptotic Regression Model | ![Y = a - (a - b) \, \exp (- c  X) \quad \quad \quad](https://render.githubusercontent.com/render/math?math=Y%20%3D%20a%20-%20(a%20-%20b)%20%5C%2C%20%5Cexp%20(-%20c%20%20X)%20%5Cquad%20%5Cquad%20%5Cquad) |
+|DRC.beta         | Beta function | ![Y = d \,\left\{  \left( \frac{X - X_b}{X_o - X_b} \right) \left( \frac{X_c - X}{X_c - X_o} \right) ^ {\frac{X_c - X_o}{X_o - X_b}} \right\}^b \quad \quad \quad](https://render.githubusercontent.com/render/math?math=Y%20%3D%20d%20%5C%2C%5Cleft%5C%7B%20%20%5Cleft(%20%5Cfrac%7BX%20-%20X_b%7D%7BX_o%20-%20X_b%7D%20%5Cright)%20%5Cleft(%20%5Cfrac%7BX_c%20-%20X%7D%7BX_c%20-%20X_o%7D%20%5Cright)%20%5E%20%7B%5Cfrac%7BX_c%20-%20X_o%7D%7BX_o%20-%20X_b%7D%7D%20%5Cright%5C%7D%5Eb%20%5Cquad%20%5Cquad%20%5Cquad) |
+|DRC.bragg.3      | Bragg equation (3 parameters) | ![Y = d \, \exp \left\[ - b (X - e)^2 \right\] \quad \quad \quad](https://render.githubusercontent.com/render/math?math=Y%20%3D%20d%20%5C%2C%20%5Cexp%20%5Cleft%5B%20-%20b%20(X%20-%20e)%5E2%20%5Cright%5D%20%5Cquad%20%5Cquad%20%5Cquad) |
+|DRC.bragg.4      | Bragg equation (4 parameters) | ![Y = c + (d - c) \, \exp \left\[ - b (X - e)^2 \right\] \quad \quad \quad](https://render.githubusercontent.com/render/math?math=Y%20%3D%20c%20%2B%20(d%20-%20c)%20%5C%2C%20%5Cexp%20%5Cleft%5B%20-%20b%20(X%20-%20e)%5E2%20%5Cright%5D%20%5Cquad%20%5Cquad%20%5Cquad) |
 |DRC.cousens85    | Yield-Weed Density function (Cousens, 1985) |  |
-|DRC.expoDecay    | Exponential Decay Model |  |
-|DRC.expoGrowth   | Exponential Growth Model |  |
-|DRC.linear       | Straight line |![Y = b_0 + b_1 \, X \quad \quad \quad](https://render.githubusercontent.com/render/math?math=Y%20%3D%20b_0%20%2B%20b_1%20%5C%2C%20X%20%5Cquad%20%5Cquad%20%5Cquad) |
-|DRC.linearOrigin | Straight line through origin |  |
-|DRC.logCurve     | Linear regression on log-transformed x |  |
-|DRC.lorentz.3    | Lorentz equation (3 parameters) |  |
-|DRC.lorentz.4    | Lorentz equation (4 parameters) |  |
-|DRC.negExp       | Negative exponential function |  |
-|DRC.poly2        | Second Order Polynomial |  |
-|DRC.powerCurve   | Power curve (Freundlich equation) |  |
+|DRC.expoDecay    | Exponential Decay Model (k < 0) | ![Y = a  e^{k X} \quad \quad \quad](https://render.githubusercontent.com/render/math?math=Y%20%3D%20a%20%20e%5E%7Bk%20X%7D%20%5Cquad%20%5Cquad%20%5Cquad) |
+|DRC.expoGrowth   | Exponential Growth Model (k > 0) | ![Y = a  e^{k X} \quad \quad \quad](https://render.githubusercontent.com/render/math?math=Y%20%3D%20a%20%20e%5E%7Bk%20X%7D%20%5Cquad%20%5Cquad%20%5Cquad) |
+|DRC.linear       | Straight line | ![Y = b_0 + b_1 \, X \quad \quad \quad](https://render.githubusercontent.com/render/math?math=Y%20%3D%20b_0%20%2B%20b_1%20%5C%2C%20X%20%5Cquad%20%5Cquad%20%5Cquad) | b0  is the value of Y when X=0, b1 is the slope |
+|DRC.linearOrigin | Straight line through origin | ![Y = b_1 \, X \quad \quad \quad](https://render.githubusercontent.com/render/math?math=Y%20%3D%20b_1%20%5C%2C%20X%20%5Cquad%20%5Cquad%20%5Cquad) |
+|DRC.logCurve     | Linear regression on log-transformed x | ![y = a + b \, \log(X) \quad \quad \quad](https://render.githubusercontent.com/render/math?math=y%20%3D%20a%20%2B%20b%20%5C%2C%20%5Clog(X)%20%5Cquad%20%5Cquad%20%5Cquad) |
+|DRC.lorentz.3    | Lorentz equation (3 parameters) | ![Y = \frac{d} { 1 + b (X - e)^2 } \quad \quad \quad](https://render.githubusercontent.com/render/math?math=Y%20%3D%20%5Cfrac%7Bd%7D%20%7B%201%20%2B%20b%20(X%20-%20e)%5E2%20%7D%20%5Cquad%20%5Cquad%20%5Cquad) |
+|DRC.lorentz.4    | Lorentz equation (4 parameters) | ![Y = c + \frac{d - c} { 1 + b (X - e)^2 } \quad \quad \quad](https://render.githubusercontent.com/render/math?math=Y%20%3D%20c%20%2B%20%5Cfrac%7Bd%20-%20c%7D%20%7B%201%20%2B%20b%20(X%20-%20e)%5E2%20%7D%20%5Cquad%20%5Cquad%20%5Cquad) |
+|DRC.negExp       | Negative exponential function | ![Y = a \[1 -  \exp (- c  X) \] \quad \quad \quad](https://render.githubusercontent.com/render/math?math=Y%20%3D%20a%20%5B1%20-%20%20%5Cexp%20(-%20c%20%20X)%20%5D%20%5Cquad%20%5Cquad%20%5Cquad) |
+|DRC.poly2        | Second Order Polynomial | ![Y = b_0 + b_1\, X + b_2 \, X^2 \quad \quad \quad](https://render.githubusercontent.com/render/math?math=Y%20%3D%20b_0%20%2B%20b_1%5C%2C%20X%20%2B%20b_2%20%5C%2C%20X%5E2%20%5Cquad%20%5Cquad%20%5Cquad) |
+|DRC.powerCurve   | Power curve (Freundlich equation) | ![Y = a \, X^b \quad \quad \quad](https://render.githubusercontent.com/render/math?math=Y%20%3D%20a%20%5C%2C%20X%5Eb%20%5Cquad%20%5Cquad%20%5Cquad) |
 |DRC.SSasymp      | Asymptotic regression model |  |
 |DRC.YL           | Yield-Loss function (Cousens, 1985) |  |
-|E.3              | Modified Gompertz equation (3 parameters) |  |
-|E.4              | Modified Gompertz equation (4 parameters) |  |
-|L.2              | Logistic (ED50 as parameter) |  |
+|E.3              | Modified Gompertz equation (3 parameters) | ![Y = c + (1 - c) \left\{ 1 - \exp \left\{- \exp \left\[ b \, (X - e) \right\] \right\} \right\} \quad \quad \quad](https://render.githubusercontent.com/render/math?math=Y%20%3D%20c%20%2B%20(1%20-%20c)%20%5Cleft%5C%7B%201%20-%20%5Cexp%20%5Cleft%5C%7B-%20%5Cexp%20%5Cleft%5B%20b%20%5C%2C%20(X%20-%20e)%20%5Cright%5D%20%5Cright%5C%7D%20%5Cright%5C%7D%20%5Cquad%20%5Cquad%20%5Cquad) |
+|E.4              | Modified Gompertz equation (4 parameters) | ![Y = c + (d - c) \left\{ 1 - \exp \left\{- \exp \left\[ b \, (X - e) \right\] \right\} \right\} \quad \quad \quad](https://render.githubusercontent.com/render/math?math=Y%20%3D%20c%20%2B%20(d%20-%20c)%20%5Cleft%5C%7B%201%20-%20%5Cexp%20%5Cleft%5C%7B-%20%5Cexp%20%5Cleft%5B%20b%20%5C%2C%20(X%20-%20e)%20%5Cright%5D%20%5Cright%5C%7D%20%5Cright%5C%7D%20%5Cquad%20%5Cquad%20%5Cquad) |
+|L.2              | Logistic (2 parameters) | ![Y = \frac{1}{1 + exp(- b (X - e))} \quad \quad \quad](https://render.githubusercontent.com/render/math?math=Y%20%3D%20%5Cfrac%7B1%7D%7B1%20%2B%20exp(-%20b%20(X%20-%20e))%7D%20%5Cquad%20%5Cquad%20%5Cquad) |
 
