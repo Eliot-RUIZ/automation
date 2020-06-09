@@ -37,9 +37,10 @@ After 4 to 5s of computation (on a usual laptop), the function a table containin
 
 The user can choose to order the table (*arrange* argument), according to the AIC, and/or the BIC, and/or the RMSE and/or the number of coefficients; their order reflecting the importance the used gives to each estimator. The models with the lowest estimators (i.e. best models) are then placed on the top of the dataframe (i.e. Rank 1, Rank 2 etc). However, the dataframe could also be ordered by descending order if the argument *increase* is shifted to *FALSE*.
 
-Here is an example obtained with the *mtcars* package (*mpg ~ wt*):
+Here is an example obtained with the *mtcars* package, and easily exported using the *kable* function in the "knitr" package:
 ```r
-compare_nlm(mpg ~ wt, mtcars)
+result = compare_nlm(mpg ~ wt, mtcars)
+kable(head(result, 15))
 ```
 
 |Rank  |ID   |    Function      |RMSE   | AIC    | BIC    |Nb_coeffs  |  Coeff_1    | Coeff_2    |   Coeff_3     | Coeff_4    | Coeff_5    | Coeff_6   |Coeff_7   |
@@ -62,6 +63,7 @@ compare_nlm(mpg ~ wt, mtcars)
 |16    |28   |L.5               |2.45   |160.18  |168.97  |5 coeffs   |b: 18.12     |c: 9.57     |d: 31.04       |e: 1.82     |f: 0.03     |           |          |
 |+99 other lines  |   |          |   |     |     |  |      |     |        |     |     |    |   |
 
+In R, the results are printed in a convenient way to allows maximum visibility for detecting the best model rapidly:
 
 
 
