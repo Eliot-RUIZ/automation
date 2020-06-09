@@ -1,7 +1,9 @@
 # Package "automation" - Eliot RUIZ
 
 The goal of this package is to provide functions automating usual time-consuming tasks in R.
-$ \sum_{\forall i}{x_i^{2}} $
+```math
+a^2+b^2=c^2
+```
 
 ## Automation of usual statistical tests
 
