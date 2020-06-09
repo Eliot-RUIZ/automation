@@ -79,8 +79,33 @@ compare_nlm(mpg ~ wt, mtcars, plot_model = c(75,23,34,88,44,46))
 
 ![Rplot](https://user-images.githubusercontent.com/15387266/84199785-0b5a9400-aaa6-11ea-9080-672bdfbd2145.png)
 
-
-
+Information on the non-linear model (e.g. formula, coefficients) can be directly accessed for 93 models (in package "drc") like this:
+```r
+?UCRS.5c
+```
+The 21 remaining model (in package "aomisc") are commonly used models thus information on them can easily be found on Internet by typing their names
+|Aomisc functions |
+|:----------------|
+|DRC.asymReg      |
+|DRC.beta         |
+|DRC.bragg.3      |
+|DRC.bragg.4      |
+|DRC.cousens85    |
+|DRC.expoDecay    |
+|DRC.expoGrowth   |
+|DRC.linear       |
+|DRC.linearOrigin |
+|DRC.logCurve     |
+|DRC.lorentz.3    |
+|DRC.lorentz.4    |
+|DRC.negExp       |
+|DRC.poly2        |
+|DRC.powerCurve   |
+|DRC.SSasymp      |
+|DRC.YL           |
+|E.3              |
+|E.4              |
+|L.2              |
 
 
 
