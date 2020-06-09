@@ -35,35 +35,41 @@ The function *compare_nlm* is fully functionnal and serves to choose the most ap
 
 After 4 to 5s of computation (on a usual laptop), the function a table containing the coefficients (1 to 7) of 112 non-linear and 2 linear models (intercept = 0 or not).
 
-The user can choose to order the table (*arrange* argument), according to the AIC, and/or the BIC, and/or the RMSE and/or the number of coefficients; their order reflecting the importance the used gives to each estimator. The models with the lowest estimators (i.e. best models) are then placed on the top of the dataframe (i.e. Rank 1, Rank 2 etc). However, the dataframe could also be ordered by descending order if the argument *increase* is shifted to *FALSE*.
+The user can choose to order the table (*arrange* argument), according to the AIC, and/or the BIC, and/or the RMSE and/or the number of coefficients. 
+
+The order of the estimators reflect their importance for the user because, the dataframe is first ordered using the 1st estimator, and then, for equal values of the 1st estimator, it uses the 2nd estimator etc. 
+
+The models with the lowest estimators (i.e. best models) are then placed on the top of the dataframe (i.e. Rank 1, Rank 2 etc). However, the dataframe could also be ordered by descending order if the argument *increase* is shifted to *FALSE*.
 
 Here is an example obtained with the *mtcars* package, and easily exported using the *kable* function in the "knitr" package:
 ```r
-result = compare_nlm(mpg ~ wt, mtcars)
+result = compare_nlm(mpg ~ wt, mtcars, digits = 1, c("Nb_coeffs", "AIC"), increase = F)
 kable(head(result, 15))
 ```
 
-|Rank  |ID   |    Function      |RMSE   | AIC    | BIC    |Nb_coeffs  |  Coeff_1    | Coeff_2    |   Coeff_3     | Coeff_4    | Coeff_5    | Coeff_6   |Coeff_7   |
-|:-----|:----|:-----------------|:------|:-------|:-------|:----------|:------------|:-----------|:--------------|:-----------|:-----------|:----------|:---------|
-|1     |71   |UCRS.5c           |2.31   |156.46  |165.26  |5 coeffs   |b: -274.58   |c: 93.75    |d: 30.07       |e: 2.26     |f: 158.28   |           |          |
-|2     |77   |uml4c             |2.31   |156.46  |165.26  |5 coeffs   |b: -274.58   |c: 93.75    |d: 30.07       |e: 2.26     |f: 158.28   |           |          |
-|3     |70   |UCRS.5b           |2.32   |156.55  |165.34  |5 coeffs   |b: -249.34   |c: 69.84    |d: 30.07       |e: 2.26     |f: 89.31    |           |          |
-|4     |76   |uml4b             |2.32   |156.55  |165.34  |5 coeffs   |b: -249.34   |c: 69.84    |d: 30.07       |e: 2.26     |f: 89.31    |           |          |
-|5     |69   |UCRS.5a           |2.34   |157.11  |165.91  |5 coeffs   |b: -201.18   |c: 66.46    |d: 30.07       |e: 2.26     |f: 65.33    |           |          |
-|6     |75   |uml4a             |2.34   |157.11  |165.91  |5 coeffs   |b: -201.18   |c: 66.46    |d: 30.07       |e: 2.26     |f: 65.33    |           |          |
-|7     |23   |gaussian          |2.41   |158.98  |167.77  |5 coeffs   |b: 1.08      |c: -5.71    |d: 38.23       |e: 1.75     |f: 0.51     |           |          |
-|8     |34   |lgaussian         |2.41   |159.2   |167.99  |5 coeffs   |b: 1.85      |c: -44.18   |d: 36.3        |e: 1.74     |f: 0.65     |           |          |
-|9     |88   |W2x.4             |2.43   |157.74  |165.07  |4 coeffs   |c: 30.87     |d: 9.57     |e: 1.65        |t0: 1.83    |            |           |          |
-|10    |44   |LL2.5             |2.44   |159.93  |168.73  |5 coeffs   |b: 33.35     |c: 2.05     |d: 31.13       |e: 0.62     |f: 0.03     |           |          |
-|11    |46   |llogistic2        |2.44   |159.93  |168.73  |5 coeffs   |b: 33.35     |c: 2.05     |d: 31.13       |e: 0.62     |f: 0.03     |           |          |
-|12    |33   |l5                |2.44   |159.98  |168.77  |5 coeffs   |b: 28.47     |c: 1.6      |d: 31.11       |e: 1.86     |f: 0.03     |           |          |
-|13    |39   |LL.5              |2.44   |159.98  |168.77  |5 coeffs   |b: 28.47     |c: 1.6      |d: 31.11       |e: 1.86     |f: 0.03     |           |          |
-|14    |45   |llogistic         |2.44   |159.98  |168.77  |5 coeffs   |b: 28.47     |c: 1.6      |d: 31.11       |e: 1.86     |f: 0.03     |           |          |
-|15    |15   |CRS.6             |2.44   |161.94  |172.2   |6 coeffs   |b: 1.53      |c: 5.17     |d: 87.88       |e: 1.11     |f: -394.28  |g: -2.73   |          |
-|16    |28   |L.5               |2.45   |160.18  |168.97  |5 coeffs   |b: 18.12     |c: 9.57     |d: 31.04       |e: 1.82     |f: 0.03     |           |          |
+|Rank  |ID   |    Function      |RMSE  | AIC   | BIC   |Nb_coeffs  | Coeff_1    | Coeff_2   |  Coeff_3     | Coeff_4   | Coeff_5   |Coeff_6   |Coeff_7  |
+|:-----|:----|:-----------------|:-----|:------|:------|:----------|:-----------|:----------|:-------------|:----------|:----------|:---------|:--------|
+|1     |65   |twophase          |2.5   |165.6  |177.3  |7 coeffs   |b1: 8       |c1: 9.3    |d1: 15.8      |e1: 0.3    |b2: 3.1    |d2: 26.3  |e2: 2.7  |
+|2     |15   |CRS.6             |2.4   |161.9  |172.2  |6 coeffs   |b: 1.5      |c: 5.2     |d: 87.9       |e: 1.1     |f: -394.3  |g: -2.7   |         |
+|3     |61   |multi2            |5.9   |216.8  |225.5  |5 coeffs   |b1: 1.6     |b2: 55.6   |b3: 46.4      |c: 17.7    |d: 20.1    |          |         |
+|4     |93   |weibull2x         |5.3   |209.6  |218.4  |5 coeffs   |b: -5.1     |c: 20.9    |d: 11.8       |e: 4.4     |t0: 4.5    |          |         |
+|5     |3    |baro5             |2.5   |161.5  |170.2  |5 coeffs   |b1: 4       |b2: 2.3    |c: 7.8        |d: 34.1    |e: 2.9     |          |         |
+|6     |13   |CRS.5b            |2.5   |160.7  |169.5  |5 coeffs   |b: 2.8      |c: 8.9     |d: -343.6     |e: 1.1     |f: 955.3   |          |         |
+|7     |14   |CRS.5c            |2.5   |160.7  |169.5  |5 coeffs   |b: 2.8      |c: 8.7     |d: -826.6     |e: 1.1     |f: 2259.1  |          |         |
+|8     |57   |ml4b              |2.5   |160.7  |169.5  |5 coeffs   |b: 2.8      |c: 8.9     |d: -343.6     |e: 1.1     |f: 955.3   |          |         |
+|9     |58   |ml4c              |2.5   |160.7  |169.5  |5 coeffs   |b: 2.8      |c: 8.7     |d: -826.6     |e: 1.1     |f: 2259.1  |          |         |
+|10    |5    |BC.5              |2.5   |160.6  |169.4  |5 coeffs   |b: 3.3      |c: 8.5     |d: -163.1     |e: 1.1     |f: 170.6   |          |         |
+|11    |7    |bcl4              |2.5   |160.6  |169.4  |5 coeffs   |b: 3.3      |c: 8.5     |d: -163.1     |e: 1.1     |f: 170.6   |          |         |
+|12    |8    |braincousens      |2.5   |160.6  |169.4  |5 coeffs   |b: 3.3      |c: 8.5     |d: -163.1     |e: 1.1     |f: 170.6   |          |         |
+|13    |12   |CRS.5a            |2.5   |160.6  |169.4  |5 coeffs   |b: 2.6      |c: 8.7     |d: -294.2     |e: 0.9     |f: 792.2   |          |         |
+|14    |56   |ml4a              |2.5   |160.6  |169.4  |5 coeffs   |b: 2.6      |c: 8.7     |d: -294.2     |e: 0.9     |f: 792.2   |          |         |
 |+99 other lines  |   |          |   |     |     |  |      |     |        |     |     |    |   |
 
 In R, the results are printed in a convenient way to allows maximum visibility for detecting the best model rapidly:
+```r
+compare_nlm(mpg ~ wt, mtcars, digits = 2, increase = F, arrange = c("RMSE", "Nb_coeffs", "AIC", "BIC"))
+```
+
 ![Capture](https://user-images.githubusercontent.com/15387266/84198162-6d65ca00-aaa3-11ea-942e-534d4e07876e.PNG)
 
 
