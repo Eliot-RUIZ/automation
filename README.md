@@ -84,29 +84,29 @@ Information on the non-linear model (e.g. formula, coefficients) can be directly
 ?UCRS.5c
 ```
 The 21 remaining model (in package "aomisc") are commonly used models thus information on them can easily be found on Internet by typing their names
-|Aomisc functions |
-|:----------------|
-|DRC.asymReg      |
-|DRC.beta         |
-|DRC.bragg.3      |
-|DRC.bragg.4      |
-|DRC.cousens85    |
-|DRC.expoDecay    |
-|DRC.expoGrowth   |
-|DRC.linear       |
-|DRC.linearOrigin |
-|DRC.logCurve     |
-|DRC.lorentz.3    |
-|DRC.lorentz.4    |
-|DRC.negExp       |
-|DRC.poly2        |
-|DRC.powerCurve   |
-|DRC.SSasymp      |
-|DRC.YL           |
-|E.3              |
-|E.4              |
-|L.2              |
+|Aomisc functions |  | 
+|:----------------|:------------------------------|
+|DRC.asymReg      | Asymptotic Regression Model |
+|DRC.beta         | Beta Regression Models |
+|DRC.bragg.3      |  |
+|DRC.bragg.4      |  |
+|DRC.cousens85    |  |
+|DRC.expoDecay    |  |
+|DRC.expoGrowth   |  |
+|DRC.linear       |  |
+|DRC.linearOrigin |  |
+|DRC.logCurve     |  |
+|DRC.lorentz.3    |  |
+|DRC.lorentz.4    |  |
+|DRC.negExp       |  |
+|DRC.poly2        |  |
+|DRC.powerCurve   |  |
+|DRC.SSasymp      |  |
+|DRC.YL           |  |
+|E.3              |  |
+|E.4              |  |
+|L.2              |  |
 
 
-
+\[ Y = d \, \exp \left[ – b (X – e)^2 \right] \quad \quad \quad (19)\]
   
