@@ -89,8 +89,15 @@ View(compare_nlm(mpg ~ wt, mtcars))
 
 The confidence interval around the coefficients of the model of interest can easily be calculated using the *confint* function in the "drc" package:
 ```r
-model = drm(mpg ~ wt, data = mtcars, fct = LL.4())
+model = drm(mpg ~ wt, data = mtcars, fct = UCRS.5c())
 confint(model, level = 0.95)
+
+                     2.5 %      97.5 %
+b:(Intercept) -2226.212509 1677.054628
+c:(Intercept)    67.247223  120.259724
+d:(Intercept)    27.957770   32.175538
+e:(Intercept)     1.840954    2.688259
+f:(Intercept)   103.096202  213.467964
 ```
 
 
