@@ -7,7 +7,7 @@ install_github("Eliot-RUIZ/automation")
 ```
 <br>
 <br>
-<br>
+
 ## Automation of usual statistical tests
 
 The BaseR packages as well as the numerous external packages provide an extraordinary diversity of functions coding for statistical tests and associated operations, and allows to test the association between variables in almost every specific cases. However, this powerful tool requires a great knowledge of inferential statistics in order to use it fully and correctly. Indeed, finding the right statistical test with all its assumptions and associated computations, and finding how to run such analysis can be very tedious and complex in R. Even running a complete analysis requires a lot of coding lines, which increase the risk of making errors. Finally, reporting all the results in a correct and compact format for a scientific report (APA format) is also very cumbersome!
@@ -36,6 +36,7 @@ For more transparency due to the length of the function (approximately 1500 line
 This decision tree can be viewed online following this link: http://www.xmind.net/m/3QZV9X
 
 The decision tree can also be downloaded by clicking on the top right corner button and then "Download". The decision tree could then be opened in Xmind (prior download of the software necessary) to get access to the content of the boxes (R code), and also see it in the text preview (as it is organized in the function).
+<br>
 <br>
 <br>
 
@@ -187,7 +188,8 @@ In case of error, different messages will be printed to explain to the user why 
 <br>
 <br>
 <br>
-## Quick calculation of non-linear model confidence interval and predictions
+
+## Calculation of non-linear model confidence interval and predictions
 
 The package "drc" already provides methods to calculate the confidence interval around the non-linear models created with its own Self-Starters (*predict.drc*). However, this feature is not available for the model created from "aomisc" self-starters, though some of them are often the best models (e.g. linear, exponential, logarithmic).
 
