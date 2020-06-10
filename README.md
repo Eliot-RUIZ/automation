@@ -6,29 +6,29 @@ The goal of this package is to provide functions automating time-consuming tasks
 
 ## Automation of usual statistical tests
 
+The BaseR packages as well as the numerous external packages provide an extraordinary diversity of functions coding for statistical tests and associated operations, and allows to test the association between variables in almost every specific cases. However, this powerful tool requires a great knowledge of inferential statistics in order to use it fully and correctly. Indeed, finding the right statistical test with all its assumptions and associated computations, and finding how to run such analysis can be very tedious and complex in R. Even running a complete analysis requires a lot of coding lines, which increase the risk of making errors. Finally, reporting all the results in a correct and compact format for a scientific report (APA format) is also very cumbersome!
+
+Doing all of that can takes days of hardwork when analysing a big dataset. I therefore decided to code a function running a complete analysis in a few seconds, and displaying the results in a format enabling to simply copy and paste it in a report. 
+
+The function *auto_stats* aims at choosing the appropriate statistical test for the data provided by the user. The data could consist in an independant variable (Y) explained by 0 to 2 factors (X). After checking each assumptions, the function compute the main test and all usually associated tasks (e.g. effect size, post-hoc tests, interaction plot).
 ```r
 ### Actual default values ###
 auto_stats = function(data, Y, X1 = NULL, X2 = NULL, paired = "none", ID = NULL, digits = 3)
 ```
 
-The function *auto_stats* aims at choosing the appropriate statistical test for the data provided by the user. 
-
-The data could consist in an independant variable (Y) explained by 0 to 2 factors (X).
-
-After checking each assumptions, the function compute the main test and all usually associated tasks (e.g. effect size, post-hoc tests, interaction plot).
-
-It then returns all the results in APA format to ease insertion in a text document, except for the post-hoc analysis results. The output is separated in 5 sections: 
+It then returns all the results in APA format to ease insertion in a text document, except for the post-hoc analysis results. The output is separated in 5 sections:
+  - (Contigency table used -> for qualitative Y only)
   - Assumptions
   - Main test
   - Effect size and related 
   - Post-Hoc analysis
   - Messages
-
+  
 The last section is of major importance since many different messages have been implemented in the function for transparency of the analysis (e.g. advices, problems with the data).
+  
+Currently, this function is still in the making but it will be functionnal in the next few days.
 
-Currently, this function is still in the making but will be functionnal in the next few days.
-
-For more transparency due to the length of the function (approximately 1500 lines of code), I created on Xmind the decision tree the algorithm follows, for the statistical part. 
+For more transparency due to the length of the function (approximately 1500 lines of code yet), I created on Xmind the decision tree the algorithm follows, for the statistical part. 
 
 This decision tree can be viewed online following this link: http://www.xmind.net/m/3QZV9X
 
@@ -38,16 +38,29 @@ The decision tree can also be downloaded by clicking on the top right corner but
 
 ## Automation of the comparison using different estimators + automatic plotting of non-linear models of interest
 
-The function *compare_nlm* is fully functionnal and serves to choose the most appropriate non-linear model to a set of data consisting in 1 dependent variable (Y) and 1 factor. Both variables must be quantitative.
+Finding the best models and the best parameters for nonlinear models on R can be very cumbersome, in my experience. Indeed, few Self-Starters (i.e. functions allowing to automatically determine "good" starting parameters), are implemented in BaseR. It takes a long time to find a package offering the appropriate functions, even for simple models such as the power laws. When your not an expert in mathematics, even thinking to a model who could fit well enough the data can be complicated. 
 
+The method of groping search of good starting parameters is even more tedious since even with values close to the nearest tenth of the optimal values, the *nls* function (BaseR) sometimes don't converge after 50,000 iterations! Besides, once the right parameters have been found, it is still very long to calculate the model quality estimators and the confidence intervals around the coefficients. Finally, making a correct graph representing the model can be very hard in R.
+
+To ease such procedure, I coded the function *compare_nlm* to compare many different models, compute their estimators, and finally plot them, for a set of data consisting in 1 quantitative dependent variable (Y) and 1 quantitative factor.
 ```r
 ### Default values ###
 compare_nlm = function(formula, data, digits = 2, arrange = c("AIC", "RMSE", "BIC"), increase = T, plot_model = NA, package = F)
 ```
 
-After 4 to 5s of computation (on a usual laptop), the function dispaly a table containing the best coefficients (1 to 7) of 112 non-linear and 2 linear models (intercept = 0 or not). The self-starters for all those models are found in the packages "drc" and "aomisc", and *compare_nlm* uses internally the function *drm* (package "drc) to run the computation. 
+After 4 to 5s of computation (on a usual laptop), the function dispaly a table containing the best coefficients (1 to 7) of 112 non-linear and 2 linear models (intercept = 0 or not). The self-starters for all those models are found in the packages "drc" and "aomisc", and *compare_nlm* uses internally the function *drm* (package "drc") to run the computation. 
 
 Sometimes, the convergence of the self-starters might fail (model not appropried to the data), but the function will jump to the other model and print a message with the ID of model (stored at the end of the table).
+```r
+compare_nlm(mpg ~ wt, mtcars)
+
+Error in optim(startVec, opfct, hessian = TRUE, method = optMethod, control = list(maxit = maxIt,  : 
+  non-finite finite-difference value [2]
+[1] "Convergence failed - Self-Starter ID : 59"
+Error in optim(startVec, opfct, hessian = TRUE, method = optMethod, control = list(maxit = maxIt,  : 
+  non-finite finite-difference value [1]
+[1] "Convergence failed - Self-Starter ID : 95"
+```
 
 The user can choose to order the table (*arrange* argument), according to the AIC, and/or the BIC, and/or the RMSE and/or the number of coefficients. 
 
@@ -79,42 +92,15 @@ kable(head(result, 15), row.names = F)
 |14    |56   |ml4a              |2.5   |160.6  |169.4  |5 coeffs   |b: 2.6      |c: 8.7     |d: -294.2     |e: 0.9     |f: 792.2   |          |         |
 |+99 other lines  |   |          |   |     |     |  |      |     |        |     |     |    |   |
 
+
 In R, the results are printed in a convenient way to allows maximum visibility for detecting the best model rapidly. They can also be printed using the *View* function:
 ```r
-compare_nlm(mpg ~ wt, mtcars)
-
-Error in optim(startVec, opfct, hessian = TRUE, method = optMethod, control = list(maxit = maxIt,  : 
-  non-finite finite-difference value [2]
-[1] "Convergence failed - Self-Starter ID : 59"
-Error in optim(startVec, opfct, hessian = TRUE, method = optMethod, control = list(maxit = maxIt,  : 
-  non-finite finite-difference value [1]
-[1] "Convergence failed - Self-Starter ID : 95"
-  Rank  ID      Function       RMSE    AIC     BIC    Nb_coeffs   Coeff_1      Coeff_2      Coeff_3       Coeff_4     Coeff_5    Coeff_6    Coeff_7 
- ===== ==== ================= ====== ======= ======= ========== ============ =========== ============== =========== =========== ========== =========
-    1   71       UCRS.5c       2.31   156.46  165.26   5 coeffs  b: -274.58    c: 93.75     d: 30.07      e: 2.26    f: 158.28                      
-    2   77        uml4c        2.31   156.46  165.26   5 coeffs  b: -274.58    c: 93.75     d: 30.07      e: 2.26    f: 158.28                      
-    3   70       UCRS.5b       2.32   156.55  165.34   5 coeffs  b: -249.34    c: 69.84     d: 30.07      e: 2.26     f: 89.31                      
-    4   76        uml4b        2.32   156.55  165.34   5 coeffs  b: -249.34    c: 69.84     d: 30.07      e: 2.26     f: 89.31                      
-    5   69       UCRS.5a       2.34   157.11  165.91   5 coeffs  b: -201.18    c: 66.46     d: 30.07      e: 2.26     f: 65.33                      
-    6   75        uml4a        2.34   157.11  165.91   5 coeffs  b: -201.18    c: 66.46     d: 30.07      e: 2.26     f: 65.33                      
-    7   23       gaussian      2.41   158.98  167.77   5 coeffs    b: 1.08     c: -5.71     d: 38.23      e: 1.75     f: 0.51                       
-    8   34      lgaussian      2.41   159.2   167.99   5 coeffs    b: 1.85    c: -44.18      d: 36.3      e: 1.74     f: 0.65                       
-    9   88        W2x.4        2.43   157.74  165.07   4 coeffs   c: 30.87     d: 9.57       e: 1.65      t0: 1.83                                  
-   10   44        LL2.5        2.44   159.93  168.73   5 coeffs   b: 33.35     c: 2.05      d: 31.13      e: 0.62     f: 0.03                       
-   11   46      llogistic2     2.44   159.93  168.73   5 coeffs   b: 33.35     c: 2.05      d: 31.13      e: 0.62     f: 0.03                       
-   12   33          l5         2.44   159.98  168.77   5 coeffs   b: 28.47      c: 1.6      d: 31.11      e: 1.86     f: 0.03                       
-   13   39         LL.5        2.44   159.98  168.77   5 coeffs   b: 28.47      c: 1.6      d: 31.11      e: 1.86     f: 0.03                       
-   14   45      llogistic      2.44   159.98  168.77   5 coeffs   b: 28.47      c: 1.6      d: 31.11      e: 1.86     f: 0.03                       
-   15   15        CRS.6        2.44   161.94  172.2    6 coeffs    b: 1.53     c: 5.17      d: 87.88      e: 1.11    f: -394.28  g: -2.73           
-   16   28         L.5         2.45   160.18  168.97   5 coeffs   b: 18.12     c: 9.57      d: 31.04      e: 1.82     f: 0.03                       
-   17   52       logistic      2.45   160.18  168.97   5 coeffs   b: 18.12     c: 9.57      d: 31.04      e: 1.82     f: 0.03                       
-   18    5         BC.5        2.47   160.62  169.42   5 coeffs    b: 3.34     c: 8.48     d: -163.13      e: 1.1    f: 170.56                      
-   19    7         bcl4        2.47   160.62  169.42   5 coeffs    b: 3.34     c: 8.48     d: -163.13      e: 1.1    f: 170.56                      
-   20    8     braincousens    2.47   160.62  169.42   5 coeffs    b: 3.34     c: 8.48     d: -163.13      e: 1.1    f: 170.56                      
- [ reached 'max' / getOption("max.print") -- omitted 93 rows ]
+View(compare_nlm(mpg ~ wt, mtcars)) # Easier to read and to search a model
+compare_nlm(mpg ~ wt, mtcars)       # Compact format as you can see below
 ```
 
 ![Capture](https://user-images.githubusercontent.com/15387266/84198162-6d65ca00-aaa3-11ea-942e-534d4e07876e.PNG)
+
 
 The confidence interval around the coefficients of the model of interest can easily be calculated using the *confint* function in the "drc" package:
 ```r
@@ -128,7 +114,6 @@ d:(Intercept)    27.957770   32.175538
 e:(Intercept)     1.840954    2.688259
 f:(Intercept)   103.096202  213.467964
 ```
-
 
 The argument *plot_model* allows to automatically plot 1 to 9 model with their RMSE by entering the ID, the partition of the graphical window being automatically adapted to the number of graphics to plot:
 ```r
@@ -173,9 +158,14 @@ In case of error, different messages will be printed to explain to the user why 
 
 
 
-## To complete
+## Quick calculation of non-linear model confidence interval and predictions
 
+The package "drc" already provides methods to calculate the confidence interval around the non-linear models created with its own Self-Starters. However, this feature is not available for the model created from "aomisc" self-starters, though some of them are often the best models (e.g. linear, exponential, logarithmic).
+
+The function *ci_nlm* was coded to generalize CI calculations for all models used in *compare_nlm*, but also to allows the user for plotting the predictions.
 ```r
 ### Default values ###
-compare_nlm = function(formula, data, digits = 2, arrange = c("AIC", "RMSE", "BIC"), increase = T, plot_model = NA, package = F)
+ci_nlm = function(formula, fct, data, method = "delta", level = 0.05, nb_boot = 200, expand_x = NA, keep_cols = NULL)
 ```
+
+
