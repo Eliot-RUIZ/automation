@@ -96,7 +96,7 @@ kable(head(result, 15), row.names = F)
 |14    |56   |ml4a              |2.5   |160.6  |169.4  |5 coeffs   |b: 2.6      |c: 8.7     |d: -294.2     |e: 0.9     |f: 792.2   |          |         |
 |+99 other lines  |   |          |   |     |     |  |      |     |        |     |     |    |   |
 <br>
-<br>
+
 In R, the results are printed in a convenient way to allows maximum visibility for detecting the best model rapidly. They can also be printed using the *View* function:
 ```r
 View(compare_nlm(mpg ~ wt, mtcars)) # Easier to read and to search a model
