@@ -82,7 +82,36 @@ kable(head(result, 15), row.names = F)
 In R, the results are printed in a convenient way to allows maximum visibility for detecting the best model rapidly. They can also be printed using the *View* function:
 ```r
 compare_nlm(mpg ~ wt, mtcars)
-View(compare_nlm(mpg ~ wt, mtcars))
+
+Error in optim(startVec, opfct, hessian = TRUE, method = optMethod, control = list(maxit = maxIt,  : 
+  non-finite finite-difference value [2]
+[1] "Convergence failed - Self-Starter ID : 59"
+Error in optim(startVec, opfct, hessian = TRUE, method = optMethod, control = list(maxit = maxIt,  : 
+  non-finite finite-difference value [1]
+[1] "Convergence failed - Self-Starter ID : 95"
+  Rank  ID      Function       RMSE    AIC     BIC    Nb_coeffs   Coeff_1      Coeff_2      Coeff_3       Coeff_4     Coeff_5    Coeff_6    Coeff_7 
+ ===== ==== ================= ====== ======= ======= ========== ============ =========== ============== =========== =========== ========== =========
+    1   71       UCRS.5c       2.31   156.46  165.26   5 coeffs  b: -274.58    c: 93.75     d: 30.07      e: 2.26    f: 158.28                      
+    2   77        uml4c        2.31   156.46  165.26   5 coeffs  b: -274.58    c: 93.75     d: 30.07      e: 2.26    f: 158.28                      
+    3   70       UCRS.5b       2.32   156.55  165.34   5 coeffs  b: -249.34    c: 69.84     d: 30.07      e: 2.26     f: 89.31                      
+    4   76        uml4b        2.32   156.55  165.34   5 coeffs  b: -249.34    c: 69.84     d: 30.07      e: 2.26     f: 89.31                      
+    5   69       UCRS.5a       2.34   157.11  165.91   5 coeffs  b: -201.18    c: 66.46     d: 30.07      e: 2.26     f: 65.33                      
+    6   75        uml4a        2.34   157.11  165.91   5 coeffs  b: -201.18    c: 66.46     d: 30.07      e: 2.26     f: 65.33                      
+    7   23       gaussian      2.41   158.98  167.77   5 coeffs    b: 1.08     c: -5.71     d: 38.23      e: 1.75     f: 0.51                       
+    8   34      lgaussian      2.41   159.2   167.99   5 coeffs    b: 1.85    c: -44.18      d: 36.3      e: 1.74     f: 0.65                       
+    9   88        W2x.4        2.43   157.74  165.07   4 coeffs   c: 30.87     d: 9.57       e: 1.65      t0: 1.83                                  
+   10   44        LL2.5        2.44   159.93  168.73   5 coeffs   b: 33.35     c: 2.05      d: 31.13      e: 0.62     f: 0.03                       
+   11   46      llogistic2     2.44   159.93  168.73   5 coeffs   b: 33.35     c: 2.05      d: 31.13      e: 0.62     f: 0.03                       
+   12   33          l5         2.44   159.98  168.77   5 coeffs   b: 28.47      c: 1.6      d: 31.11      e: 1.86     f: 0.03                       
+   13   39         LL.5        2.44   159.98  168.77   5 coeffs   b: 28.47      c: 1.6      d: 31.11      e: 1.86     f: 0.03                       
+   14   45      llogistic      2.44   159.98  168.77   5 coeffs   b: 28.47      c: 1.6      d: 31.11      e: 1.86     f: 0.03                       
+   15   15        CRS.6        2.44   161.94  172.2    6 coeffs    b: 1.53     c: 5.17      d: 87.88      e: 1.11    f: -394.28  g: -2.73           
+   16   28         L.5         2.45   160.18  168.97   5 coeffs   b: 18.12     c: 9.57      d: 31.04      e: 1.82     f: 0.03                       
+   17   52       logistic      2.45   160.18  168.97   5 coeffs   b: 18.12     c: 9.57      d: 31.04      e: 1.82     f: 0.03                       
+   18    5         BC.5        2.47   160.62  169.42   5 coeffs    b: 3.34     c: 8.48     d: -163.13      e: 1.1    f: 170.56                      
+   19    7         bcl4        2.47   160.62  169.42   5 coeffs    b: 3.34     c: 8.48     d: -163.13      e: 1.1    f: 170.56                      
+   20    8     braincousens    2.47   160.62  169.42   5 coeffs    b: 3.34     c: 8.48     d: -163.13      e: 1.1    f: 170.56                      
+ [ reached 'max' / getOption("max.print") -- omitted 93 rows ]
 ```
 
 ![Capture](https://user-images.githubusercontent.com/15387266/84198162-6d65ca00-aaa3-11ea-942e-534d4e07876e.PNG)
