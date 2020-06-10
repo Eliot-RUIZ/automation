@@ -7,7 +7,6 @@ install_github("Eliot-RUIZ/automation")
 ```
 <br>
 <br>
-<br>
 
 ## Automation of usual statistical tests
 
@@ -39,7 +38,7 @@ This decision tree can be viewed online following this link: http://www.xmind.ne
 The decision tree can also be downloaded by clicking on the top right corner button and then "Download". The decision tree could then be opened in Xmind (prior download of the software necessary) to get access to the content of the boxes (R code), and also see it in the text preview (as it is organized in the function).
 <br>
 <br>
-<br>
+
 ## Automation of the comparison using different estimators + automatic plotting of non-linear models of interest
 
 Finding the best models and the best parameters for nonlinear models on R can be very cumbersome, in my experience. Indeed, few Self-Starters (i.e. functions allowing to automatically determine "good" starting parameters), are implemented in BaseR. It takes a long time to find a package offering the appropriate functions, even for simple models such as the power laws. When your not an expert in mathematics, even thinking to a model who could fit well enough the data can be complicated. 
@@ -52,7 +51,7 @@ To ease such procedure, I coded the function *compare_nlm* to compare many diffe
 compare_nlm = function(formula, data, digits = 2, arrange = c("AIC", "RMSE", "BIC"), increase = T, plot_model = NA, package = F)
 ```
 <br>
-<br>
+
 After 4 to 5s of computation (on a usual laptop), the function dispaly a table containing the best coefficients (1 to 7) of 112 non-linear and 2 linear models (intercept = 0 or not). The self-starters for all those models are found in the packages "drc" and "aomisc", and *compare_nlm* uses internally the function *drm* (package "drc") to run the computation. 
 
 Sometimes, the convergence of the self-starters might fail (model not appropried to the data), but the function will jump to the other model and print a message with the ID of model (stored at the end of the table).
@@ -67,7 +66,7 @@ Error in optim(startVec, opfct, hessian = TRUE, method = optMethod, control = li
 [1] "Convergence failed - Self-Starter ID : 95"
 ```
 <br>
-<br>
+
 The user can choose to order the table (*arrange* argument), according to the AIC, and/or the BIC, and/or the RMSE and/or the number of coefficients. 
 
 The order of the estimators reflect their importance for the user because, the dataframe is first ordered using the 1st estimator, and then, for equal values of the 1st estimator, it uses the 2nd estimator etc. 
@@ -142,7 +141,6 @@ e:(Intercept)     1.840954    2.688259
 f:(Intercept)   103.096202  213.467964
 ```
 <br>
-<br>
 
 The argument *plot_model* allows to automatically plot 1 to 9 model with their RMSE by entering the ID, the partition of the graphical window being automatically adapted to the number of graphics to plot:
 ```r
@@ -150,7 +148,7 @@ compare_nlm(mpg ~ wt, mtcars, plot_model = c(75,23,34,88,44,46))
 ```
 ![Hnet com-image (4)](https://user-images.githubusercontent.com/15387266/84263219-641a4300-ab1f-11ea-9be6-886e3cbb0fc7.jpg)
 <br>
-<br>
+
 Information on the non-linear model (e.g. formula, coefficients) can be directly accessed for 93 models (in package "drc") by typing their names preceded by a question mark:
 ```r
 ?UCRS.5c
@@ -181,9 +179,8 @@ The names of the 21 remaining model (in package "aomisc") are displayed below an
 |E.4              | Modified Gompertz equation (4 parameters) | ![Y = c + (d - c) \left\{ 1 - \exp \left\{- \exp \left\[ b \, (X - e) \right\] \right\} \right\} \quad \quad \quad](https://render.githubusercontent.com/render/math?math=Y%20%3D%20c%20%2B%20(d%20-%20c)%20%5Cleft%5C%7B%201%20-%20%5Cexp%20%5Cleft%5C%7B-%20%5Cexp%20%5Cleft%5B%20b%20%5C%2C%20(X%20-%20e)%20%5Cright%5D%20%5Cright%5C%7D%20%5Cright%5C%7D%20%5Cquad%20%5Cquad%20%5Cquad) |
 |L.2              | Logistic (2 parameters) | ![Y = \frac{1}{1 + exp(- b (X - e))} \quad \quad \quad](https://render.githubusercontent.com/render/math?math=Y%20%3D%20%5Cfrac%7B1%7D%7B1%20%2B%20exp(-%20b%20(X%20-%20e))%7D%20%5Cquad%20%5Cquad%20%5Cquad) |
 <br>
-<br>
+
 In case of error, different messages will be printed to explain to the user why the error he made : error of syntax of the estimators, error in the number of digits or the ID of the models etc.
-<br>
 <br>
 <br>
 
@@ -200,7 +197,7 @@ The *predict.drc* function computes the confidence interval using the Delta meth
 
 A warning message appears if the "aomisc" self-starter is used with the Delta method, advising him to shift *method" to *"boot"*. Beforehand, it is really easy to check the source of the function, by switching *package = FALSE* to *package = TRUE* in the *compare_nlm* function.
 <br>
-<br>
+
 The latence vary with the Self-Starter used, with the number of coefficients and with the number of iterations. However, it is situated between 2 and 4s "aomisc" Self-starters with the default value of 200 iterations, while it could be much longer for "drc" Self-starters.
 ```r
 ### DRC self-starter with the Delta method -> immediate result ###
@@ -239,7 +236,6 @@ result = ci_nlm(mpg~ wt, fct = DRC.expoDecay(), data = mtcars, method = "boot")
 6    17.98273 17.14739 18.96891
 ```
 <br>
-<br>
 
 The argument *keep_col* is very useful for plotting since it allows to add any other columns to the new dataframe:
 ```r
@@ -255,7 +251,6 @@ head(result)
 5 18.7 3.440    17.75349 16.52585 18.98113
 6 18.1 3.460    17.66496 16.43295 18.89697
 ```
-<br>
 <br>
 
 Plotting the model and its confidence interval is then made really easy:
@@ -277,7 +272,7 @@ ggplot(data = mtcars, aes(x = wt, y = mpg)) + geom_point(size = 3) +
 ```
 ![regrg2](https://user-images.githubusercontent.com/15387266/84253071-c10dfd00-ab0f-11ea-9fa1-e88bcecff71b.png)
 <br>
-<br>
+
 Another argument allows the user to do predictions using the model. The user only has to fill the argument *expand_x* with two values new limits of X incorporation the previous. 
 
 In order to ensure the accuracy of the confidence intervals, the data related to the previous X is kept as it is. The new X is calculated to completely fill the new bounds, while being spaced by the same mean step as the previous values of X, so as not to artificially inflate the "density" of the measurements, which would reduce the confidence interval around the predictions.
@@ -290,7 +285,7 @@ ggplot(data = mtcars, aes(x = wt, y = mpg)) + geom_point(size = 3) +
 ```
 ![regrg3](https://user-images.githubusercontent.com/15387266/84255455-ef410c00-ab12-11ea-8da4-41b7d2c744cb.png)
 <br>
-<br>
+
 If *keep_cols* is activated, the selected columns are repeated as much as necessary to fit the number of rows of the new dataframe. 
 ```r
 result = ci_nlm(mpg~ wt, fct = gaussian(), data = mtcars, keep_cols = c("mpg","wt"), expand_x = c(-6,10))
@@ -322,11 +317,9 @@ tail(result_without_NA)
 381  NA NA 9.946094    5.075669 -12.064286 22.21562
 ```
 <br>
-<br>
-The performance of the Delta and the Bootstrap method are very similar when the number of iterations is sufficient: in general between 100 and 200.
 
+The performance of the Delta and the Bootstrap method are very similar when the number of iterations is sufficient: in general between 100 and 200.
 ![regrg](https://user-images.githubusercontent.com/15387266/84254332-5e1d6580-ab11-11ea-9b97-cda72db70810.png)
 
 However, this is not the case when the X are expanded. The CI generated by the Bootstrap method follows the fitted line while they widen approaching the limits with Delta method. This could be due to the difference of method or to complementary calculations implemented in the "drc" package, but I still did not found the answer to my question and I would be glad if someone can share it with me. I hope this will be answered when I will implement the Delta method for "aomisc" functions. I believe the Delta method is more accurate in this case since it seems logic that the CI increase while going away for the measured points. A message pop if the bootstrap method is used with the *expand* argument to warn the user about that.
-
 ![regrg4](https://user-images.githubusercontent.com/15387266/84261992-156ba980-ab1d-11ea-86b3-8c6d698b2cf5.png)
