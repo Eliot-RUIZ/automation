@@ -37,7 +37,7 @@ The decision tree can also be downloaded by clicking on the top right corner but
 <br>
 <br>
 
-## Automation of the comparison using different estimators + automatic plotting of non-linear models of interest
+## Automation of the comparison of non-linear models using different estimators & automatic plotting of the non-linear models of interest
 
 In my experience, finding the best models and the best parameters for nonlinear models on R can be very cumbersome. Indeed, few Self-Starters (i.e. functions allowing to automatically determine "good" starting parameters for each models), are implemented in Base R. It takes a long time to find a package offering the appropriate functions, even for simple models such as the power laws. When your not an expert in mathematics, even thinking to a model who could fit well enough the data can be complicated. 
 
