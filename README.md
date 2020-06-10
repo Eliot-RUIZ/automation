@@ -8,7 +8,6 @@ install_github("Eliot-RUIZ/automation")
 <br>
 <br>
 <br>
-
 ## Automation of usual statistical tests
 
 The BaseR packages as well as the numerous external packages provide an extraordinary diversity of functions coding for statistical tests and associated operations, and allows to test the association between variables in almost every specific cases. However, this powerful tool requires a great knowledge of inferential statistics in order to use it fully and correctly. Indeed, finding the right statistical test with all its assumptions and associated computations, and finding how to run such analysis can be very tedious and complex in R. Even running a complete analysis requires a lot of coding lines, which increase the risk of making errors. Finally, reporting all the results in a correct and compact format for a scientific report (APA format) is also very cumbersome!
@@ -20,7 +19,6 @@ The function *auto_stats* aims at choosing the appropriate statistical test for 
 ### Actual default values ###
 auto_stats = function(data, Y, X1 = NULL, X2 = NULL, paired = "none", ID = NULL, digits = 3)
 ```
-
 It then returns all the results in APA format to ease insertion in a text document, except for the post-hoc analysis results. The output is separated in 5 sections:
   - (Contigency table used -> for qualitative Y only)
   - Assumptions
@@ -38,7 +36,6 @@ For more transparency due to the length of the function (approximately 1500 line
 This decision tree can be viewed online following this link: http://www.xmind.net/m/3QZV9X
 
 The decision tree can also be downloaded by clicking on the top right corner button and then "Download". The decision tree could then be opened in Xmind (prior download of the software necessary) to get access to the content of the boxes (R code), and also see it in the text preview (as it is organized in the function).
-<br>
 <br>
 <br>
 <br>
@@ -98,8 +95,8 @@ kable(head(result, 15), row.names = F)
 |13    |12   |CRS.5a            |2.5   |160.6  |169.4  |5 coeffs   |b: 2.6      |c: 8.7     |d: -294.2     |e: 0.9     |f: 792.2   |          |         |
 |14    |56   |ml4a              |2.5   |160.6  |169.4  |5 coeffs   |b: 2.6      |c: 8.7     |d: -294.2     |e: 0.9     |f: 792.2   |          |         |
 |+99 other lines  |   |          |   |     |     |  |      |     |        |     |     |    |   |
-
-
+<br>
+<br>
 In R, the results are printed in a convenient way to allows maximum visibility for detecting the best model rapidly. They can also be printed using the *View* function:
 ```r
 View(compare_nlm(mpg ~ wt, mtcars)) # Easier to read and to search a model
@@ -144,6 +141,7 @@ e:(Intercept)     1.840954    2.688259
 f:(Intercept)   103.096202  213.467964
 ```
 <br>
+<br>
 The argument *plot_model* allows to automatically plot 1 to 9 model with their RMSE by entering the ID, the partition of the graphical window being automatically adapted to the number of graphics to plot:
 ```r
 compare_nlm(mpg ~ wt, mtcars, plot_model = c(75,23,34,88,44,46))
@@ -155,8 +153,6 @@ Information on the non-linear model (e.g. formula, coefficients) can be directly
 ```r
 ?UCRS.5c
 ```
-<br>
-<br>
 If the name of the package implementing the function appear in front of the name of the model if the argument *package* is switched to *TRUE*.
 
 The names of the 21 remaining model (in package "aomisc") are displayed below and more informations on them can be obtained following this [link1](https://www.statforbiology.com/2020/stat_nls_usefulfunctions/#exponential-function) and this [link2](https://www.statforbiology.com/nonlinearregression/usefulequations):
@@ -188,7 +184,6 @@ In case of error, different messages will be printed to explain to the user why 
 <br>
 <br>
 <br>
-<br>
 ## Quick calculation of non-linear model confidence interval and predictions
 
 The package "drc" already provides methods to calculate the confidence interval around the non-linear models created with its own Self-Starters (*predict.drc*). However, this feature is not available for the model created from "aomisc" self-starters, though some of them are often the best models (e.g. linear, exponential, logarithmic).
@@ -198,11 +193,11 @@ The function *ci_nlm* was coded to generalize CI calculations for all models use
 ### Default values ###
 ci_nlm = function(formula, fct, data, method = "delta", level = 0.05, nb_boot = 200, expand_x = NA, keep_cols = NULL)
 ```
-
 The *predict.drc* function computes the confidence interval using the Delta method, which is very fast to compute. However, as its calculation is very complicated, I decided to use the equivalent Bootstrapp method (Bertail, Boizot & Combris, 2003), which much more simple to code, but is slower to compute. 
 
 A warning message appears if the "aomisc" self-starter is used with the Delta method, advising him to shift *method" to *"boot"*. Beforehand, it is really easy to check the source of the function, by switching *package = FALSE* to *package = TRUE* in the *compare_nlm* function.
-
+<br>
+<br>
 The latence vary with the Self-Starter used, with the number of coefficients and with the number of iterations. However, it is situated between 2 and 4s "aomisc" Self-starters with the default value of 200 iterations, while it could be much longer for "drc" Self-starters.
 ```r
 ### DRC self-starter with the Delta method -> immediate result ###
@@ -240,7 +235,8 @@ result = ci_nlm(mpg~ wt, fct = DRC.expoDecay(), data = mtcars, method = "boot")
 5    18.08863 17.25334 19.06617
 6    17.98273 17.14739 18.96891
 ```
-
+<br>
+<br>
 The argument *keep_col* is very useful for plotting since it allows to add any other columns to the new dataframe:
 ```r
 ci_nlm(mpg~ wt, fct = gaussian(), data = mtcars, keep_cols = c("all"))  # To keep all the columns of the initial dataframe
@@ -255,7 +251,8 @@ head(result)
 5 18.7 3.440    17.75349 16.52585 18.98113
 6 18.1 3.460    17.66496 16.43295 18.89697
 ```
-
+<br>
+<br>
 Plotting the model and its confidence interval is then made really easy:
 ```r
 ### Plotting in Base R ###
@@ -265,9 +262,7 @@ lines(data$wt, data$Predictions, lwd = 2)
 lines(data$wt, data$Lower_CI, lty = 2)
 lines(data$wt, data$Upper_CI, lty = 2)
 ```
-
 ![Hnet com-image](https://user-images.githubusercontent.com/15387266/84260516-7776df80-ab1a-11ea-8c1a-8095a1518201.jpg)
-
 ```r
 ### Plotting with the "ggplot" package ###
 ggplot(data = mtcars, aes(x = wt, y = mpg)) + geom_point(size = 3) +
@@ -275,10 +270,9 @@ ggplot(data = mtcars, aes(x = wt, y = mpg)) + geom_point(size = 3) +
   geom_line(data = result, aes(x = wt, y = Predictions), size = 1.2) +
   theme_minimal()
 ```
-
 ![regrg2](https://user-images.githubusercontent.com/15387266/84253071-c10dfd00-ab0f-11ea-9fa1-e88bcecff71b.png)
-
-
+<br>
+<br>
 Another argument allows the user to do predictions using the model. The user only has to fill the argument *expand_x* with two values new limits of X incorporation the previous. 
 
 In order to ensure the accuracy of the confidence intervals, the data related to the previous X is kept as it is. The new X is calculated to completely fill the new bounds, while being spaced by the same mean step as the previous values of X, so as not to artificially inflate the "density" of the measurements, which would reduce the confidence interval around the predictions.
@@ -290,8 +284,8 @@ ggplot(data = mtcars, aes(x = wt, y = mpg)) + geom_point(size = 3) +
   theme_minimal()
 ```
 ![regrg3](https://user-images.githubusercontent.com/15387266/84255455-ef410c00-ab12-11ea-8da4-41b7d2c744cb.png)
-
-
+<br>
+<br>
 If *keep_cols* is activated, the selected columns are repeated as much as necessary to fit the number of rows of the new dataframe. 
 ```r
 result = ci_nlm(mpg~ wt, fct = gaussian(), data = mtcars, keep_cols = c("mpg","wt"), expand_x = c(-6,10))
@@ -305,7 +299,6 @@ tail(result)
 371 22.8 2.320 9.823875    5.192001 -11.509855 21.89386
 381 21.4 3.215 9.946094    5.075669 -12.064286 22.21562
 ```
-
 If this is problem in your case, you can just run this line of code and it will replace the repeated rows by NA in the selected columns.
 ```r
 replace_NA = function(prev_df, new_df, names) { 
@@ -323,20 +316,12 @@ tail(result_without_NA)
 371  NA NA 9.823875    5.192001 -11.509855 21.89386
 381  NA NA 9.946094    5.075669 -12.064286 22.21562
 ```
-
-
+<br>
+<br>
 The performance of the Delta and the Bootstrap method are very similar when the number of iterations is sufficient: in general between 100 and 200.
 
 ![regrg](https://user-images.githubusercontent.com/15387266/84254332-5e1d6580-ab11-11ea-9b97-cda72db70810.png)
 
-
 However, this is not the case when the X are expanded. The CI generated by the Bootstrap method follows the fitted line while they widen approaching the limits with Delta method. This could be due to the difference of method or to complementary calculations implemented in the "drc" package, but I still did not found the answer to my question and I would be glad if someone can share it with me. I hope this will be answered when I will implement the Delta method for "aomisc" functions. I believe the Delta method is more accurate in this case since it seems logic that the CI increase while going away for the measured points. A message pop if the bootstrap method is used with the *expand* argument to warn the user about that.
 
 ![regrg4](https://user-images.githubusercontent.com/15387266/84261992-156ba980-ab1d-11ea-86b3-8c6d698b2cf5.png)
-
-
-
-
-
-
-
