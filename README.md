@@ -245,7 +245,7 @@ ggplot(data = mtcars, aes(x = wt, y = mpg)) + geom_point(size = 3) +
   theme_minimal()
 ```
 
-![regrg2](https://user-images.githubusercontent.com/15387266/84253071-c10dfd00-ab0f-11ea-9fa1-e88bcecff71b.png)
+![regrg2](https://user-images.githubusercontent.com/15387266/84253071-c10dfd00-ab0f-11ea-9fa1-e88bcecff71b.png =250x250)
 
 
 Another argument allows the user to do predictions using the model. The user only has to fill the argument *expand_x* with two values new limits of X incorporation the previous. 
@@ -258,7 +258,7 @@ ggplot(data = mtcars, aes(x = wt, y = mpg)) + geom_point(size = 3) +
   geom_line(data = result, aes(x = wt, y = Predictions), size = 1.2) +
   theme_minimal()
 ```
-![regrg3](https://user-images.githubusercontent.com/15387266/84255455-ef410c00-ab12-11ea-8da4-41b7d2c744cb.png)
+![regrg3](https://user-images.githubusercontent.com/15387266/84255455-ef410c00-ab12-11ea-8da4-41b7d2c744cb.png =250x250)
 
 
 If *keep_cols* is activated, the selected columns are repeated as much as necessary to fit the number of rows of the new dataframe. 
