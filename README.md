@@ -120,7 +120,8 @@ The argument *plot_model* allows to automatically plot 1 to 9 model with their R
 compare_nlm(mpg ~ wt, mtcars, plot_model = c(75,23,34,88,44,46))
 ```
 
-![Rplot](https://user-images.githubusercontent.com/15387266/84199785-0b5a9400-aaa6-11ea-9080-672bdfbd2145.png)
+![Hnet com-image (1)](https://user-images.githubusercontent.com/15387266/84263011-fec65200-ab1e-11ea-9015-fb22c4d96fac.jpg)
+
 
 Information on the non-linear model (e.g. formula, coefficients) can be directly accessed for 93 models (in package "drc") by typing their names preceded by a question mark:
 ```r
