@@ -170,7 +170,9 @@ ci_nlm = function(formula, fct, data, method = "delta", level = 0.05, nb_boot = 
 
 The *predict.drc* function computes the confidence interval using the Delta method, which is very fast to compute. However, as its calculation is very complicated, I decided to use the equivalent Bootstrapp method (Bertail, Boizot & Combris, 2003), which much more simple to code, but is slower to compute. 
 
-The latence vary with the Self-Starter used, with the number of coefficients and with the number of iterations. However, it is situated between 2 and 4s "aomisc" self-starters with the default value of 200 iterations, while it could be much longer for "drc" self-starters.
+A warning message appears if the "aomisc" self-starter is used with the Delta method, advising him to shift *method" to *"boot"*. Beforehand, it is really easy to check the source of the function, by switching *package = FALSE* to *package = TRUE* in the *compare_nlm* function.
+
+The latence vary with the Self-Starter used, with the number of coefficients and with the number of iterations. However, it is situated between 2 and 4s "aomisc" Self-starters with the default value of 200 iterations, while it could be much longer for "drc" Self-starters.
 ```r
 ### DRC self-starter with the Delta method -> immediate result ###
 result = ci_nlm(mpg~ wt, fct = gaussian(), data = mtcars)
@@ -208,12 +210,95 @@ result = ci_nlm(mpg~ wt, fct = DRC.expoDecay(), data = mtcars, method = "boot")
 6    17.98273 17.14739 18.96891
 ```
 
-Plotting the model and its confidence interval is then made ea
+The argument *keep_col* is very useful for plotting since it allows to add any other columns to the new dataframe:
+```r
+ci_nlm(mpg~ wt, fct = gaussian(), data = mtcars, keep_cols = c("all"))  # To keep all the columns of the initial dataframe
+result = ci_nlm(mpg~ wt, fct = gaussian(), data = mtcars, keep_cols = c("mpg", "wt"))  # To keep only the columns of interest
+head(result)
+
+   mpg    wt Predictions Lower_CI Upper_CI
+1 21.0 2.620    22.39356 20.79063 23.99648
+2 21.0 2.875    20.68509 19.36893 22.00126
+3 22.8 2.320    24.94405 22.85991 27.02818
+4 21.4 3.215    18.81245 17.61229 20.01262
+5 18.7 3.440    17.75349 16.52585 18.98113
+6 18.1 3.460    17.66496 16.43295 18.89697
+```
+
+Plotting the model and its confidence interval is then made really easy:
+```r
+### Plotting in Base R ###
+data = result[order(result$wt), ]           # Dataframe must be ordered by X for plotting in Base R
+plot(data$wt, data$mpg)
+lines(data$wt, data$Predictions, lwd = 2)
+lines(data$wt, data$Lower_CI, lty = 2)
+lines(data$wt, data$Upper_CI, lty = 2)
+```
+
+[Rplot01.pdf](https://github.com/Eliot-RUIZ/Images/files/4757577/Rplot01.pdf)
+
+```r
+### Plotting with the "ggplot" package ###
+ggplot(data = mtcars, aes(x = wt, y = mpg)) + geom_point(size = 3) +
+  geom_ribbon(data = result, aes(x = wt, ymin = Lower_CI, ymax = Upper_CI), alpha = 0.5, fill = "grey") +
+  geom_line(data = result, aes(x = wt, y = Predictions), size = 1.2) +
+  theme_minimal()
+```
+
+![regrg2](https://user-images.githubusercontent.com/15387266/84253071-c10dfd00-ab0f-11ea-9fa1-e88bcecff71b.png)
 
 
+Another argument allows the user to do predictions using the model. The user only has to fill the argument *expand_x* with two values new limits of X incorporation the previous. 
 
-The performance of the Delta and the Bootstrap method are totally equivalent when the number of iterations is sufficient: in general around 200.
+In order to ensure the accuracy of the confidence intervals, the data related to the previous X is kept as it is. The new X is calculated to completely fill the new bounds, while being spaced by the same mean step as the previous values of X, so as not to artificially inflate the "density" of the measurements, which would reduce the confidence interval around the predictions.
+```r
+### Plotting with the "ggplot" package ###
+ggplot(data = mtcars, aes(x = wt, y = mpg)) + geom_point(size = 3) +
+  geom_ribbon(data = result, aes(x = wt, ymin = Lower_CI, ymax = Upper_CI), alpha = 0.5, fill = "grey") +
+  geom_line(data = result, aes(x = wt, y = Predictions), size = 1.2) +
+  theme_minimal()
+```
+![regrg3](https://user-images.githubusercontent.com/15387266/84255455-ef410c00-ab12-11ea-8da4-41b7d2c744cb.png)
 
+If *keep_cols* is activated, the selected columns are repeated as much as necessary to fit the number of rows of the new dataframe. 
+```r
+result = ci_nlm(mpg~ wt, fct = gaussian(), data = mtcars, keep_cols = c("mpg","wt"), expand_x = c(-6,10))
+tail(result)
+
+     mpg    wt    New_X Predictions   Lower_CI Upper_CI
+331 15.0 3.570 9.335000    5.679318  -9.279771 20.63841
+341 21.4 2.780 9.457219    5.554060  -9.839035 20.94715
+351 21.0 2.620 9.579438    5.431132 -10.397176 21.25944
+361 21.0 2.875 9.701656    5.310468 -10.954134 21.57507
+371 22.8 2.320 9.823875    5.192001 -11.509855 21.89386
+381 21.4 3.215 9.946094    5.075669 -12.064286 22.21562
+```
+
+If this is problem in your case, you can just run this line of code
+```r
+replace_NA = function(prev_df, new_df, names) { 
+  new_df[(nrow(prev_df) + 1) : nrow(new_df), names] = NA
+  print(new_df)
+  }
+result_without_NA = replace_NA(mtcars, result, names = c("mpg", "wt"))
+tail(result_without_NA)
+
+    mpg wt    New_X Predictions   Lower_CI Upper_CI
+331  NA NA 9.335000    5.679318  -9.279771 20.63841
+341  NA NA 9.457219    5.554060  -9.839035 20.94715
+351  NA NA 9.579438    5.431132 -10.397176 21.25944
+361  NA NA 9.701656    5.310468 -10.954134 21.57507
+371  NA NA 9.823875    5.192001 -11.509855 21.89386
+381  NA NA 9.946094    5.075669 -12.064286 22.21562
+```
+
+
+The performance of the Delta and the Bootstrap method are very similar when the number of iterations is sufficient: in general between 100 and 200.
+
+![regrg](https://user-images.githubusercontent.com/15387266/84254332-5e1d6580-ab11-11ea-9b97-cda72db70810.png)
+
+
+However, this is not the case when ...
 
 
 
