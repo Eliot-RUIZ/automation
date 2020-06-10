@@ -97,9 +97,32 @@ In R, the results are printed in a convenient way to allows maximum visibility f
 ```r
 View(compare_nlm(mpg ~ wt, mtcars)) # Easier to read and to search a model
 compare_nlm(mpg ~ wt, mtcars)       # Compact format as you can see below
+
+  Rank  ID      Function        AIC     BIC    RMSE   Nb_coeffs   Coeff_1      Coeff_2      Coeff_3       Coeff_4     Coeff_5    Coeff_6    Coeff_7 
+ ===== ==== ================= ======= ======= ====== ========== ============ =========== ============== =========== =========== ========== =========
+    1   71       UCRS.5c       156.46  165.26  2.31    5 coeffs  b: -274.58    c: 93.75     d: 30.07      e: 2.26    f: 158.28                      
+    2   77        uml4c        156.46  165.26  2.31    5 coeffs  b: -274.58    c: 93.75     d: 30.07      e: 2.26    f: 158.28                      
+    3   70       UCRS.5b       156.55  165.34  2.32    5 coeffs  b: -249.34    c: 69.84     d: 30.07      e: 2.26     f: 89.31                      
+    4   76        uml4b        156.55  165.34  2.32    5 coeffs  b: -249.34    c: 69.84     d: 30.07      e: 2.26     f: 89.31                      
+    5   69       UCRS.5a       157.11  165.91  2.34    5 coeffs  b: -201.18    c: 66.46     d: 30.07      e: 2.26     f: 65.33                      
+    6   75        uml4a        157.11  165.91  2.34    5 coeffs  b: -201.18    c: 66.46     d: 30.07      e: 2.26     f: 65.33                      
+    7   16        EXD.2        157.55  161.95  2.58    2 coeffs   d: 49.66     e: 3.41                                                              
+    8   99    DRC.expoDecay    157.55  161.95  2.58    2 coeffs  init: 49.66   k: 0.29                                                              
+    9   100   DRC.expoGrowth   157.55  161.95  2.58    2 coeffs  init: 49.66   k: -0.29                                                             
+   10   103    DRC.logCurve    157.59  161.98  2.58    2 coeffs   a: 39.26    b: -17.09                                                             
+   11   88        W2x.4        157.74  165.07  2.43    4 coeffs   c: 30.87     d: 9.57       e: 1.65      t0: 1.83                                  
+   12   107     DRC.poly2      158.05  163.91  2.52    3 coeffs   a: 49.93    b: -13.38      c: 1.17                                                
+   13   84         W2.3        158.17  164.03  2.53    3 coeffs   b: -1.38     d: 37.03      e: 2.54                                                
+   14   17        EXD.3        158.39  164.25  2.54    3 coeffs    c: 6.78     d: 57.33      e: 2.27                                                
+   15   94     DRC.asymReg     158.39  164.25  2.54    3 coeffs  init: 57.34   m: 0.44    plateau: 6.78                                             
+   16   109    DRC.SSasymp     158.39  164.25  2.54    3 coeffs  Asym: 6.78   R0: 57.34    lrc: -0.82                                               
+   17   30          l3         158.47  164.33  2.54    3 coeffs    b: 1.51     d: 48.49      e: 2.42                                                
+   18   36         LL.3        158.47  164.33  2.54    3 coeffs    b: 1.51     d: 48.49      e: 2.42                                                
+   19   41        LL2.3        158.47  164.33  2.54    3 coeffs    b: 1.51     d: 48.5       e: 0.88                                                
+   20   104   DRC.lorentz.3    158.61  164.48  2.55    3 coeffs    b: 0.13    d: 102.25      e: -2.5                                                
+ [ reached 'max' / getOption("max.print") -- omitted 93 rows ]
 ```
 
-![Capture](https://user-images.githubusercontent.com/15387266/84198162-6d65ca00-aaa3-11ea-942e-534d4e07876e.PNG)
 
 
 The confidence interval around the coefficients of the model of interest can easily be calculated using the *confint* function in the "drc" package:
