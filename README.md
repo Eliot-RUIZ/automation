@@ -282,7 +282,6 @@ Another argument allows the user to do predictions using the model. The user onl
 
 In order to ensure the accuracy of the confidence intervals, the data related to the previous X is kept as it is. The new X is calculated to completely fill the new bounds, while being spaced by the same mean step as the previous values of X, so as not to artificially inflate the "density" of the measurements, which would reduce the confidence interval around the predictions.
 ```r
-### Plotting with the "ggplot" package ###
 ggplot(data = mtcars, aes(x = wt, y = mpg)) + geom_point(size = 3) +
   geom_ribbon(data = result, aes(x = wt, ymin = Lower_CI, ymax = Upper_CI), alpha = 0.5, fill = "grey") +
   geom_line(data = result, aes(x = wt, y = Predictions), size = 1.2) +
