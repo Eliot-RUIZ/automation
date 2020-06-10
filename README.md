@@ -142,6 +142,7 @@ f:(Intercept)   103.096202  213.467964
 ```
 <br>
 <br>
+
 The argument *plot_model* allows to automatically plot 1 to 9 model with their RMSE by entering the ID, the partition of the graphical window being automatically adapted to the number of graphics to plot:
 ```r
 compare_nlm(mpg ~ wt, mtcars, plot_model = c(75,23,34,88,44,46))
