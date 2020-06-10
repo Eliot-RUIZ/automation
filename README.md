@@ -235,7 +235,7 @@ lines(data$wt, data$Lower_CI, lty = 2)
 lines(data$wt, data$Upper_CI, lty = 2)
 ```
 
-[Rplot01.pdf](https://github.com/Eliot-RUIZ/Images/files/4757577/Rplot01.pdf)
+![Hnet com-image](https://user-images.githubusercontent.com/15387266/84260516-7776df80-ab1a-11ea-8c1a-8095a1518201.jpg)
 
 ```r
 ### Plotting with the "ggplot" package ###
@@ -260,6 +260,7 @@ ggplot(data = mtcars, aes(x = wt, y = mpg)) + geom_point(size = 3) +
 ```
 ![regrg3](https://user-images.githubusercontent.com/15387266/84255455-ef410c00-ab12-11ea-8da4-41b7d2c744cb.png)
 
+
 If *keep_cols* is activated, the selected columns are repeated as much as necessary to fit the number of rows of the new dataframe. 
 ```r
 result = ci_nlm(mpg~ wt, fct = gaussian(), data = mtcars, keep_cols = c("mpg","wt"), expand_x = c(-6,10))
@@ -274,7 +275,7 @@ tail(result)
 381 21.4 3.215 9.946094    5.075669 -12.064286 22.21562
 ```
 
-If this is problem in your case, you can just run this line of code
+If this is problem in your case, you can just run this line of code and it will replace the repeated rows by NA in the selected columns.
 ```r
 replace_NA = function(prev_df, new_df, names) { 
   new_df[(nrow(prev_df) + 1) : nrow(new_df), names] = NA
