@@ -7,6 +7,7 @@ install_github("Eliot-RUIZ/automation")
 ```
 <br>
 <br>
+<br>
 
 ## Automation of usual statistical tests
 
@@ -185,6 +186,7 @@ In case of error, different messages will be printed to explain to the user why 
 <br>
 <br>
 <br>
+
 ## Quick calculation of non-linear model confidence interval and predictions
 
 The package "drc" already provides methods to calculate the confidence interval around the non-linear models created with its own Self-Starters (*predict.drc*). However, this feature is not available for the model created from "aomisc" self-starters, though some of them are often the best models (e.g. linear, exponential, logarithmic).
@@ -238,6 +240,7 @@ result = ci_nlm(mpg~ wt, fct = DRC.expoDecay(), data = mtcars, method = "boot")
 ```
 <br>
 <br>
+
 The argument *keep_col* is very useful for plotting since it allows to add any other columns to the new dataframe:
 ```r
 ci_nlm(mpg~ wt, fct = gaussian(), data = mtcars, keep_cols = c("all"))  # To keep all the columns of the initial dataframe
