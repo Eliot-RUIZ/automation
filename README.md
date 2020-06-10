@@ -257,6 +257,7 @@ head(result)
 ```
 <br>
 <br>
+
 Plotting the model and its confidence interval is then made really easy:
 ```r
 ### Plotting in Base R ###
