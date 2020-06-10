@@ -1,6 +1,6 @@
 # Package "automation" - Eliot RUIZ
 
-The goal of this package is to provide functions automating time-consuming tasks in R: statistical testing & non-linear model choice/plotting. The package can be installed using this code, but since the auto_stats function is not finished yet, the package cannot be installed yet.
+The goal of this package is to provide functions automating time-consuming tasks in R: statistical testing & non-linear model choice/plotting. The package can be installed using this code, but since the auto_stats function is not finished, the package cannot be installed yet.
 ```r
 library(remotes)
 install_github("Eliot-RUIZ/automation")
@@ -10,7 +10,7 @@ install_github("Eliot-RUIZ/automation")
 
 ## Automation of usual statistical tests
 
-The BaseR packages as well as the numerous external packages provide an extraordinary diversity of functions coding for statistical tests and associated operations, and allows to test the association between variables in almost every specific cases. However, this powerful tool requires a great knowledge of inferential statistics in order to use it fully and correctly. Indeed, finding the right statistical test with all its assumptions and associated computations, and finding how to run such analysis can be very tedious and complex in R. Even running a complete analysis requires a lot of coding lines, which increase the risk of making errors. Finally, reporting all the results in a correct and compact format for a scientific report (APA format) is also very cumbersome!
+The Base R packages as well as the numerous external packages provide an extraordinary diversity of functions coding most statistical tests and associated operations, which allows to test the association between variables in almost every specific cases. However, this powerful tool requires a great knowledge of inferential statistics in order to use it fully and correctly. Indeed, finding the right statistical test with all its assumptions and associated computations, and assessing how to run such analysis can be very tedious and complex in R. Even running a complete analysis requires a lot of coding lines, which increase the risk of making errors. Finally, reporting all the results in a correct and compact format for a scientific report (APA format) is also very cumbersome!
 
 Doing all of that can takes days of hardwork when analysing a big dataset. I therefore decided to code a function running a complete analysis in a few seconds, and displaying the results in a format enabling to simply copy and paste it in a report. 
 
@@ -19,17 +19,15 @@ The function *auto_stats* aims at choosing the appropriate statistical test for 
 ### Actual default values ###
 auto_stats = function(data, Y, X1 = NULL, X2 = NULL, paired = "none", ID = NULL, digits = 3)
 ```
-It then returns all the results in APA format to ease insertion in a text document, except for the post-hoc analysis results. The output is separated in 5 sections:
-  - (Contigency table used -> for qualitative Y only)
+It then returns all the results in APA format to ease insertion in a text document, except for the post-hoc analysis results. The output is separated into 5 sections:
+  - (Contingency table used -> for qualitative Y only)
   - Assumptions
   - Main test
-  - Effect size and related 
-  - Post-Hoc analysis
+  - Measures of associations (e.g. effect size, odds ratio, correlation coefficients) and other informations
+  - Post-hoc analysis
   - Messages
   
 The last section is of major importance since many different messages have been implemented in the function for transparency of the analysis (e.g. advices, problems with the data).
-  
-Currently, this function is still in the making but it will be functionnal in the next few days. You can view the actual code in the R file of this page.
 
 For more transparency due to the length of the function (approximately 1500 lines of code yet), I created on Xmind the decision tree the algorithm follows, for the statistical part. 
 
@@ -42,20 +40,20 @@ The decision tree can also be downloaded by clicking on the top right corner but
 
 ## Automation of the comparison using different estimators + automatic plotting of non-linear models of interest
 
-Finding the best models and the best parameters for nonlinear models on R can be very cumbersome, in my experience. Indeed, few Self-Starters (i.e. functions allowing to automatically determine "good" starting parameters), are implemented in BaseR. It takes a long time to find a package offering the appropriate functions, even for simple models such as the power laws. When your not an expert in mathematics, even thinking to a model who could fit well enough the data can be complicated. 
+In my experience, finding the best models and the best parameters for nonlinear models on R can be very cumbersome. Indeed, few Self-Starters (i.e. functions allowing to automatically determine "good" starting parameters for each models), are implemented in Base R. It takes a long time to find a package offering the appropriate functions, even for simple models such as the power laws. When your not an expert in mathematics, even thinking to a model who could fit well enough the data can be complicated. 
 
-The method of groping search of good starting parameters is even more tedious since even with values close to the nearest tenth of the optimal values, the *nls* function (BaseR) sometimes don't converge after 50,000 iterations! Besides, once the right parameters have been found, it is still very long to calculate the model quality estimators and the confidence intervals around the coefficients. Finally, making a correct graph representing the model can be very hard in R.
+The groping search method of good starting parameters is even more tedious since even with values close to the nearest tenth of the optimal values, the *nls* function (BaseR) sometimes don't converge after 50,000 iterations! Besides, once the right parameters have been found, it is still very long to calculate the model quality estimators and the confidence intervals around the coefficients. Finally, making a correct graph representing the model can be very hard in R.
 
-To ease such procedure, I coded the function *compare_nlm* to compare many different models, compute their estimators, and finally plot them, for a set of data consisting in 1 quantitative dependent variable (Y) and 1 quantitative factor.
+To ease such procedure, I coded the function *compare_nlm* (see the commented code in french in the "R" file of this page) to compare many different models, compute their estimators, and finally plot them, for a set of data consisting in 1 quantitative dependent variable (Y) and 1 quantitative factor.
 ```r
 ### Default values ###
 compare_nlm = function(formula, data, digits = 2, arrange = c("AIC", "RMSE", "BIC"), increase = T, plot_model = NA, package = F)
 ```
 <br>
 
-After 4 to 5s of computation (on a usual laptop), the function dispaly a table containing the best coefficients (1 to 7) of 112 non-linear and 2 linear models (intercept = 0 or not). The self-starters for all those models are found in the packages "drc" and "aomisc", and *compare_nlm* uses internally the function *drm* (package "drc") to run the computation. 
+After 4 to 5s of computation (on a usual laptop), the function display a table containing the best coefficients (1 to 7) of 112 non-linear and 2 linear models. The self-starters for all those models are found in the packages "drc" and "aomisc", and *compare_nlm* uses internally the function *drm* (package "drc") to run the computation. 
 
-Sometimes, the convergence of the self-starters might fail (model not appropried to the data), but the function will jump to the other model and print a message with the ID of model (stored at the end of the table).
+Sometimes, the convergence of the self-starters might fail (model not appropriate for the data), but the function will jump to the other model and print a message with the ID of the model (found at the end of the table).
 ```r
 compare_nlm(mpg ~ wt, mtcars)
 
@@ -70,7 +68,7 @@ Error in optim(startVec, opfct, hessian = TRUE, method = optMethod, control = li
 
 The user can choose to order the table (*arrange* argument), according to the AIC, and/or the BIC, and/or the RMSE and/or the number of coefficients. 
 
-The order of the estimators reflect their importance for the user because, the dataframe is first ordered using the 1st estimator, and then, for equal values of the 1st estimator, it uses the 2nd estimator etc. 
+The order of the estimators reflects their importance for the user because, the dataframe is first ordered using the 1st estimator, and then, for equal values of the 1st estimator, it uses the 2nd estimator etc. 
 
 The models with the lowest estimators (i.e. best models) are then placed on the top of the dataframe (i.e. Rank 1, Rank 2 etc). However, the dataframe could also be ordered by descending order if the argument *increase* is shifted to *FALSE*.
 
@@ -129,7 +127,7 @@ compare_nlm(mpg ~ wt, mtcars)       # Compact format as you can see below
 ```
 <br>
 
-The confidence interval around the coefficients of the model of interest can easily be calculated using the *confint* function in the "drc" package:
+The confidence interval around the coefficients of the model of interest can easily be calculated using the *confint.drc* function in the "drc" package:
 ```r
 model = drm(mpg ~ wt, data = mtcars, fct = UCRS.5c())
 confint(model, level = 0.95)
@@ -156,10 +154,17 @@ Information on the non-linear model (e.g. formula, coefficients) can be directly
 ```
 <br>
 
-If the name of the package implementing the function appear in front of the name of the model if the argument *package* is switched to *TRUE*.
+The name of the package containing the function appear in front of the name of the model, if the argument *package* is switched to *TRUE*.
+```r
+compare_nlm(mpg ~ wt, mtcars, package = T)
+
+# Part of the dataset obtained #
+7   16          drc::EXD.2         157.55  161.95  2.58    2 coeffs   d: 49.66     e: 3.41                                               
+8   99    aomisc::DRC.expoDecay    157.55  161.95  2.58    2 coeffs  init: 49.66   k: 0.29
+```
 <br>
 
-The names of the 21 remaining model (in package "aomisc") are displayed below and more informations on them can be obtained following this [link1](https://www.statforbiology.com/2020/stat_nls_usefulfunctions/#exponential-function) and this [link2](https://www.statforbiology.com/nonlinearregression/usefulequations):
+The names of the 21 remaining model (in package "aomisc") are displayed below, and more informations on them can be obtained following this [link1](https://www.statforbiology.com/2020/stat_nls_usefulfunctions/#exponential-function) and this [link2](https://www.statforbiology.com/nonlinearregression/usefulequations):
 |Aomisc functions used | Name of the model | Formula of the model  |
 |:----------------|:----------------------------------------------|:-----------------|
 |DRC.asymReg      | Asymptotic Regression Model | ![Y = a - (a - b) \, \exp (- c  X) \quad \quad \quad](https://render.githubusercontent.com/render/math?math=Y%20%3D%20a%20-%20(a%20-%20b)%20%5C%2C%20%5Cexp%20(-%20c%20%20X)%20%5Cquad%20%5Cquad%20%5Cquad) |
@@ -184,26 +189,26 @@ The names of the 21 remaining model (in package "aomisc") are displayed below an
 |L.2              | Logistic (2 parameters) | ![Y = \frac{1}{1 + exp(- b (X - e))} \quad \quad \quad](https://render.githubusercontent.com/render/math?math=Y%20%3D%20%5Cfrac%7B1%7D%7B1%20%2B%20exp(-%20b%20(X%20-%20e))%7D%20%5Cquad%20%5Cquad%20%5Cquad) |
 <br>
 
-In case of error, different messages will be printed to explain to the user why the error he made : error of syntax of the estimators, error in the number of digits or the ID of the models etc.
+In case of error, different messages will be printed to explain to the user what was the problem (e.g. error of syntax of the estimators, error in the number of digits or the ID of the models).
 <br>
 <br>
 <br>
 
-## Calculation of non-linear model confidence interval and predictions
+## Calculation of non-linear models' confidence interval & predictions
 
-The package "drc" already provides methods to calculate the confidence interval around the non-linear models created with its own Self-Starters (*predict.drc*). However, this feature is not available for the model created from "aomisc" self-starters, though some of them are often the best models (e.g. linear, exponential, logarithmic).
+The package "drc" already provides methods to calculate the confidence interval around the non-linear models created with its Self-Starters (*predict.drc*). However, this feature is not available for the model created from "aomisc" self-starters, though some of them are often the best models (e.g. linear, exponential, logarithmic).
 
 The function *ci_nlm* was coded to generalize CI calculations for all models used in *compare_nlm*, but also to allows the user for plotting the predictions.
 ```r
 ### Default values ###
 ci_nlm = function(formula, fct, data, method = "delta", level = 0.05, nb_boot = 200, expand_x = NA, keep_cols = NULL)
 ```
-The *predict.drc* function computes the confidence interval using the Delta method, which is very fast to compute. However, as its calculation is very complicated, I decided to use the equivalent Bootstrapp method (Bertail, Boizot & Combris, 2003), which much more simple to code, but is slower to compute. 
+The *predict.drc* function computes the confidence interval using the Delta method, which is very fast. However, as its calculation is very complicated, I decided to use the equivalent Bootstrap method (Bertail, Boizot & Combris, 2003) for the moment, which is much more simple to code but is slower to compute. 
 
-A warning message appears if the "aomisc" self-starter is used with the Delta method, advising him to shift *method" to *"boot"*. Beforehand, it is really easy to check the source of the function, by switching *package = FALSE* to *package = TRUE* in the *compare_nlm* function.
+A warning message appears if the "aomisc" self-starter is used with the Delta method, advising to shift *method" to *"boot"*. Beforehand, it is really easy to check the source of the function, by switching *package = FALSE* to *package = TRUE* in the *compare_nlm* function (see above).
 <br>
 
-The latence vary with the Self-Starter used, with the number of coefficients and with the number of iterations. However, it is situated between 2 and 4s "aomisc" Self-starters with the default value of 200 iterations, while it could be much longer for "drc" Self-starters.
+The latency vary with the Self-Starter used, with the number of coefficients and with the number of iterations. However, it is situated between 2 and 4s for "aomisc" Self-starters, with the default value of 200 iterations. Since the *drm* function calculate many supplementary things for "drc" Self-starters, the duration of computation is generally much longer.
 ```r
 ### DRC self-starter with the Delta method -> immediate result ###
 result = ci_nlm(mpg~ wt, fct = gaussian(), data = mtcars)
@@ -278,10 +283,12 @@ ggplot(data = mtcars, aes(x = wt, y = mpg)) + geom_point(size = 3) +
 ![regrg2](https://user-images.githubusercontent.com/15387266/84253071-c10dfd00-ab0f-11ea-9fa1-e88bcecff71b.png)
 <br>
 
-Another argument allows the user to do predictions using the model. The user only has to fill the argument *expand_x* with two values new limits of X incorporation the previous. 
+Another argument allows the user to do predictions using the model. The user only has to fill the argument *expand_x* with two new limits of X incorporation the previous. 
 
-In order to ensure the accuracy of the confidence intervals, the data related to the previous X is kept as it is. The new X is calculated to completely fill the new bounds, while being spaced by the same mean step as the previous values of X, so as not to artificially inflate the "density" of the measurements, which would reduce the confidence interval around the predictions.
+To ensure the accuracy of the confidence intervals, the data related to the previous X is kept as it is. The new X is calculated to fill the new bounds, while being spaced by the same mean step as the previous values of X, so as not to artificially inflate the "density" of the measurements, which would reduce the confidence interval around the predictions.
 ```r
+ci_nlm(mpg~ wt, fct = gaussian(), data = mtcars, expand_x = c(-6,10))
+
 ggplot(data = mtcars, aes(x = wt, y = mpg)) + geom_point(size = 3) +
   geom_ribbon(data = result, aes(x = wt, ymin = Lower_CI, ymax = Upper_CI), alpha = 0.5, fill = "grey") +
   geom_line(data = result, aes(x = wt, y = Predictions), size = 1.2) +
@@ -290,7 +297,7 @@ ggplot(data = mtcars, aes(x = wt, y = mpg)) + geom_point(size = 3) +
 ![regrg3](https://user-images.githubusercontent.com/15387266/84255455-ef410c00-ab12-11ea-8da4-41b7d2c744cb.png)
 <br>
 
-If *keep_cols* is activated, the selected columns are repeated as much as necessary to fit the number of rows of the new dataframe. 
+If *keep_cols* is activated, the selected columns are repeated as much as necessary to fit the number of rows of the new dataframe. This is very useful when facetting in ggplot for example. 
 ```r
 result = ci_nlm(mpg~ wt, fct = gaussian(), data = mtcars, keep_cols = c("mpg","wt"), expand_x = c(-6,10))
 tail(result)
@@ -324,5 +331,7 @@ tail(result_without_NA)
 
 The performance of the Delta and the Bootstrap method are very similar when the number of iterations is sufficient: in general between 100 and 200.
 ![regrg5](https://user-images.githubusercontent.com/15387266/84266961-a21a6580-ab25-11ea-9acf-a7b9374328ae.png)
-However, this is not the case when the X are expanded. The CI generated by the Bootstrap method follows the fitted line while they widen approaching the limits with Delta method. This could be due to the difference of method or to complementary calculations implemented in the "drc" package, but I still did not found the answer to my question and I would be glad if someone can share it with me. I hope this will be answered when I will implement the Delta method for "aomisc" functions. I believe the Delta method is more accurate in this case since it seems logic that the CI increase while going away for the measured points. A message pop if the bootstrap method is used with the *expand* argument to warn the user about that.
+However, this is not the case when the X are expanded. The CI generated by the Bootstrap method follows the fitted line while they widen approaching the limits with Delta method. This could be due to the difference of method or to complementary calculations implemented in the "drc" package, but I still did not found the answer to my question and I would be glad if someone can share it with me. I hope this will be answered when I will implement the Delta method for "aomisc" functions. 
+
+I believe the Delta method is more accurate in this case since it seems logic that the CI increase while going away for the measured points. A message pop if the bootstrap method is used with the *expand* argument to warn the user about that.
 ![regrg4](https://user-images.githubusercontent.com/15387266/84261992-156ba980-ab1d-11ea-86b3-8c6d698b2cf5.png)
