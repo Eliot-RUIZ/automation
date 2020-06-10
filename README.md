@@ -1,9 +1,14 @@
 # Package "automation" - Eliot RUIZ
 
-The goal of this package is to provide functions automating time-consuming tasks in R: statistical testing & non-linear model choice/plotting.
-
-
-
+The goal of this package is to provide functions automating time-consuming tasks in R: statistical testing & non-linear model choice/plotting. The package can be installed using this code, but since the auto_stats function is not finished yet, the package cannot be installed yet.
+```r
+library(remotes)
+install_github("Eliot-RUIZ/automation")
+```
+<br>
+<br>
+<br>
+<br>
 ## Automation of usual statistical tests
 
 The BaseR packages as well as the numerous external packages provide an extraordinary diversity of functions coding for statistical tests and associated operations, and allows to test the association between variables in almost every specific cases. However, this powerful tool requires a great knowledge of inferential statistics in order to use it fully and correctly. Indeed, finding the right statistical test with all its assumptions and associated computations, and finding how to run such analysis can be very tedious and complex in R. Even running a complete analysis requires a lot of coding lines, which increase the risk of making errors. Finally, reporting all the results in a correct and compact format for a scientific report (APA format) is also very cumbersome!
@@ -26,16 +31,17 @@ It then returns all the results in APA format to ease insertion in a text docume
   
 The last section is of major importance since many different messages have been implemented in the function for transparency of the analysis (e.g. advices, problems with the data).
   
-Currently, this function is still in the making but it will be functionnal in the next few days.
+Currently, this function is still in the making but it will be functionnal in the next few days. You can view the actual code in the R file of this page.
 
 For more transparency due to the length of the function (approximately 1500 lines of code yet), I created on Xmind the decision tree the algorithm follows, for the statistical part. 
 
 This decision tree can be viewed online following this link: http://www.xmind.net/m/3QZV9X
 
 The decision tree can also be downloaded by clicking on the top right corner button and then "Download". The decision tree could then be opened in Xmind (prior download of the software necessary) to get access to the content of the boxes (R code), and also see it in the text preview (as it is organized in the function).
-
-
-
+<br>
+<br>
+<br>
+<br>
 ## Automation of the comparison using different estimators + automatic plotting of non-linear models of interest
 
 Finding the best models and the best parameters for nonlinear models on R can be very cumbersome, in my experience. Indeed, few Self-Starters (i.e. functions allowing to automatically determine "good" starting parameters), are implemented in BaseR. It takes a long time to find a package offering the appropriate functions, even for simple models such as the power laws. When your not an expert in mathematics, even thinking to a model who could fit well enough the data can be complicated. 
@@ -47,7 +53,8 @@ To ease such procedure, I coded the function *compare_nlm* to compare many diffe
 ### Default values ###
 compare_nlm = function(formula, data, digits = 2, arrange = c("AIC", "RMSE", "BIC"), increase = T, plot_model = NA, package = F)
 ```
-
+<br>
+<br>
 After 4 to 5s of computation (on a usual laptop), the function dispaly a table containing the best coefficients (1 to 7) of 112 non-linear and 2 linear models (intercept = 0 or not). The self-starters for all those models are found in the packages "drc" and "aomisc", and *compare_nlm* uses internally the function *drm* (package "drc") to run the computation. 
 
 Sometimes, the convergence of the self-starters might fail (model not appropried to the data), but the function will jump to the other model and print a message with the ID of model (stored at the end of the table).
@@ -61,7 +68,8 @@ Error in optim(startVec, opfct, hessian = TRUE, method = optMethod, control = li
   non-finite finite-difference value [1]
 [1] "Convergence failed - Self-Starter ID : 95"
 ```
-
+<br>
+<br>
 The user can choose to order the table (*arrange* argument), according to the AIC, and/or the BIC, and/or the RMSE and/or the number of coefficients. 
 
 The order of the estimators reflect their importance for the user because, the dataframe is first ordered using the 1st estimator, and then, for equal values of the 1st estimator, it uses the 2nd estimator etc. 
@@ -73,7 +81,6 @@ Here is an example obtained with the *mtcars* package, and easily exported using
 result = compare_nlm(mpg ~ wt, mtcars, digits = 1, increase = F, arrange = c("Nb_coeffs", "AIC"))
 kable(head(result, 15), row.names = F)
 ```
-
 |Rank  |ID   |    Function      |RMSE  | AIC   | BIC   |Nb_coeffs  | Coeff_1    | Coeff_2   |  Coeff_3     | Coeff_4   | Coeff_5   |Coeff_6   |Coeff_7  |
 |:-----|:----|:-----------------|:-----|:------|:------|:----------|:-----------|:----------|:-------------|:----------|:----------|:---------|:--------|
 |1     |65   |twophase          |2.5   |165.6  |177.3  |7 coeffs   |b1: 8       |c1: 9.3    |d1: 15.8      |e1: 0.3    |b2: 3.1    |d2: 26.3  |e2: 2.7  |
@@ -122,9 +129,8 @@ compare_nlm(mpg ~ wt, mtcars)       # Compact format as you can see below
    20   104   DRC.lorentz.3    158.61  164.48  2.55    3 coeffs    b: 0.13    d: 102.25      e: -2.5                                                
  [ reached 'max' / getOption("max.print") -- omitted 93 rows ]
 ```
-
-
-
+<br>
+<br>
 The confidence interval around the coefficients of the model of interest can easily be calculated using the *confint* function in the "drc" package:
 ```r
 model = drm(mpg ~ wt, data = mtcars, fct = UCRS.5c())
@@ -137,24 +143,23 @@ d:(Intercept)    27.957770   32.175538
 e:(Intercept)     1.840954    2.688259
 f:(Intercept)   103.096202  213.467964
 ```
-
+<br>
 The argument *plot_model* allows to automatically plot 1 to 9 model with their RMSE by entering the ID, the partition of the graphical window being automatically adapted to the number of graphics to plot:
 ```r
 compare_nlm(mpg ~ wt, mtcars, plot_model = c(75,23,34,88,44,46))
 ```
-
 ![Hnet com-image (4)](https://user-images.githubusercontent.com/15387266/84263219-641a4300-ab1f-11ea-9be6-886e3cbb0fc7.jpg)
-
-
+<br>
+<br>
 Information on the non-linear model (e.g. formula, coefficients) can be directly accessed for 93 models (in package "drc") by typing their names preceded by a question mark:
 ```r
 ?UCRS.5c
 ```
-
+<br>
+<br>
 If the name of the package implementing the function appear in front of the name of the model if the argument *package* is switched to *TRUE*.
 
 The names of the 21 remaining model (in package "aomisc") are displayed below and more informations on them can be obtained following this [link1](https://www.statforbiology.com/2020/stat_nls_usefulfunctions/#exponential-function) and this [link2](https://www.statforbiology.com/nonlinearregression/usefulequations):
-
 |Aomisc functions used | Name of the model | Formula of the model  |
 |:----------------|:----------------------------------------------|:-----------------|
 |DRC.asymReg      | Asymptotic Regression Model | ![Y = a - (a - b) \, \exp (- c  X) \quad \quad \quad](https://render.githubusercontent.com/render/math?math=Y%20%3D%20a%20-%20(a%20-%20b)%20%5C%2C%20%5Cexp%20(-%20c%20%20X)%20%5Cquad%20%5Cquad%20%5Cquad) |
@@ -177,11 +182,13 @@ The names of the 21 remaining model (in package "aomisc") are displayed below an
 |E.3              | Modified Gompertz equation (3 parameters) | ![Y = c + (1 - c) \left\{ 1 - \exp \left\{- \exp \left\[ b \, (X - e) \right\] \right\} \right\} \quad \quad \quad](https://render.githubusercontent.com/render/math?math=Y%20%3D%20c%20%2B%20(1%20-%20c)%20%5Cleft%5C%7B%201%20-%20%5Cexp%20%5Cleft%5C%7B-%20%5Cexp%20%5Cleft%5B%20b%20%5C%2C%20(X%20-%20e)%20%5Cright%5D%20%5Cright%5C%7D%20%5Cright%5C%7D%20%5Cquad%20%5Cquad%20%5Cquad) |
 |E.4              | Modified Gompertz equation (4 parameters) | ![Y = c + (d - c) \left\{ 1 - \exp \left\{- \exp \left\[ b \, (X - e) \right\] \right\} \right\} \quad \quad \quad](https://render.githubusercontent.com/render/math?math=Y%20%3D%20c%20%2B%20(d%20-%20c)%20%5Cleft%5C%7B%201%20-%20%5Cexp%20%5Cleft%5C%7B-%20%5Cexp%20%5Cleft%5B%20b%20%5C%2C%20(X%20-%20e)%20%5Cright%5D%20%5Cright%5C%7D%20%5Cright%5C%7D%20%5Cquad%20%5Cquad%20%5Cquad) |
 |L.2              | Logistic (2 parameters) | ![Y = \frac{1}{1 + exp(- b (X - e))} \quad \quad \quad](https://render.githubusercontent.com/render/math?math=Y%20%3D%20%5Cfrac%7B1%7D%7B1%20%2B%20exp(-%20b%20(X%20-%20e))%7D%20%5Cquad%20%5Cquad%20%5Cquad) |
-
+<br>
+<br>
 In case of error, different messages will be printed to explain to the user why the error he made : error of syntax of the estimators, error in the number of digits or the ID of the models etc.
-
-
-
+<br>
+<br>
+<br>
+<br>
 ## Quick calculation of non-linear model confidence interval and predictions
 
 The package "drc" already provides methods to calculate the confidence interval around the non-linear models created with its own Self-Starters (*predict.drc*). However, this feature is not available for the model created from "aomisc" self-starters, though some of them are often the best models (e.g. linear, exponential, logarithmic).
