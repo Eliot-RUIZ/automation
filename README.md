@@ -7,7 +7,7 @@ install_github("Eliot-RUIZ/automation")
 ```
 <br>
 <br>
-<br>
+
 ## Automation of usual statistical tests
 
 The BaseR packages as well as the numerous external packages provide an extraordinary diversity of functions coding for statistical tests and associated operations, and allows to test the association between variables in almost every specific cases. However, this powerful tool requires a great knowledge of inferential statistics in order to use it fully and correctly. Indeed, finding the right statistical test with all its assumptions and associated computations, and finding how to run such analysis can be very tedious and complex in R. Even running a complete analysis requires a lot of coding lines, which increase the risk of making errors. Finally, reporting all the results in a correct and compact format for a scientific report (APA format) is also very cumbersome!
