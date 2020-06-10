@@ -127,7 +127,7 @@ compare_nlm(mpg ~ wt, mtcars)       # Compact format as you can see below
  [ reached 'max' / getOption("max.print") -- omitted 93 rows ]
 ```
 <br>
-<br>
+
 The confidence interval around the coefficients of the model of interest can easily be calculated using the *confint* function in the "drc" package:
 ```r
 model = drm(mpg ~ wt, data = mtcars, fct = UCRS.5c())
