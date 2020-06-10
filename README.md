@@ -160,12 +160,66 @@ In case of error, different messages will be printed to explain to the user why 
 
 ## Quick calculation of non-linear model confidence interval and predictions
 
-The package "drc" already provides methods to calculate the confidence interval around the non-linear models created with its own Self-Starters. However, this feature is not available for the model created from "aomisc" self-starters, though some of them are often the best models (e.g. linear, exponential, logarithmic).
+The package "drc" already provides methods to calculate the confidence interval around the non-linear models created with its own Self-Starters (*predict.drc*). However, this feature is not available for the model created from "aomisc" self-starters, though some of them are often the best models (e.g. linear, exponential, logarithmic).
 
 The function *ci_nlm* was coded to generalize CI calculations for all models used in *compare_nlm*, but also to allows the user for plotting the predictions.
 ```r
 ### Default values ###
 ci_nlm = function(formula, fct, data, method = "delta", level = 0.05, nb_boot = 200, expand_x = NA, keep_cols = NULL)
 ```
+
+The *predict.drc* function computes the confidence interval using the Delta method, which is very fast to compute. However, as its calculation is very complicated, I decided to use the equivalent Bootstrapp method (Bertail, Boizot & Combris, 2003), which much more simple to code, but is slower to compute. 
+
+The latence vary with the Self-Starter used, with the number of coefficients and with the number of iterations. However, it is situated between 2 and 4s "aomisc" self-starters with the default value of 200 iterations, while it could be much longer for "drc" self-starters.
+```r
+### DRC self-starter with the Delta method -> immediate result ###
+result = ci_nlm(mpg~ wt, fct = gaussian(), data = mtcars)
+head(result)
+
+  Predictions Lower_CI Upper_CI
+1    22.39356 20.79063 23.99648
+2    20.68509 19.36893 22.00126
+3    24.94405 22.85991 27.02818
+4    18.81245 17.61229 20.01262
+5    17.75349 16.52585 18.98113
+6    17.66496 16.43295 18.89697
+
+### DRC self-starter with the Bootstrap method (default = 200 iterations) -> 10s ###
+result = ci_nlm(mpg~ wt, fct = gaussian(), data = mtcars, method = "boot")
+head(result)
+
+Predictions Lower_CI Upper_CI
+1    22.39356 21.30726 23.78245
+2    20.68509 19.65370 21.97412
+3    24.94405 23.84398 26.62455
+4    18.81245 17.87121 19.96312
+5    17.75349 16.74902 18.81757
+6    17.66496 16.64668 18.71966
+
+### AOMISC self-starter with the Bootstrap method (default = 200 iterations) -> 2s ###
+result = ci_nlm(mpg~ wt, fct = DRC.expoDecay(), data = mtcars, method = "boot") 
+
+  Predictions Lower_CI Upper_CI
+1    23.01207 22.19429 24.00978
+2    21.35223 20.59005 22.25067
+3    25.13077 24.03569 26.36981
+4    19.32383 18.49125 20.24617
+5    18.08863 17.25334 19.06617
+6    17.98273 17.14739 18.96891
+```
+
+Plotting the model and its confidence interval is then made ea
+
+
+
+The performance of the Delta and the Bootstrap method are totally equivalent when the number of iterations is sufficient: in general around 200.
+
+
+
+
+
+
+
+
 
 
