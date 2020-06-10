@@ -8,7 +8,7 @@ The goal of this package is to provide functions automating time-consuming tasks
 
 ```r
 ### Actual default values ###
-auto_stats = function(data, Y, X1 = NULL, X2 = NULL, paired = "none", ID = NULL, theoric_mean = NULL, digits = 3)
+auto_stats = function(data, Y, X1 = NULL, X2 = NULL, paired = "none", ID = NULL, digits = 3)
 ```
 
 The function *auto_stats* aims at choosing the appropriate statistical test for the data provided by the user. 
@@ -86,6 +86,13 @@ View(compare_nlm(mpg ~ wt, mtcars))
 ```
 
 ![Capture](https://user-images.githubusercontent.com/15387266/84198162-6d65ca00-aaa3-11ea-942e-534d4e07876e.PNG)
+
+The confidence interval around the coefficients of the model of interest can easily be calculated using the *confint* function in the "drc" package:
+```r
+model = drm(mpg ~ wt, data = mtcars, fct = LL.4())
+confint(model, level = 0.95)
+```
+
 
 The argument *plot_model* allows to automatically plot 1 to 9 model with their RMSE by entering the ID, the partition of the graphical window being automatically adapted to the number of graphics to plot:
 ```r
