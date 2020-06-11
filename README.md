@@ -47,7 +47,7 @@ auto_stats(data = data.frame(Y), y = "Y", digits = 2, apa = F)
 
 ----------------------------- Table ------------------------------
  
-no_cochran
+Y
  no yes 
   4   2 
  
@@ -63,13 +63,15 @@ One-sample Chi-squared Test with Yates' correction = 0.17, df = 1, p-value = 0.6
 -------------------- Measure(s) of association -------------------
  
 Cohen's h = 0.68
+ 
+------------------------------------------------------------------
 
 
 ### APA displaying ###
 
 ----------------------------- Table ------------------------------
  
-no_cochran
+Y
  no yes 
   4   2 
  
@@ -88,6 +90,10 @@ APA code = &chi;²(1) = 0.167, *p* = .683
 -------------------- Measure(s) of association -------------------
  
 Cohen's h = .68
+ 
+------------------------------------------------------------------
+
+### Appearance of the formula after following the instructions above : χ²(1) = 0.167, p = .683
 ```
 <br>
 <br>
