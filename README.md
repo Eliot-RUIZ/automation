@@ -16,15 +16,17 @@ Doing all of that can takes days of hardwork when analysing a big dataset. I the
 The function *auto_stats* aims at choosing the appropriate statistical test for the data provided by the user. The data could consist in an independant variable (Y) explained by 0 to 2 factors (X). After checking each assumptions, the function compute the main test and all usually associated tasks (e.g. effect size, post-hoc tests, interaction plot).
 ```r
 ### Actual default values ###
-auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL, digits = 3)
+auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL, digits = 3, apa = F)
 ```
-It then returns all the results in APA format to ease insertion in a text document, except for the post-hoc analysis results. The output is separated into 5 sections:
-  - (Contingency table used -> for qualitative Y only)
-  - Assumptions
-  - Main test
-  - Measures of associations (e.g. effect size, odds ratio, correlation coefficients) and other informations
+It then returns all the results in APA format to ease insertion in a text document, except for the post-hoc analysis results. The output is separated into multiple sections (empty ones aren't displayed):
+  - Table (for qualitative Y only)
+  - Probabilities (for qualitative Y only)
+  - Asssumptions testing
+  - Main test(s)
+  - Measure(s) of association (e.g. effect size, odds ratio, correlation coefficients) 
+  - Other (rarely used)
   - Post-hoc analysis
-  - Messages
+  - Message(s)
   
 The last section is of major importance since many different messages have been implemented in the function for transparency of the analysis (e.g. advices, problems with the data).
 
@@ -33,6 +35,60 @@ For more transparency due to the length of the function (approximately 1500 line
 This decision tree can be viewed online following this link: https://www.xmind.net/m/cx77Pm/
 
 The decision tree can also be downloaded by clicking on the top right corner button and then "Download". The decision tree could then be opened in Xmind (prior download of the software necessary) to get access to the content of the boxes (R code), and also see it in the text preview (as it is organized in the function).
+
+Here is an example of the output:
+```r
+### Significant difference between proportion of Yes and No ? ###
+Y = c("no","no","no","yes","no","yes")
+
+### Default displaying ###
+
+auto_stats(data = data.frame(Y), y = "Y", digits = 2, apa = F)
+
+----------------------------- Table ------------------------------
+ 
+no_cochran
+ no yes 
+  4   2 
+ 
+-------------------------- Probabilities -------------------------
+ 
+Probality of no = 0.67, 95% CI [0.24, 0.94]
+Probality of yes = 0.33 95% CI [0.06, 0.76]
+ 
+-------------------------- Main test(s) --------------------------
+ 
+One-sample Chi-squared Test with Yates' correction = 0.17, df = 1, p-value = 0.68 (ns)
+ 
+-------------------- Measure(s) of association -------------------
+ 
+Cohen's h = 0.68
+
+
+### APA displaying ###
+
+----------------------------- Table ------------------------------
+ 
+no_cochran
+ no yes 
+  4   2 
+ 
+-------------------------- Probabilities -------------------------
+ 
+Probality of no = .66, 95% CI [.24, .94]
+Probality of yes = .33 95% CI [.06, .75]
+ 
+-------------------------- Main test(s) --------------------------
+ 
+One-sample Chi-squared Test with Yates' correction = 0.17, df = 1, p-value = 0.68 (ns)
+ 
+APA code = &chi;²(1) = 0.167, *p* = .683
+(Copy it + Paste it in an R Notebook + Click on Knit + Copy it in your report)
+ 
+-------------------- Measure(s) of association -------------------
+ 
+Cohen's h = .68
+```
 <br>
 <br>
 <br>
