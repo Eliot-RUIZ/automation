@@ -39,7 +39,7 @@ The decision tree can also be downloaded by clicking on the top right corner but
 Here is an example of the default mode:
 ```r
 ### Significant difference between proportion of Yes and No ? ###
-Y = c("no","no","no","yes","no","yes")
+Y = c("no","no","no","yes","no","no","no","no","yes","no")
 
 ### Default displaying ###
 
@@ -49,24 +49,28 @@ auto_stats(data = data.frame(Y), y = "Y")
  
 Y
  no yes 
-  4   2 
+ 11   3 
  
 -------------------------- Probabilities -------------------------
  
-Probality of no = 0.67, 95% CI [0.24, 0.94]
-Probality of yes = 0.33 95% CI [0.06, 0.76]
+Probality of no = 0.786, 95% CI [0.524, 0.924]
+Probality of yes = 0.214 95% CI [0.076, 0.476]
+ 
+--------------------- Asssumptions testing ----------------------
+ 
+Cochran's rule: 0% of expected counts are below 5 -> Satisfied
  
 -------------------------- Main test(s) --------------------------
  
-One-sample Chi-squared Test with Yates' correction = 0.17, df = 1, p-value = 0.68 (ns)
+One-sample Chi-squared Test = 4.571, df = 1, p-value = 0.033 (*)
  
 -------------------- Measure(s) of association -------------------
  
-Cohen's h = 0.68
+Cohen's h = 1.216
  
 ------------------------------------------------------------------
 ```
-The with the APA mode activated:
+The same but with the APA mode activated:
 ```
 auto_stats(data = data.frame(Y), y = "Y", apa = TRUE)
 
@@ -74,27 +78,31 @@ auto_stats(data = data.frame(Y), y = "Y", apa = TRUE)
  
 Y
  no yes 
-  4   2 
+ 11   3 
  
 -------------------------- Probabilities -------------------------
  
-Probality of no = .66, 95% CI [.24, .94]
-Probality of yes = .33 95% CI [.06, .75]
+Probality of no = .786, 95% CI [.524, .924]
+Probality of yes = .214 95% CI [.076, .476]
+ 
+--------------------- Asssumptions testing ----------------------
+ 
+Cochran's rule: 0% of expected counts are below 5 -> Satisfied
  
 -------------------------- Main test(s) --------------------------
  
-One-sample Chi-squared Test with Yates' correction = 0.17, df = 1, p-value = 0.68 (ns)
+One-sample Chi-squared Test = 4.571, df = 1, p-value = 0.033 (*)
  
-APA code = &chi;²(1) = 0.167, *p* = .683
+APA code = &chi;²(1) = 4.571, *p* = .033
 (Copy it + Paste it in an R Notebook + Click on Knit + Copy it in your report)
  
 -------------------- Measure(s) of association -------------------
  
-Cohen's h = .68
+Cohen's h = .216
  
------------------------------------------------------------------- 
+------------------------------------------------------------------
 ```
-Appearance of the formula after following the instructions above : χ²(1) = 0.167, p = .683
+Appearance of the formula after following the instructions above : χ²(1) = 4.571, p = .033
 <br>
 <br>
 <br>
