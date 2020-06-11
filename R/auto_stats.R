@@ -1,48 +1,53 @@
 auto_stats = function(data, Y, X1 = NULL, X2 = NULL, paired = "none", ID = NULL, theoric_mean = NULL, digits = 3) {
   
-  if(!(Y %in% names(data)))
+  if(!(y %in% names(data)))
+    stop("The dataframe does not contain Y. Check the spelling.")
+  
+  if(!is.null(x1) && !(x1 %in% names(data)))
     stop("The dataframe does not contain X1. Check the spelling.")
   
-  if(!is.null(X1) && !(X1 %in% names(data)))
-    stop("The dataframe does not contain X1. Check the spelling.")
-  
-  if(!is.null(X2) && !(X2 %in% names(data)))
+  if(!is.null(x2) && !(x2 %in% names(data)))
     stop("The dataframe does not contain X2. Check the spelling.")
   
-  if(!is.null(ID) && !(ID %in% names(data)))
+  if(!is.null(id) && !(id %in% names(data)))
     stop("The dataframe does not contain ID. Check the spelling.")
   
-  Y = data[, Y]
+  Y = data[, y]
   
-  if(!is.null(X1))  X1 = data[, X1]
+  if(!is.null(x1))  X1 = data[, x1]
   
-  if(!is.null(X2))  X2 = data[, X2]
+  if(!is.null(x2))  X2 = data[, x2]
   
-  if(!is.null(ID))  ID = data[, ID]
+  if(!is.null(id))  ID = data[, id]
   
-  if(!(is.integer(theoric_mean) || is.numeric(theoric_mean)))
-    stop("The theoric mean must be a number (numeric or integer class).") ### This part is in the making.
+  if(length(unique(Y)) == 1)
+    stop("Y is constant while it must have at least two levels.")
   
-  #else {
+  if(!is.null(id) && length(unique(ID)) == 1)
+    stop("The ID of the subject is constant while it must have at least two levels.")
   
-  #data = data[ , which(names(data) %in% c(Y, X1, X2, ID))] 
+  if(!(is.character(Y) || is.factor(Y) || is.integer(Y) || is.numeric(Y)))
+    stop("Y must be either a character, a factor, an integer or a number.
+         Check it with this command: (is.character(y) || is.factor(y) || is.integer(y) || is.numeric(y))
+         Change it using as.character(y) etc.")
   
-  # print(data$Y) }
+  if(!is.null(x1) && !(is.character(X1) || is.factor(X1) || is.integer(X1) || is.numeric(X1)))
+    stop("X1 must be either a character, a factor, an integer or a number.
+         Check it with this command: (is.character(x1) || is.factor(x1) || is.integer(x1) || is.numeric(x1))
+         Change it using as.character(x1) etc.")
   
-  #if(!is.null(ID) && length(unique(ID)) < 2)
-  #stop("ID is constant.")
+  if(!is.null(x2) && !(is.character(X2) || is.factor(X2) || is.integer(X2) || is.numeric(X2)))
+    stop("X2 must be either of type character, factor, integer or numeric.
+         Check it with this command: (is.character(x2) || is.factor(x2) || is.integer(x2) || is.numeric(x2))
+         Change it using as.character(x2) etc.")
   
-  #if(is.null(X1) && is.null(X2) && is.null(ID))
+  if(!is.null(id) && !(is.character(ID) || is.factor(ID) || is.integer(ID) || is.numeric(ID)))
+    stop("ID must be either of type character, factor, integer or numeric.
+         Check it with this command: (is.character(id) || is.factor(id) || is.integer(id) || is.numeric(id))
+         Change it using as.character(id) etc.")
   
-  
-  
-  #if(X1 = NULL && dim(data)[[2]] == 0)
-  #stop("Please enter the names of the variable between quotation mark.")
-  
-  
-  
-  #if(is.factor(Y) || is.character(Y))
-  # stop("Y must be qualitative (i.e. character or factor).")
+  if(!(paired == "none" || paired == "first" || paired == "second" || paired == "both"))
+    stop('The "paired" argument only takes those values: "none", "first", "second", "both".')
   
   ## Qualitative Y
   
