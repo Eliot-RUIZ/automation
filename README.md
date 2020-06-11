@@ -16,7 +16,7 @@ Doing all of that can takes days of hardwork when analysing a big dataset. I the
 The function *auto_stats* aims at choosing the appropriate statistical test for the data provided by the user. The data could consist in an independant variable (Y) explained by 0 to 2 factors (X). After checking each assumptions, the function compute the main test and all usually associated tasks (e.g. effect size, post-hoc tests, interaction plot).
 ```r
 ### Actual default values ###
-auto_stats = function(data, Y, X1 = NULL, X2 = NULL, paired = "none", ID = NULL, digits = 3)
+auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL, digits = 3)
 ```
 It then returns all the results in APA format to ease insertion in a text document, except for the post-hoc analysis results. The output is separated into 5 sections:
   - (Contingency table used -> for qualitative Y only)
