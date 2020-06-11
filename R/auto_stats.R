@@ -1,4 +1,4 @@
-auto_stats = function(data, Y, X1 = NULL, X2 = NULL, paired = "none", ID = NULL, theoric_mean = NULL, digits = 3) {
+auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL, digits = 3) {
   
   if(!(y %in% names(data)))
     stop("The dataframe does not contain Y. Check the spelling.")
