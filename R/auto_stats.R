@@ -171,12 +171,15 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
         tab_n1 = sort(table(Y), decreasing = T)
         tab_n2 = sort(table(Y), decreasing = F)
         tab_prop = sort(prop.table(table(Y)), decreasing = T) 
+        cochran = suppressWarnings(table(chisq.test(tab_n1)$expected > 5))
         
         # Test
         
         # Violation of Cochran's Rule
         
-        if(suppressWarnings(any(chisq.test(table(Y))$expected)) <= 5) {
+        if(names(cochran) == "FALSE") {
+          
+          vali = "Cochran's rule: 100% of expected counts are below 5 -> Not satisfied"
           
           # One-sample Chi-squared Test with Yates' correction
 
@@ -189,6 +192,8 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
         # Satisfied Cochran's Rule
         
         else {
+          
+          vali = "Cochran's rule: 0% of expected counts are below 5 -> Satisfied"
           
           # One-sample Chi-squared Test
           
@@ -229,8 +234,9 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
           
         test_apa = paste("&chi;²(", test1[[2]][[1]], ") = ", x_apa(test1[[1]][[1]]), ", *p* = ", p_apa(test1[[3]]), sep = "")
         
-        if(apa) display(tab = tab_n1, prob1 = prob_ci1_apa, prob2 = prob_ci2_apa, test1 = test, asso1 = eff_apa, apa = test_apa)
-        else display(tab = tab_n1, prob = prob_ci1, prob2 = prob_ci2, test1 = test, asso1 = eff)
+        if(apa) display(tab = tab_n1, prob1 = prob_ci1_apa, prob2 = prob_ci2_apa, vali1 = vali,
+                        test1 = test, asso1 = eff_apa, apa = test_apa)
+        else display(tab = tab_n1, prob = prob_ci1, prob2 = prob_ci2, vali1 = vali, test1 = test, asso1 = eff)
         
         }
             
