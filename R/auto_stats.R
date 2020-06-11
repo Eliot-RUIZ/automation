@@ -1,4 +1,6 @@
-auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL, digits = 3) {
+auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL, digits = 3, apa = F) {
+
+  ## Initialisation
   
   if(!(y %in% names(data)))
     stop("The dataframe does not contain Y. Check the spelling.")
@@ -24,75 +26,217 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
     stop("Y is constant while it must have at least two levels.")
   
   if(!is.null(id) && length(unique(ID)) == 1)
-    stop("The ID of the subject is constant while it must have at least two levels.")
+    stop("The ID of the subjects is constant while it must have at least two levels.")
   
   if(!(is.character(Y) || is.factor(Y) || is.integer(Y) || is.numeric(Y)))
     stop("Y must be either a character, a factor, an integer or a number.
          Check it with this command: (is.character(y) || is.factor(y) || is.integer(y) || is.numeric(y))
-         Change it using as.character(y) etc.")
+         Change it using as.character(y) etc, depending on which type you want it to be.")
   
   if(!is.null(x1) && !(is.character(X1) || is.factor(X1) || is.integer(X1) || is.numeric(X1)))
     stop("X1 must be either a character, a factor, an integer or a number.
          Check it with this command: (is.character(x1) || is.factor(x1) || is.integer(x1) || is.numeric(x1))
-         Change it using as.character(x1) etc.")
+         Change it using as.character(x1) etc, depending on which type you want it to be.")
   
   if(!is.null(x2) && !(is.character(X2) || is.factor(X2) || is.integer(X2) || is.numeric(X2)))
     stop("X2 must be either of type character, factor, integer or numeric.
          Check it with this command: (is.character(x2) || is.factor(x2) || is.integer(x2) || is.numeric(x2))
-         Change it using as.character(x2) etc.")
+         Change it using as.character(x2) etc, depending on which type you want it to be.")
   
   if(!is.null(id) && !(is.character(ID) || is.factor(ID) || is.integer(ID) || is.numeric(ID)))
     stop("ID must be either of type character, factor, integer or numeric.
          Check it with this command: (is.character(id) || is.factor(id) || is.integer(id) || is.numeric(id))
-         Change it using as.character(id) etc.")
+         Change it using as.character(id) etc, depending on which type you want it to be.")
   
   if(!(paired == "none" || paired == "first" || paired == "second" || paired == "both"))
     stop('The "paired" argument only takes those values: "none", "first", "second", "both".')
   
+  display = function(tab = NULL, prob1 = NULL, prob2 = NULL, vali1 = NULL, vali2 = NULL, vali3 = NULL, vali4 = NULL, 
+                     test1 = NULL, test2 = NULL, asso1 = NULL, asso2 = NULL, apa = NULL, ph1 = NULL, ph2 = NULL, ph3 = NULL, 
+                     ph4 = NULL, mes1 = NULL, mes2 = NULL, mes3 = NULL, mes4 = NULL, dig = digits) {
+    if(!is.null(tab)) {
+      cat("-----------------------------", "Table", "------------------------------", fill = T)
+      cat(" ", fill = T)
+      print(tab, digits = dig)
+      cat(" ", fill = T)
+    }
+    if(!is.null(prob1)) {
+      cat("--------------------------", "Probabilities", "-------------------------", fill = T)
+      cat(" ", fill = T)
+      cat(prob1, fill = T)
+      cat(prob2, fill = T)
+      cat(" ", fill = T)
+    }
+    if(!is.null(vali1)) {
+      cat("---------------------", "Asssumptions testing", "----------------------", fill = T)
+      cat(" ", fill = T)
+      cat(vali1, fill = T)
+      if(!is.null(vali2)) cat(vali2, fill = T)
+      if(!is.null(vali3)) cat(vali3, fill = T)
+      if(!is.null(vali4)) cat(vali4, fill = T)
+      cat(" ", fill = T)
+    }
+    if(!is.null(test1)) {
+      cat("--------------------------", "Main test(s)", "--------------------------", fill = T)
+      cat(" ", fill = T)
+      cat(test1, fill = T)
+      if(!is.null(test2)) cat(test2, fill = T)
+      if(!is.null(apa)) {
+      cat(" ", fill = T)
+      cat(paste("APA code =", apa), fill = T)
+      cat("(Copy it + Paste it in an R Notebook + Click on Knit + Copy it in your report)", fill = T)
+      }
+      cat(" ", fill = T)
+    }
+    if(!is.null(asso1)) {
+      cat("--------------------", "Measure(s) of association", "-------------------", fill = T)
+      cat(" ", fill = T)
+      cat(asso1, fill = T)
+      if(!is.null(asso2)) cat(asso2, fill = T)
+      cat(" ", fill = T)
+    }
+    if(!is.null(ph1)) {
+      cat("------------------------", "Post-hoc analysis", "-----------------------", fill = T)
+      cat(" ", fill = T)
+      print(ph1, digits = dig)
+      if(!is.null(ph2)) print(ph2, digits = dig)
+      if(!is.null(ph3)) print(ph3, digits = dig)
+      cat(" ", fill = T)
+    }
+    if(!is.null(mes1) || !is.null(mes2) || !is.null(mes3) || !is.null(mes4)) {
+      cat("-----------------------------", "Message(s)", "----------------------------", fill = T)
+      cat(" ", fill = T)
+      if(!is.null(mes1)) cat(mes, fill = T)
+      if(!is.null(mes2)) cat(mes, fill = T)
+      if(!is.null(mes3)) cat(mes, fill = T)
+      if(!is.null(mes4)) cat(mes, fill = T)
+      cat(" ", fill = T)
+    }
+    cat("------------------------------------------------------------------", fill = T)
+  }
+  
+  r = function(r) {
+    r = round(r, digits = digits)
+    r
+  }
+  
+  x_apa = function(x) {
+    x = round(x, digits = 3)
+    x
+  }
+  
+  x1_apa = function(x) {
+    x = substr(round(x, digits = 3), 2, digits + 2)
+    x
+  }
+  
+  p_apa = function(p) {
+    if(p >= 0.001 && p < 0.01)
+      p = "< .01"
+    
+    else if(p < 0.001)
+      p = "< .001"
+    
+    else 
+      p = substr(round(p, digits = 3), 2, 5)
+    p
+  }
+  
+  s = function(p) {
+    if(p >= 0.05 && p < 0.1)    significance = " (.)"
+    
+    else if(p >= 0.01 && p < 0.05)    significance = " (*)"
+    
+    else if(p >= 0.001 && p < 0.01)    significance = " (**)"
+    
+    else if(p < 0.001)    significance = " (***)"
+    
+    else significance = " (ns)"
+    
+    significance
+  }
+  
   ## Qualitative Y
   
-  if(is.factor(y) || is.character(y))
+  if(is.factor(y) || is.character(y)) {
     
     ### No X
     
-    if(is.null(X1) && is.null(X2))
+    if(is.null(x1) && is.null(x2)) {
       
       # Independence
       
-      if(paired == "none")
+      if(paired == "none") {
         
-        tab_n = sort(table(Y), decreasing = T)
-  tab_prop = sort(prop.table(table(Y)), decreasing = T)
-  
-  # Test
-  
-  # Violation of Cochran's Rule
-  
-  if(any(chisq.test(table(Y))$expected) <= 5)
-    
-    # One-sample Chi-squared Test with Yates' correction
-    
-    prop.test(tab_n)
-  
-  # Satisfied Cochran's Rule
-  
-  else
-    
-    # One-sample Chi-squared Test
-    
-    prop.test(tab_n, correct = F)
-  
-  # Effect size: Cohen's H
-  
-  abs(2 * asin(sqrt(tab_prop[[1]])) # 2 * asin(sqrt(tab_prop[[2]])))
-      
-      # Probability of the most represented category and its CI
-      
-      prop.test(tab_n)[[4]]
-      
-      prop.test(tab_n)[[6]][1:2]
-      
-      # Repeated measures: ERROR
+        tab_n1 = sort(table(Y), decreasing = T)
+        tab_n2 = sort(table(Y), decreasing = F)
+        tab_prop = sort(prop.table(table(Y)), decreasing = T) 
+        
+        # Test
+        
+        # Violation of Cochran's Rule
+        
+        if(suppressWarnings(any(chisq.test(table(Y))$expected)) <= 5) {
+          
+          # One-sample Chi-squared Test with Yates' correction
+
+          test1 = suppressWarnings(prop.test(tab_n1)) 
+          test2 = suppressWarnings(prop.test(tab_n2))
+          name = "One-sample Chi-squared Test with Yates' correction"
+          
+          }
+        
+        # Satisfied Cochran's Rule
+        
+        else {
+          
+          # One-sample Chi-squared Test
+          
+          test1 = suppressWarnings(prop.test(tab_n1, correct = F)) 
+          test2 = suppressWarnings(prop.test(tab_n2, correct = F)) 
+          name = "One-sample Chi-squared Test"
+          
+          }
+        
+        # Effect size: Cohen's H
+        
+        effect_size = abs(2 * asin(sqrt(tab_prop[[1]]))) - 2 * asin(sqrt(tab_prop[[2]]))
+            
+        # Probability 
+            
+        prob1 = test1[[4]][[1]]
+        prob2 = test2[[4]][[1]]
+        ci1 = test1[[6]][1:2]
+        ci2 = test2[[6]][1:2]
+
+        # Displaying results
+        
+        prob_ci1 = paste("Probality of ", names(tab_n1)[1], " = ", r(prob1), 
+                         ", 95% CI [", r(ci1[1]), ", ", r(ci1[2]), "]", sep = "")
+        prob_ci2 = paste("Probality of ", names(tab_n2)[1], " = ", r(prob2), 
+                         " 95% CI [", r(ci2[1]), ", ", r(ci2[2]), "]", sep = "")
+        
+        prob_ci1_apa = paste("Probality of ", names(tab_n1)[1], " = ", x1_apa(prob1), 
+                         ", 95% CI [", x1_apa(ci1[1]), ", ", x1_apa(ci1[2]), "]", sep = "")
+        prob_ci2_apa = paste("Probality of ", names(tab_n2)[1], " = ", x1_apa(prob2), 
+                         " 95% CI [", x1_apa(ci2[1]), ", ", x1_apa(ci2[2]), "]", sep = "")
+        
+        test = paste(name, " = ", r(test1[[1]][[1]]), ", df = ", test1[[2]][[1]], ", p-value = ", r(test1[[3]]), s(test1[[3]]), sep = "")
+        
+        eff = paste("Cohen's h =", r(effect_size))
+        
+        eff_apa = paste("Cohen's h =", x1_apa(effect_size))
+          
+        test_apa = paste("&chi;²(", test1[[2]][[1]], ") = ", x_apa(test1[[1]][[1]]), ", *p* = ", p_apa(test1[[3]]), sep = "")
+        
+        if(apa) display(tab = tab_n1, prob1 = prob_ci1_apa, prob2 = prob_ci2_apa, test1 = test, asso1 = eff_apa, apa = test_apa)
+        else display(tab = tab_n1, prob = prob_ci1, prob2 = prob_ci2, test1 = test, asso1 = eff)
+        
+        }
+            
+    # Repeated measures: ERROR
+            
+    else stop("Y cannot be paired. Add a repeated factor in the formula.")
       
       else
         
