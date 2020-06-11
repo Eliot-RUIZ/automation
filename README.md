@@ -36,14 +36,14 @@ This decision tree can be viewed online following this link: https://www.xmind.n
 
 The decision tree can also be downloaded by clicking on the top right corner button and then "Download". The decision tree could then be opened in Xmind (prior download of the software necessary) to get access to the content of the boxes (R code), and also see it in the text preview (as it is organized in the function).
 
-Here is an example of the output:
+Here is an example of the default mode:
 ```r
 ### Significant difference between proportion of Yes and No ? ###
 Y = c("no","no","no","yes","no","yes")
 
 ### Default displaying ###
 
-auto_stats(data = data.frame(Y), y = "Y", digits = 2, apa = F)
+auto_stats(data = data.frame(Y), y = "Y")
 
 ----------------------------- Table ------------------------------
  
@@ -65,9 +65,10 @@ One-sample Chi-squared Test with Yates' correction = 0.17, df = 1, p-value = 0.6
 Cohen's h = 0.68
  
 ------------------------------------------------------------------
-
-
-### APA displaying ###
+```
+The with the APA mode activated:
+```
+auto_stats(data = data.frame(Y), y = "Y", apa = TRUE)
 
 ----------------------------- Table ------------------------------
  
@@ -91,10 +92,9 @@ APA code = &chi;²(1) = 0.167, *p* = .683
  
 Cohen's h = .68
  
-------------------------------------------------------------------
-
-### Appearance of the formula after following the instructions above : χ²(1) = 0.167, p = .683
+------------------------------------------------------------------ 
 ```
+Appearance of the formula after following the instructions above : χ²(1) = 0.167, p = .683
 <br>
 <br>
 <br>
