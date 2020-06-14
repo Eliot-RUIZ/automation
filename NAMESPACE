@@ -1,0 +1,45 @@
+exportPattern("^[[:alpha:]]+")
+
+
+importFrom("graphics", "mtext", "par", "plot")
+
+importFrom("stats", "AIC", "BIC", "anova", "binomial", "chisq.test",
+               "coef", "complete.cases", "fisher.test", "ftable", "glm",
+               "mantelhaen.test", "model.matrix", "model.response",
+               "predict", "prop.test", "quantile")
+
+importFrom("aomisc", "DRC.asymReg", "DRC.beta", "DRC.bragg.3", "DRC.bragg.4", "DRC.cousens85",
+           "DRC.expoDecay", "DRC.expoGrowth", "DRC.linear", "DRC.linearOrigin", "DRC.logCurve",
+           "DRC.lorentz.3", "DRC.lorentz.4", "DRC.negExp", "DRC.poly2", "DRC.powerCurve", 
+           "DRC.SSasymp", "DRC.YL", "E.3", "E.4", "L.2")
+
+importFrom("drc", "AR.2", "AR.3", "baro5", "BC.4", "BC.5", "bcl3", "bcl4", "braincousens", "CRS.4a", 
+"CRS.4b", "CRS.4c", "CRS.5a", "CRS.5b", "CRS.5c", "CRS.6", "EXD.2", "EXD.3", "G.2", 
+"G.3", "G.3u", "G.4", "gammadr", "gaussian", "gompertz", "gompertzd", "L.3","L.4", 
+"L.5", "l2", "l3", "l3u", "l4", "l5", "lgaussian", "LL.2", "LL.3", 
+"LL.3u", "LL.4", "LL.5", "LL2.2", "LL2.3", "LL2.3u", "LL2.4", "LL2.5", "llogistic",   
+"llogistic2", "LN.2", "LN.3", "LN.3u", "LN.4", "lnormal", "logistic", "ml3a", "ml3b", 
+"ml3c", "ml4a", "ml4b", "ml4c", "MM.2", "MM.3", "multi2", "NEC.2", "NEC.3", 
+"NEC.4", "twophase", "UCRS.4a", "UCRS.4b", "UCRS.4c", "UCRS.5a", "UCRS.5b", "UCRS.5c", "uml3a", 
+"uml3b", "uml3c", "uml4a", "uml4b", "uml4c", "W1.2", "W1.3", "W1.3u", "W1.4", 
+"w2", "W2.2", "W2.3", "W2.3u", "W2.4", "W2x.3", "W2x.4", "w3", "w4",  
+"weibull1", "weibull2", "weibull2x", "drm")
+
+importFrom("dplyr", "group_by", "select", "arrange", "mutate")
+
+importFrom("tidyr", "spread")
+
+importFrom("exact2x2", "fisher.exact", "mcnemar.exact")
+
+importFrom("rcompanion", "nominalSymmetryTest", "cramerV", "cohenG", "pairwiseNominalIndependence",
+           "pairwisePermutationSymmetry", "groupwiseCMH")
+
+importFrom("coin", "symmetry_test", "mh_test")
+
+importFrom("RVAideMemoire", "fisher.multcomp", "cochran.qtest")
+
+importFrom("vcd", "woolf_test", "loddsratio")
+
+
+
+

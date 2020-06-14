@@ -1,6 +1,4 @@
-auto_stats = function(y, ...) UseMethod("auto_stats")
-
-auto_stats.default = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL, digits = 3, apa = F) {
+auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL, digits = 3, apa = F) {
   
   ## Initialisation
   

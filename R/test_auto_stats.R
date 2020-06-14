@@ -1,6 +1,4 @@
-test_auto_stats = function(y, ...) UseMethod("test_auto_stats")
-
-test_auto_stats.default = function(y, nb_x, paired) {
+test_auto_stats = function(y, nb_x, paired) {
   
   if(missing(y)) stop("The y argument is missing.")
   

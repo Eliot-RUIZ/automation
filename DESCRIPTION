@@ -10,6 +10,6 @@ Description: This package currently provide two functions for automation of
 License: GNU v3.0
 Encoding: UTF-8
 LazyData: true
-Depends: aomisc
-Imports: aomisc
+Depends: stats, graphics, aomisc, drc, dplyr, tidyr, exact2x2, rcompanion, coin, RVAideMemoire, vcd 
+
          
