@@ -3,13 +3,13 @@ Type: Package
 Title: Automation of time-consumming tasks in R
 Version: 0.1.0
 Author: Eliot RUIZ
-Maintainer: The package maintainer <leliotruiz@gmail.com>
+Maintainer: Eliot RUIZ - <leliotruiz@gmail.com>
 Description: This package currently provide two functions for automation of 
     non-linear model comparison. All associated calculations, plotting and
     ordering related functionalities are also implemented.
 License: GNU v3.0
 Encoding: UTF-8
 LazyData: true
-Depends: aomisc, dplyr, tidyr, exact2x2, rcompanion, coin, RVAideMemoire, vcd
-Imports: aomisc, dplyr, tidyr, exact2x2, rcompanion, coin, RVAideMemoire, vcd
+Depends: aomisc
+Imports: aomisc
          
