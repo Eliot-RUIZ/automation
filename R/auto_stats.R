@@ -870,7 +870,7 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
           ### Displaying results
           
           val = paste("Woolf's Test: X-squared = ", r(vali[[1]][[1]]), ", df = ", vali[[2]][[1]],
-                      ", p-value = ", r(vali[[3]][[1]]), " -> Satisfied -> Homogeneity of odds ratios across levels of X2 (p-value > 0.05)", sep = "")
+                      ", p-value = ", r(vali[[3]][[1]]), " -> Satisfied (p-value > 0.05)\nNote: Homogeneity of odds ratios across levels of X2 (strata).", sep = "")
           
           mess1 = "This test has been designed to know if there is an association between the 1st factor (X1)\nand the dependant variable (Y). As the 2nd factor (X2) is used for adjustement, you should\nchange the position in the formula if this is the variable of main interest."
           
@@ -892,7 +892,7 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
             var_type = var_type = "Variable type: Qualitative dependent variable (Y) with two levels\nTwo independent factors (X)."
             
             assign("vali2", paste("Woolf's Test: X-squared = ", r(vali[[1]][[1]]), ", df = ", vali[[2]][[1]],
-                                  ", p-value = ", r(vali[[3]][[1]]), " -> Not satisfied -> Heterogeneity of odds ratios across levels of X2 (p-value <= 0.05)", sep = ""))
+                                  ", p-value = ", r(vali[[3]][[1]]), " -> Not satisfied (p-value <= 0.05)\nNote: Heterogeneity of odds ratios across levels of X2 (strata).", sep = ""))
           }
           
           else var_type = "Variable type: Qualitative dependent variable (Y) with more than two levels\nTwo independent factors (X)."
@@ -909,7 +909,7 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
           
           if(is.na(dev[[5]][2]) || dev[[5]][2] > 0.05) {
             
-            vali3_type = " -> Additive model."
+            vali3_type = " -> Additive model (non-significant difference)"
             
             lrt = Anova(mod_simple, type = 2)
             
@@ -927,7 +927,7 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
           
           else {
             
-            vali3_type = " -> Multiplicative model."
+            vali3_type = " -> Multiplicative model (significant difference)"
             
             if(Anova(mod_interaction, type = 3)[[3]][3] > 0.05) {
               
@@ -958,9 +958,9 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
             
           }
           
-          vali3 = paste("Likelihood Ratio Test on Logistic Regression model:\nDeviance between additive (Y ~ X1 + X2) & multiplicative model (Y ~ X1 * X2) = ", 
+          vali3 = paste("Likelihood Ratio Test on Logistic Regression model:\nDeviance = ", 
                         r(dev[[4]][2]), ", p-value = ", ifelse(is.na(dev[[5]][2]), 1, r(dev[[5]][2])), 
-                        vali3_type , sep = "")
+                        vali3_type, "\nNote: Deviance between additive (Y ~ X1 + X2) & multiplicative model (Y ~ X1 * X2)", sep = "")
           
           if(apa) display(tab = tab_f, vali1 = var_type, vali2 = cm("vali2"), vali3 = vali3, test1 = test, apa_test1 = test_apa,
                           other_asso = o_p, name_ph1 = name_ph, ph1 = ph)

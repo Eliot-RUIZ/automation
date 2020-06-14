@@ -175,8 +175,8 @@ test_auto_stats = function(y, nb_x, paired) {
       
     }
     
-    #else if(nb_x == 1 && paired == "second" || nb_x == 1 && paired == "both")
-    # stop('Only one factor (X): the paired argument must be either "none" or "first".')
+    else if(nb_x == 1 && paired == "second" || nb_x == 1 && paired == "both")
+     stop('Only one factor (X): the paired argument must be either "none" or "first".')
     
     else if(nb_x == 2 && paired == "none") {
       
