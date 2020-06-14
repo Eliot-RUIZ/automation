@@ -2,34 +2,37 @@
 
 The goal of this package is to provide functions automating time-consuming tasks in R: statistical testing & non-linear model choice/plotting. The package can be installed using this code, but since the auto_stats function is not finished, the package cannot be installed yet.
 ```r
-install.packages("installr")
-library(installr)
-updateR() 
+### Usual installation ###
 
+# External installation of the "aomisc" package not hosted on CRAN (with the install_github function in the "devtools" package):
 install.packages("devtools")
 library(devtools)
 install_github("OnofriAndreaPG/aomisc")
 
+# Installation of the "automation" package and all its dependencies:
+install_github("Eliot-RUIZ/automation")
+library(automation) # Loading
+
+### In case of error during the installation, first run the lines below, and then re-run the first ###
+
+# Fixing potential errors during installation of "aomisc" mentionning a problem of version:
+install.packages("installr")
+library(installr)
+updateR() 
+
+# Fixing errors mentionning the "curl" package: 
+install.packages("curl")
+library(curl
+
+# Fixing errors mentionsing the "mixOmics" package:
 if (!requireNamespace("BiocManager", quietly = TRUE))
   install.packages("BiocManager")
-
-if (BiocManager::version() >= package_version('3.11')) 
-{
+if (BiocManager::version() >= package_version('3.11')) {
   BiocManager::install("mixOmicsTeam/mixOmics")
-} else
-{
+} else {
   message('Please update to the latest Bioconductor (https://www.bioconductor.org/install/) ',
-          'to install the stable GitHub version')
-}
-
+          'to install the stable GitHub version') }
 library(mixOmics) 
-
-library(curl)
-install.packages("curl")
-
-install_github("Eliot-RUIZ/automation")
-
-library(automation)
 ```
 <br>
 
