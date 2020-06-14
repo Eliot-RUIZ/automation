@@ -331,7 +331,7 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
           
           test = paste(name, ": X-squared = ", r(test1[[1]][[1]]), ", df = ", test1[[2]][[1]], ", p-value = ", r(test1[[3]]), s(test1[[3]]), sep = "")
           
-          test_apa = paste("&chi;²(", test1[[2]][[1]], ") = ", x_apa(test1[[1]][[1]]), ", *p* = ", p_apa(test1[[3]]), sep = "")
+          test_apa = paste("&chi;^2^(", test1[[2]][[1]], ") = ", x_apa(test1[[1]][[1]]), ", *p* = ", p_apa(test1[[3]]), sep = "")
           
           eff = paste("Cohen's h = ", r(effect_size), m(effect_size, lim1 = 0.2, lim2 = 0.5, lim3 = 0.8), sep = "")
           
@@ -685,7 +685,7 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
               test2_n = paste("Stuart-Maxwell Marginal Homogeneity Test: X-squared = ", r(x_squared), ", df = ", df,
                               ", p-value = ", r(p_value2), s(p_value2), sep = "")
               
-              test2_apa = paste("Stuart-Maxwell Marginal Homogeneity Test: &chi;²(", df, ") = ", x_apa(x_squared), 
+              test2_apa = paste("Stuart-Maxwell Marginal Homogeneity Test: &chi;^2^(", df, ") = ", x_apa(x_squared), 
                                 ", *p* = ", p_apa(p_value2), sep = "")
               
               g = paste("Cohen's g = ", r(g_global), m(g_global, lim1 = 0.05, lim2 = 0.15, lim3 = 0.25), sep = "")
@@ -833,7 +833,7 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
               test = paste("Mantel-Haenszel Chi-squared Test with continuity correction: X-squared = ", r(test1[[1]][[1]]), 
                            ", df = ", test1[[2]][[1]], ", p-value = ", r(test1[[3]][[1]]), s(test1[[3]][[1]]), sep = "")
               
-              test_apa = paste("M-H c.c. Test: &chi;²(", test1[[2]][[1]], ") = ", x_apa(test1[[1]][[1]]),
+              test_apa = paste("M-H c.c. Test: &chi;^2^(", test1[[2]][[1]], ") = ", x_apa(test1[[1]][[1]]),
                                ", *p* = ", p_apa(test1[[3]][[1]]), sep = "")
               
             }
@@ -848,10 +848,10 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
             
             test1 = mantelhaen.test(tab_n)
             
-            test = paste("Cochran-Mantel-Haenszel Test: M² = ", r(test1[[1]][[1]]), 
+            test = paste("Cochran-Mantel-Haenszel Test: M^2^ = ", r(test1[[1]][[1]]), 
                          ", df = ", test1[[2]][[1]], ", p-value = ", r(test1[[3]][[1]]), s(test1[[3]][[1]]), sep = "")
             
-            test_apa = paste("CMH Test: M²(", test1[[2]][[1]], ") = ", x_apa(test1[[1]][[1]]),
+            test_apa = paste("CMH Test: M^2^(", test1[[2]][[1]], ") = ", x_apa(test1[[1]][[1]]),
                              ", *p* = ", p_apa(test1[[3]][[1]]), sep = "")
             
           }
@@ -919,8 +919,8 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
                          ", p-value = ", r(lrt[[3]][1]), s(lrt[[3]][1]), "\nX2 -> X-squared = ", r(lrt[[1]][2]), 
                          ", df = ", lrt[[2]][2], ", p-value = ", r(lrt[[3]][2]), s(lrt[[3]][2]), sep = "")
             
-            test_apa = paste("LRT Test:\nX1 -> &chi;²(", lrt[[2]][1], ") = ", x_apa(lrt[[1]][1]), ", *p* = ", 
-                             p_apa(lrt[[3]][1]), "\nX2 -> &chi;²(", lrt[[2]][2], ") = ", x_apa(lrt[[1]][2]), ", *p* = ", 
+            test_apa = paste("LRT Test:\nX1 -> &chi;^2^(", lrt[[2]][1], ") = ", x_apa(lrt[[1]][1]), ", *p* = ", 
+                             p_apa(lrt[[3]][1]), "\nX2 -> &chi;^2^(", lrt[[2]][2], ") = ", x_apa(lrt[[1]][2]), ", *p* = ", 
                              p_apa(lrt[[3]][2]), sep = "")
             
           }
@@ -953,9 +953,9 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
                          "\nX1:X2 -> X-squared = ", r(lrt[[1]][3]), ", df = ", lrt[[2]][3], ", p-value = ", 
                          r(lrt[[3]][3]), s(lrt[[3]][3]), sep = "")
             
-            test_apa = paste("LRT Test:\nX1 -> &chi;²(", lrt[[2]][1], ") = ", x_apa(lrt[[1]][1]), ", *p* = ", 
-                             p_apa(lrt[[3]][1]), "\nX2 -> &chi;²(", lrt[[2]][2], ") = ", x_apa(lrt[[1]][2]), ", *p* = ", 
-                             p_apa(lrt[[3]][2]), "\nX1:X2 -> &chi;²(", lrt[[2]][3], ") = ", x_apa(lrt[[1]][3]), ", *p* = ", 
+            test_apa = paste("LRT Test:\nX1 -> &chi;^2^(", lrt[[2]][1], ") = ", x_apa(lrt[[1]][1]), ", *p* = ", 
+                             p_apa(lrt[[3]][1]), "\nX2 -> &chi;^2^(", lrt[[2]][2], ") = ", x_apa(lrt[[1]][2]), ", *p* = ", 
+                             p_apa(lrt[[3]][2]), "\nX1:X2 -> &chi;^2^(", lrt[[2]][3], ") = ", x_apa(lrt[[1]][3]), ", *p* = ", 
                              p_apa(lrt[[3]][3]), sep = "")
             
           }
@@ -1891,7 +1891,7 @@ i#f(permutation[[2]][3] <= 0.05)
 # if(ID == NULL)
 #   stop("Please provide the name of the column containing the blocking variable (i.e. id of the subjects) in the ID argument.")
 #
-## A ADAPTER : Homogénéité des covariances
+## A ADAPTER : Homog^2^n^2^it^2^ des covariances
 #
 #if(paired == "first") {
 # if(box_m(data[, "Y", drop = F], data$X2)[2] < 0.001)
