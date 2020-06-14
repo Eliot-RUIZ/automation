@@ -2,8 +2,34 @@
 
 The goal of this package is to provide functions automating time-consuming tasks in R: statistical testing & non-linear model choice/plotting. The package can be installed using this code, but since the auto_stats function is not finished, the package cannot be installed yet.
 ```r
-library(remotes)
+install.packages("installr")
+library(installr)
+updateR() 
+
+install.packages("devtools")
+library(devtools)
+install_github("OnofriAndreaPG/aomisc")
+
+if (!requireNamespace("BiocManager", quietly = TRUE))
+  install.packages("BiocManager")
+
+if (BiocManager::version() >= package_version('3.11')) 
+{
+  BiocManager::install("mixOmicsTeam/mixOmics")
+} else
+{
+  message('Please update to the latest Bioconductor (https://www.bioconductor.org/install/) ',
+          'to install the stable GitHub version')
+}
+
+library(mixOmics) 
+
+library(curl)
+install.packages("curl")
+
 install_github("Eliot-RUIZ/automation")
+
+library(automation)
 ```
 <br>
 
@@ -71,7 +97,7 @@ Cohen's h = 1.216
 ------------------------------------------------------------------
 ```
 The same but with the APA mode activated:
-```
+```r
 auto_stats(data = data.frame(Y), y = "Y", apa = TRUE)
 
 ----------------------------- Table ------------------------------
