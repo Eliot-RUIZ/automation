@@ -50,7 +50,7 @@ Actualised link: https://www.xmind.net/m/WdaeLv/
 
 The decision tree can also be downloaded by clicking on the top right corner button and then "Download". It can then be opened in Xmind (prior download of the software necessary) to get access to the content of the boxes, and also see it in the text preview (linear tree showing the content of the boxes). Each box is annotated with the associated piece of code because I understand that checking the 3000 lines of code (not all in Github yet) can be very difficult, even if I made an effort on the appearance of the text (well-spaced out and structured) and on the number of comments!
 
-![Capture](https://user-images.githubusercontent.com/15387266/84700715-fcfff280-af53-11ea-8ef6-563f517e1f63.PNG)
+![Capture](https://user-images.githubusercontent.com/15387266/84702633-3dad3b00-af57-11ea-87a0-65544e7bc439.PNG)
 
 Using the auto_stats function is very simple since the user only has to fill with the name of the variable(s) the *y* argument, and possibly the *x1* (and) *x2* arguments, while indicating the name of the dataframe in which they can be found in the *data* argument. If one (*"first"* or *"second"*) of both (*"both"*) factors (X) are repeated measures, the user must indicate it in the *paired* argument, the default being that the variables are independent (*"none"*). If the variables are paired, the user must provide the *id* argument with the name of one column of the dataframe containing the ID of the subjects. In case of an error of an entry error, I implemented multiple warning messages (displaying in red) covering most of the possible errors (I hope), to explain in details what went wrong and rapidly rectify it. 
 ```r
@@ -67,7 +67,7 @@ Finally, the *digits* (number of decimals) and *apa* arguments, as their names i
 <br>
 ## Testing the *auto_stats* function: *test_auto_stats*
 
-While I was developing the code, I had to create datasets, to test every single branch of the tree/code. I stored them in the *test_auto_stats* function, designed to quickly provide the tests of interest. Besides being very useful when debugging the function, it can also serve to show how to use the function correctly, and notably in which form must be the dataframe to perform an analysis (e.g. long format instead of wide).
+While I was developing the code, I had to create datasets, to test every single branch of the tree/code (21 in total). I stored them in the *test_auto_stats* function, designed to quickly provide the tests of interest. Besides being very useful when debugging the function, it can also serve to show how to use the function correctly, and notably in which form must be the dataframe to perform an analysis (e.g. long format instead of wide).
 
 This function is also intuitive to use because you just have to precise the type of dependent variable, the number of factors and if they are repeated measures or not.
 ```r
