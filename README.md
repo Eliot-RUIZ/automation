@@ -70,6 +70,170 @@ Example: χ²(2) = 2.667, *p* = .264, φ = 0.577
 
 While I was developping the code, I had to create my own datasets, to fit every single branch of the tree. I stored them in the *test_auto_stats* function, designed to quickly test the *auto_stats* function for the appropried kind of data. Besides being very useful when debugging the function, it can also serves as a reference when detecting errors or for showing how to use the function correctly.
 
+This function is also intuitive to use this you just have to precise the type of dependent variable, the number of factors and if they are repeated measures or not.
+```r
+test_auto_stats(y = "qualitative", nb_x = 1, paired = "first")
+
+Tests:
+          
+          auto_stats(`QUALITATIVE: One paired X - Y & X1 with 2 levels`,
+                      y = "Y", x1 = "X1", id = "ID", paired = "first")
+          
+          auto_stats(`QUALITATIVE: One paired X - Y with more than 2 levels & X1 with 2 levels`,
+                      y = "Y", x1 = "X1", id = "ID", paired = "first")
+          
+          auto_stats(`QUALITATIVE: One paired X - Y with 2 levels & X1 with more than 2 levels`,
+                      y = "Y", x1 = "X1", id = "ID", paired = "first")
+          
+          auto_stats(`QUALITATIVE: One paired X - Y & X1 with more than 2 levels`,
+                      y = "Y", x1 = "X1", id = "ID", paired = "first")
+```
+The functions then display the code to run the different tests associated with this kind of data. Meanwhile, the different datasets have been loaded in the Global Environment and can be seen on top right corner in RStudio. Their names aims at being the most explicit possible about which branch of the tree/code they were designed to test.
+
+The different test can then be copied and run and here is an example with the third one:
+```r
+auto_stats(`QUALITATIVE: One paired X - Y with 2 levels & X1 with more than 2 levels`,
+           y = "Y", x1 = "X1", id = "ID", paired = "first")
+           
+------------------------------ TABLE -----------------------------
+ 
+             During No Yes
+After Before              
+No    No             1   0
+      Yes            0   1
+Yes   No             0   1
+      Yes            0   0
+ 
+---------------------- ASSUMPTION(S) TESTING ---------------------
+ 
+Variable type: Qualitative dependent variable with two levels (Y)
+One factor (X1) with more than two levels of repeated measures.
+ 
+-------------------------- MAIN TEST(S) --------------------------
+ 
+Asymptotic General Symmetry Test: Z = 1, p-value = 0.577 (ns)
+ 
+Cochran's Q test: Q = 1, df = 2, p-value = 0.607 (ns)
+ 
+------------------------ POST-HOC ANALYSIS -----------------------
+ 
+Pairwise two-sample permutation symmetry tests (fdr adjustment method)
+ 
+           Comparison p-value
+1  After - Before = 0   1.000
+2  After - During = 0   0.476
+3 Before - During = 0   0.476
+ 
+------------------------------------------------------------------
+```
+
+Now let's run another one with the *apa* argument activated:
+```r
+auto_stats(`QUALITATIVE: One paired X - Y with more than 2 levels & X1 with 2 levels`,
+            y = "Y", x1 = "X1", id = "ID", paired = "first", apa = TRUE)
+
+------------------------------ TABLE -----------------------------
+ 
+       Before
+After   Maybe No Yes
+  Maybe     0  1   0
+  No        0  1   0
+  Yes       1  1   0
+ 
+---------------------- ASSUMPTION(S) TESTING ---------------------
+ 
+Variable type: Qualitative dependent variable with more than two levels (Y)
+One factor (X1) with two levels of repeated measures.
+ 
+-------------------------- MAIN TEST(S) --------------------------
+ 
+Asymptotic General Symmetry Test: Z = 1.414, p-value = 0.334 (ns)
+ 
+APA code -> Asymptotic General Symmetry Test: Z = 1.414, *p* = .334
+ 
+Stuart-Maxwell Marginal Homogeneity Test: X-squared = 2.667, df = 2, p-value = 0.264 (ns)
+ 
+APA code -> Stuart-Maxwell Marginal Homogeneity Test: &chi;^2^(2) = 2.667, *p* = .264
+ 
+(Copy it + Paste it in an R Notebook + Click on Preview and save it + Click on Knit + Copy it anywhere else)
+ 
+-------------------- MEASURE(S) OF ASSOCIATION -------------------
+ 
+Cohen's g = 0.5 (Large effect)
+ 
+APA code -> Cohen's *g* = .5
+ 
+Odds ratio = 1 (Negligible effect)
+ 
+APA code -> OR = 1
+ 
+             Comparison Odds-ratio Cohen's G
+1   Maybe/Maybe : No/No        Inf       0.5
+2 Maybe/Maybe : Yes/Yes        Inf       0.5
+3       No/No : Yes/Yes        Inf       0.5
+ 
+------------------------ POST-HOC ANALYSIS -----------------------
+ 
+
+ 
+             Comparison p-value
+1   Maybe/Maybe : No/No       1
+2 Maybe/Maybe : Yes/Yes       1
+3       No/No : Yes/Yes       1
+ 
+------------------------------------------------------------------
+```
+
+Finally, we can try the auto_stats function with two factors:
+```r
+test_auto_stats(y = "qualitative", nb_x = 2, paired = "none")   ### 7 different tests shown, I chose the 3rd one.
+
+auto_stats(`QUALITATIVE: Two independent X - Y & X1 with 2 levels - Woolf test = NOT OK - Multiplicative model`,
+           y = "Y", x1 = "X1", x2 = "X2", paired = "none")
+
+------------------------------ TABLE -----------------------------
+ 
+           X2 Group 1 Group 2 Group 3 Group 4 Group 5 Group 6
+X1     Y                                                     
+Female No          19       8     391     244     299     317
+       Yes         89      17     202     131      94      24
+Male   No         313     207     205     279     138     351
+       Yes        512     353     120     138      53      22
+ 
+---------------------- ASSUMPTION(S) TESTING ---------------------
+ 
+Variable type: Qualitative dependent variable (Y) with two levels
+Two independent factors (X).
+ 
+Woolf's Test: X-squared = 17.902, df = 5, p-value = 0.003 -> Not satisfied -> Heterogeneity of odds ratios across levels of X2 (p-value <= 0.05)
+ 
+Likelihood Ratio Test on Logistic Regression model:
+Deviance between additive (Y ~ X1 + X2) & multiplicative model (Y ~ X1 * X2) = 20.204, p-value = 0.001 -> Multiplicative model.
+ 
+-------------------------- MAIN TEST(S) --------------------------
+ 
+Likelihood Ratio Test on Logistic Regression model (Type III tests):
+X1 -> X-squared = 19.054, df = 1, p-value = 0 (***)
+X2 -> X-squared = 268.851, df = 5, p-value = 0 (***)
+X1:X2 -> X-squared = 20.204, df = 5, p-value = 0.001 (**)
+ 
+------------------------ POST-HOC ANALYSIS -----------------------
+ 
+Groupewise Exact Fisher's Tests (fdr adjustment method):
+ 
+    Group p-value
+1 Group 1  0.0001
+2 Group 2  0.6770
+3 Group 3  0.6770
+4 Group 4  0.6770
+5 Group 5  0.6770
+6 Group 6  0.6770
+ 
+------------------------------------------------------------------
+```
+<br>
+<br>
+<br>
 
 ## Automation of the comparison of non-linear models using different estimators & automatic plotting of the non-linear models of interest: *compare_nlm*
 
