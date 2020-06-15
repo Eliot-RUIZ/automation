@@ -46,7 +46,7 @@ Currently, the function is fully operational for any type/number of factors (X),
 
 To do that, the function first chooses the right analysis between around 50 different main tests, 20 different measures of associations (e.g. effect size, odds ratio), and 15 different types of post-hoc analysis. I recommend to check the regularly updated decision tree (link might change) to get a better understanding on how the function works, and notably how it decides which test is the most appropriate, using the variable type and many different validity tests (around 15). 
 
-**Actualised link: https://www.xmind.net/m/WdaeLv/**
+**Actualised link: http://www.xmind.net/m/A37CHH**
 
 The decision tree can also be downloaded by clicking on the top right corner button and then "Download". It can then be opened in Xmind (prior download of the software necessary) to get access to the content of the boxes, and also see it in the text preview (linear tree showing the content of the boxes). Each box is annotated with the associated piece of code because I understand that checking the 3000 lines of code (not all in Github yet) can be very difficult, even if I made an effort on the appearance of the text (well-spaced out and structured) and on the number of comments!
 
