@@ -315,6 +315,8 @@ Finally, here is a table presenting the limits used to give a gross approximatio
 |Odds ratio | Qualitative Y - Paired - N x N contigency tables | OR = 1 (OR < 1 -> "Less Odds") | OR < 1.22 | 1.22 ≥ OR < 1.86 | 1.86 ≥ OR < 3 | OR ≥ 3 |
 |Odds ratio | Qualitative Y - Independent | OR = 1 (OR < 1 -> "Less Odds") | OR < 1.55 | 1.55 ≥ OR < 2.8 | 2.8 ≥ OR < 5 | OR ≥ 5 |
 <br>
+|Rank  |ID   |    Function      |RMSE  | AIC   | BIC   |Nb_coeffs  | Coeff_1    | Coeff_2   |  Coeff_3     | Coeff_4   | Coeff_5   |Coeff_6   |Coeff_7  |
+|:-----|:----|:-----------------|:-----|:------|:------|:----------|:-----------|:----------|:-------------|:----------|:----------|:---------|:--------|
 <br>
 <br>
 
