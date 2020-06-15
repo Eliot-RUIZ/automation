@@ -13,7 +13,7 @@ install_github("OnofriAndreaPG/aomisc")
 install_github("Eliot-RUIZ/automation")
 library(automation) # Loading
 
-### In case of error during the installation, first run the lines below, and then re-run the first ###
+### In case of error during the installation, first run the lines below, and then re-run those above ###
 
 # Fixing potential errors during installation of "aomisc" mentionning a problem of version:
 install.packages("installr")
