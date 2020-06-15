@@ -1,12 +1,10 @@
 Package: automation
 Type: Package
-Title: Automation of time-consumming tasks in R
+Title: Automation of statistical testing & non-linear modelling in R
 Version: 0.1.0
 Author: Eliot RUIZ
 Maintainer: Eliot RUIZ - <leliotruiz@gmail.com>
-Description: This package currently provide two functions for automation of 
-    non-linear model comparison. All associated calculations, plotting and
-    ordering related functionalities are also implemented.
+Description: This package enables to automate time-consumming tasks in R: statistical testing & non-linear modelling/plotting. See my Github README for details.
 License: GNU v3.0
 Encoding: UTF-8
 LazyData: true
