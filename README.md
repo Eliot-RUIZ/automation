@@ -304,9 +304,26 @@ change the position in the formula if this is the variable of main interest.
 <br>
 Finally, here is a table presenting the limits used to give a gross approximation of the magnitude (rule of thumb) of a measure of association (interpretation varying with the field of study):
 
+|Rank  |ID   |    Function      | AIC   | BIC   |RMSE  |Nb_coeffs  | Coeff_1    | Coeff_2   |  Coeff_3     | Coeff_4   | Coeff_5   |Coeff_6   |Coeff_7  |
+|:-----|:----|:-----------------|:------|:------|:-----|:----------|:-----------|:----------|:-------------|:----------|:----------|:---------|:--------|
+|===== |==== |================= |====== |====== |===== |========== |=========== |========== |============= |========== |========== |========= |======== |
+|1     |65   |twophase          |165.6  |177.3  |2.5   |7 coeffs   |b1: 8       |c1: 9.3    |d1: 15.8      |e1: 0.3    |b2: 3.1    |d2: 26.3  |e2: 2.7  |
+|2     |15   |CRS.6             |161.9  |172.2  |2.4   |6 coeffs   |b: 1.5      |c: 5.2     |d: 87.9       |e: 1.1     |f: -394.3  |g: -2.7   |         |
+|3     |61   |multi2            |216.8  |225.5  |5.9   |5 coeffs   |b1: 1.6     |b2: 55.6   |b3: 46.4      |c: 17.7    |d: 20.1    |          |         |
+|4     |93   |weibull2x         |209.6  |218.4  |5.3   |5 coeffs   |b: -5.1     |c: 20.9    |d: 11.8       |e: 4.4     |t0: 4.5    |          |         |
+|5     |3    |baro5             |161.5  |170.2  |2.5   |5 coeffs   |b1: 4       |b2: 2.3    |c: 7.8        |d: 34.1    |e: 2.9     |          |         |
+|6     |13   |CRS.5b            |160.7  |169.5  |2.5   |5 coeffs   |b: 2.8      |c: 8.9     |d: -343.6     |e: 1.1     |f: 955.3   |          |         |
+|7     |14   |CRS.5c            |160.7  |169.5  |2.5   |5 coeffs   |b: 2.8      |c: 8.7     |d: -826.6     |e: 1.1     |f: 2259.1  |          |         |
+|8     |57   |ml4b              |160.7  |169.5  |2.5   |5 coeffs   |b: 2.8      |c: 8.9     |d: -343.6     |e: 1.1     |f: 955.3   |          |         |
+|9     |58   |ml4c              |160.7  |169.5  |2.5   |5 coeffs   |b: 2.8      |c: 8.7     |d: -826.6     |e: 1.1     |f: 2259.1  |          |         |
+|10    |5    |BC.5              |160.6  |169.4  |2.5   |5 coeffs   |b: 3.3      |c: 8.5     |d: -163.1     |e: 1.1     |f: 170.6   |          |         |
+|11    |7    |bcl4              |160.6  |169.4  |2.5   |5 coeffs   |b: 3.3      |c: 8.5     |d: -163.1     |e: 1.1     |f: 170.6   |          |         |
+|12    |8    |braincousens      |160.6  |169.4  |2.5   |5 coeffs   |b: 3.3      |c: 8.5     |d: -163.1     |e: 1.1     |f: 170.6   |          |         |
+|13    |12   |CRS.5a            |160.6  |169.4  |2.5   |5 coeffs   |b: 2.6      |c: 8.7     |d: -294.2     |e: 0.9     |f: 792.2   |          |         |
+|14    |56   |ml4a              |160.6  |169.4  |2.5   |5 coeffs   |b: 2.6      |c: 8.7     |d: -294.2     |e: 0.9     |f: 792.2   |          |         |
 <br>
 <br>
-```
+
 | Measure of association | Other | No effect  | Negligible effect | Small effect | Medium effect | Large effect |
   |:-----------------------|:----------------|:----------------|:----------------|:----------------|:----------------|:----------------|
   | Cohen's *h* | NA | *h* = 0 | *h* < 0.2 | 0.2 ≥ *h* < 0.5 |0.5 ≥ *h* < 0.8 | *h* ≥ 0.8 |
@@ -318,7 +335,7 @@ Finally, here is a table presenting the limits used to give a gross approximatio
 | Cohen's *g* | NA | *g* = 0 | *g* < 0.05 | 0.05 ≥ *g* < 0.15 | 0.15 ≥ *g* < 0.25 | *g* ≥ 0.25 |
   | Odds ratio | Qualitative Y - Paired - N x N contigency tables | OR = 1 (OR < 1 -> "Less Odds") | OR < 1.22 | 1.22 ≥ OR < 1.86 | 1.86 ≥ OR < 3 | OR ≥ 3 |
   | Odds ratio | Qualitative Y - Independent | OR = 1 (OR < 1 -> "Less Odds") | OR < 1.55 | 1.55 ≥ OR < 2.8 | 2.8 ≥ OR < 5 | OR ≥ 5 |
-```
+
 <br>
 
 ## Automation of the comparison of non-linear models using different estimators & automatic plotting of the non-linear models of interest: *compare_nlm*
