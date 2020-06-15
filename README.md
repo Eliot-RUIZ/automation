@@ -184,7 +184,7 @@ APA code -> OR = 1
 ------------------------------------------------------------------
 ```
 
-Finally, we can try the auto_stats function with two factors:
+We can also try the auto_stats function with two factors:
 ```r
 test_auto_stats(y = "qualitative", nb_x = 2, paired = "none")   ### 7 different tests shown, I chose the 3rd one.
 
@@ -205,10 +205,12 @@ Male   No         313     207     205     279     138     351
 Variable type: Qualitative dependent variable (Y) with two levels
 Two independent factors (X).
  
-Woolf's Test: X-squared = 17.902, df = 5, p-value = 0.003 -> Not satisfied -> Heterogeneity of odds ratios across levels of X2 (p-value <= 0.05)
+Woolf's Test: X-squared = 17.902, df = 5, p-value = 0.003 -> Not satisfied (p-value <= 0.05)
+Note: Heterogeneity of odds ratios across levels of X2 (strata).
  
 Likelihood Ratio Test on Logistic Regression model:
-Deviance between additive (Y ~ X1 + X2) & multiplicative model (Y ~ X1 * X2) = 20.204, p-value = 0.001 -> Multiplicative model.
+Deviance = 20.204, p-value = 0.001 -> Multiplicative model (significant difference)
+Note: Deviance between additive (Y ~ X1 + X2) & multiplicative model (Y ~ X1 * X2)
  
 -------------------------- MAIN TEST(S) --------------------------
  
@@ -228,6 +230,62 @@ Groupewise Exact Fisher's Tests (fdr adjustment method):
 4 Group 4  0.6770
 5 Group 5  0.6770
 6 Group 6  0.6770
+ 
+------------------------------------------------------------------
+```
+
+Finally, here is a little example of a typical message and of the argument *digits* modified from its default value:
+```r
+auto_stats(`QUALITATIVE: Two independent X - Y & X1 with 2 levels - Woolf test = OK`,
+           y = "Y", x1 = "X1", x2 = "X2", paired = "none", digits = 5)
+```
+```
+------------------------------ TABLE -----------------------------
+ 
+            X2 Adult female Adult male Teenage boy Teenage girl
+X1      Y                                                      
+Group 1 No                1          1           1            1
+        Yes               0          0           0            0
+Group 2 No                1          0           0            1
+        Yes               0          1           1            0
+ 
+---------------------- ASSUMPTION(S) TESTING ---------------------
+ 
+Variable type: Qualitative dependent variable (Y) with two levels
+Two independent factors (X) and X1 has two levels.
+ 
+Woolf's Test: X-squared = 0.90521, df = 3, p-value = 0.82417 -> Satisfied (p-value > 0.05)
+Note: Homogeneity of odds ratios across levels of X2 (strata).
+ 
+-------------------------- MAIN TEST(S) --------------------------
+ 
+Exact conditional test of independence: S = 4, p-value = 0.5 (ns)
+ 
+-------------------- MEASURE(S) OF ASSOCIATION -------------------
+ 
+Odds ratio (conditional Maximum Likelihood Estimate) = Inf 95% CI [1.2066, Inf]
+ 
+             Odds ratio with continuity correction
+Adult female                               0.00000
+Adult male                                 2.19722
+Teenage boy                                2.19722
+Teenage girl                               0.00000
+ 
+------------------------ POST-HOC ANALYSIS -----------------------
+ 
+Groupewise Exact Fisher's Tests (fdr adjustment method):
+ 
+         Group p-value
+1 Adult female       1
+2   Adult male       1
+3  Teenage boy       1
+4 Teenage girl       1
+ 
+-------------------------- MESSAGE(S) ---------------------------
+ 
+This test has been designed to know if there is an association between the 1st factor (X1)
+and the dependant variable (Y). As the 2nd factor (X2) is used for adjustement, you should
+change the position in the formula if this is the variable of main interest.
  
 ------------------------------------------------------------------
 ```
