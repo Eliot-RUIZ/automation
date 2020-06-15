@@ -335,7 +335,7 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
           
           eff = paste("Cohen's h = ", r(effect_size), m(effect_size, lim1 = 0.2, lim2 = 0.5, lim3 = 0.8), sep = "")
           
-          eff_apa = paste("Cohen's h = ", x_apa(effect_size), m(effect_size, lim1 = 0.2, lim2 = 0.5, lim3 = 0.8), sep = "")
+          eff_apa = paste("Cohen's *h* = ", x_apa(effect_size), sep = "")
           
           if(apa) display(tab = tab_n1, prob1 = prob_ci1_apa, prob2 = prob_ci2_apa, vali1 = var_type, vali2 = vali, 
                           test1 = test, apa_test1 = test_apa, asso1 = eff_apa)
@@ -463,7 +463,7 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
             
             var_type = "Variable type: Qualitative dependent variable (Y) with more than two levels.\nOne factor (X1) with two independent levels."
           
-          else  var_type = "Variable type: Qualitative dependent variable (Y) with more than two levels.\nOne factor with more than two independent levels(X1)."
+          else  var_type = "Variable type: Qualitative dependent variable (Y) with more than two levels.\nOne factor (X1) with more than two independent levels."
           
           # Exact Fisher's Test
           
@@ -518,10 +518,6 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
           # X has multiple levels
           
           else {
-            
-            if(length(unique(Y)) == 2) var_type = "Variable type: Qualitative dependent variable with two levels (Y)\nOne factor (X1) with more than two independent levels."
-            
-            else var_type = "Variable type: Qualitative dependent variable with more than two levels (Y)\nOne factor (X1) with more than two independent levels."
             
             # Post-hoc: Pairwise Fisher's Exact Test and Cramer's V
             
@@ -750,8 +746,7 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
                                         p_apa(get("test2", envir = fct.env)[[7]][[1]]), sep = ""), envir = fct.env)
             
             if(apa) display(tab = tab_f, vali1 = var_type, test1 = test1_n, apa_test1 = test1_apa, 
-                            test2 = cm("test2_n"),
-                            apa_test2 = cm("test2_apa"), name_ph1 = name_ph, ph1 = ph)
+                            test2 = cm("test2_n"), apa_test2 = cm("test2_apa"), name_ph1 = name_ph, ph1 = ph)
             
             else display(tab = tab_f, vali1 = var_type, test1 = test1_n, 
                          test2 = cm("test2_n"), name_ph1 = name_ph, ph1 = ph)
@@ -801,8 +796,11 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
         # Post-hoc: Groupewise Exact Fisher's Test
         
         name_ph = "Groupewise Exact Fisher's Tests (fdr adjustment method):"
+        
         ph = groupwiseCMH(tab_n, group = 3, fisher = T)
+        
         ph =  data.frame(ph[1], r(ph[4]))
+        
         colnames(ph) = c("Group", "p-value")
         
         # Woolf's Test: Homogeneity of odds ratios across levels of X2
@@ -913,7 +911,7 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
           
           dev = anova(mod_simple, mod_interaction, test = "LRT")
           
-          # Wald's Test on an additive model (logistic regression) 
+          # LRT Test on an additive model (logistic regression) 
           
           if(is.na(dev[[5]][2]) || dev[[5]][2] > 0.05) {
             
@@ -931,7 +929,7 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
             
           }
           
-          # Wald's Test on a multiplicative model (logistic regression) 
+          # LRT Test on a multiplicative model (logistic regression) 
           
           else {
             
@@ -965,6 +963,8 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
                              p_apa(lrt[[3]][3]), sep = "")
             
           }
+          
+          ### Displaying results
           
           vali3 = paste("Likelihood Ratio Test on Logistic Regression model:\nDeviance = ", 
                         r(dev[[4]][2]), ", p-value = ", ifelse(is.na(dev[[5]][2]), 1, r(dev[[5]][2])), 
