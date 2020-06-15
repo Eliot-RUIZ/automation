@@ -100,10 +100,10 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
         cat("(Copy it + Paste it in an R Notebook + Click on Preview and save it + Click on Knit + Copy it anywhere else)", fill = T)}
       cat(" ", fill = T)
     }
-    if(!is.null(asso1)) {
+    if(!is.null(asso1) || !is.null(other_asso)) {
       cat("--------------------", "MEASURE(S) OF ASSOCIATION", "-------------------", fill = T)
       cat(" ", fill = T)
-      cat(asso1, fill = T)
+      if(!(is.null(asso1) && !is.null(other_asso))) cat(asso1, fill = T)
       if(!is.null(apa_asso1)) {
         cat(" ", fill = T)
         cat(paste("APA code ->", apa_asso1), fill = T)}
@@ -112,8 +112,10 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
       if(!is.null(apa_asso2)) {
         cat(" ", fill = T)
         cat(paste("APA code ->", apa_asso2), fill = T)}
-      if(!is.null(other_asso)) {cat(" ", fill = T)
+      if(!is.null(other_asso)) {
+        if(!is.null(asso1) || !is.null(asso2)) {cat(" ", fill = T)
         print(other_asso)}
+        else print(other_asso) }
       cat(" ", fill = T)
     }
     
@@ -776,19 +778,25 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
         
         # Pairwise odds ratio 
         
-        if(any(tab_f[1:dim(tab_f)[1], 1:dim(tab_f)[2]] == 0)) {
+        magn = vector(length = dim(loddsratio(tab_n))[3])
+        
+        if(length(unique(X1)) == 2 && length(unique(Y)) == 2) {
           
-          o_p = data.frame(Log_odds_ratio_with_continuity_correction = t(t(r(loddsratio(tab_n, correct = T, log = F)[[1]]))))
-          colnames(o_p) = "Odds ratio with continuity correction"
+          for(i in 1:dim(loddsratio(tab_n))[3]) {
+            
+            magn[i] = m(exp(loddsratio(tab_n)[[1]][[i]]), lim1 = 1.55, lim2 = 2.8, lim3 = 5, OR = T)
+            
+          }
+          
+          o_p = data.frame(t(t(r(exp(loddsratio(tab_n)[[1]])))), magn)
+          colnames(o_p) = c("Odds ratio", "Magnitude")
           
         }
         
-        else {
-          
-          o_p = data.frame(Log_odds_ratio = t(t(r(loddsratio(tab_n, log = F)[[1]]))))
-          colnames(o_p) = "Odds ratio without continuity correction"
-          
-        }
+        else if(length(unique(X1)) > 2 && length(unique(Y)) == 2 || length(unique(X1)) == 2 && length(unique(Y)) > 2) 
+          o_p = loddsratio(tab_n, log = F)
+        
+        else o_p = data.frame(as.data.frame(loddsratio(tab_n))[1:3], round(as.data.frame(loddsratio(tab_n, log = F))[4], digits))
         
         # Post-hoc: Groupewise Exact Fisher's Test
         
@@ -872,7 +880,7 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
           val = paste("Woolf's Test: X-squared = ", r(vali[[1]][[1]]), ", df = ", vali[[2]][[1]],
                       ", p-value = ", r(vali[[3]][[1]]), " -> Satisfied (p-value > 0.05)\nNote: Homogeneity of odds ratios across levels of X2 (strata).", sep = "")
           
-          mess1 = "This test has been designed to know if there is an association between the 1st factor (X1)\nand the dependant variable (Y). As the 2nd factor (X2) is used for adjustement, you should\nchange the position in the formula if this is the variable of main interest."
+          mess1 = "This test has been designed to know if there is an association between the 1st factor (X1)\nand the dependant variable (Y). As the 2nd factor (X2) is used for adjustment, you should\nchange the position in the formula if this is the variable of main interest."
           
           if(apa) display(tab = tab_f, vali1 = var_type, vali2 = val, test1 = test, apa_test1 = test_apa, 
                           asso1 = cm("o_g"), apa_asso1 = cm("o_g_apa"), other_asso = o_p, 
