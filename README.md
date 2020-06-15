@@ -314,7 +314,8 @@ After 4 to 5s of computation (on a usual laptop), the function display a table c
 Sometimes, the convergence of the self-starters might fail (model not appropriate for the data), but the function will jump to the other model and print a message with the ID of the model (found at the end of the table).
 ```r
 compare_nlm(mpg ~ wt, mtcars)
-
+```
+```
 Error in optim(startVec, opfct, hessian = TRUE, method = optMethod, control = list(maxit = maxIt,  : 
   non-finite finite-difference value [2]
 [1] "Convergence failed - Self-Starter ID : 59"
@@ -483,6 +484,7 @@ head(result)
 4    18.81245 17.61229 20.01262
 5    17.75349 16.52585 18.98113
 6    17.66496 16.43295 18.89697
+```
 ```r
 ### DRC self-starter with the Bootstrap method (default = 200 iterations) -> 10s ###
 result = ci_nlm(mpg~ wt, fct = gaussian(), data = mtcars, method = "boot")
