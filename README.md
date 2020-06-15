@@ -49,6 +49,7 @@ In order to do that, the function first choose the right analysis, between of ar
 Link: https://www.xmind.net/m/cx77Pm/
 
 The decision tree can also be downloaded by clicking on the top right corner button and then "Download". It can then then be opened in Xmind (prior download of the software necessary) to get access to the content of the boxes, and also see it in the text preview (linear tree with content of the boxes). Each box is annoted with the associated piece of code, because I understand that checking the 3000 lines of code (not all in Github yet) searching for something can be very difficult!
+
 ![image](https://user-images.githubusercontent.com/15387266/84606390-164a6580-aea6-11ea-9d35-b1bc09836150.png)
 <br>
 
