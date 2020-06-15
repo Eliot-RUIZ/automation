@@ -46,12 +46,11 @@ Currently, the function is fully operational for any type/number of factors (X),
 
 To do that, the function first chooses the right analysis between around 50 different main tests, 20 different measures of associations (e.g. effect size, odds ratio), and 15 different types of post-hoc analysis. I recommend to check the regularly updated decision tree (link might change) to get a better understanding on how the function works, and notably how it decides which test is the most appropriate, using the variable type and many different validity tests (around 15). 
 
-Link: https://www.xmind.net/m/cx77Pm/
+Actualised link: https://www.xmind.net/m/WdaeLv/
 
 The decision tree can also be downloaded by clicking on the top right corner button and then "Download". It can then be opened in Xmind (prior download of the software necessary) to get access to the content of the boxes, and also see it in the text preview (linear tree showing the content of the boxes). Each box is annotated with the associated piece of code because I understand that checking the 3000 lines of code (not all in Github yet) can be very difficult, even if I made an effort on the appearance of the text (well-spaced out and structured) and on the number of comments!
 
-![Capture](https://user-images.githubusercontent.com/15387266/84607293-c327e100-aeac-11ea-83fa-e9ec31fee8b3.PNG)
-<br>
+![Capture](https://user-images.githubusercontent.com/15387266/84700715-fcfff280-af53-11ea-8ef6-563f517e1f63.PNG)
 
 Using the auto_stats function is very simple since the user only has to fill with the name of the variable(s) the *y* argument, and possibly the *x1* (and) *x2* arguments, while indicating the name of the dataframe in which they can be found in the *data* argument. If one (*"first"* or *"second"*) of both (*"both"*) factors (X) are repeated measures, the user must indicate it in the *paired* argument, the default being that the variables are independent (*"none"*). If the variables are paired, the user must provide the *id* argument with the name of one column of the dataframe containing the ID of the subjects. In case of an error of an entry error, I implemented multiple warning messages (displaying in red) covering most of the possible errors (I hope), to explain in details what went wrong and rapidly rectify it. 
 ```r
