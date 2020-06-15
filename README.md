@@ -94,7 +94,8 @@ The different test can then be copied and run and here is an example with the th
 ```r
 auto_stats(`QUALITATIVE: One paired X - Y with 2 levels & X1 with more than 2 levels`,
            y = "Y", x1 = "X1", id = "ID", paired = "first")
-           
+```
+```        
 ------------------------------ TABLE -----------------------------
  
              During No Yes
@@ -131,7 +132,8 @@ Now let's run another one with the *apa* argument activated:
 ```r
 auto_stats(`QUALITATIVE: One paired X - Y with more than 2 levels & X1 with 2 levels`,
             y = "Y", x1 = "X1", id = "ID", paired = "first", apa = TRUE)
-
+```
+```
 ------------------------------ TABLE -----------------------------
  
        Before
@@ -190,7 +192,8 @@ test_auto_stats(y = "qualitative", nb_x = 2, paired = "none")   ### 7 different 
 
 auto_stats(`QUALITATIVE: Two independent X - Y & X1 with 2 levels - Woolf test = NOT OK - Multiplicative model`,
            y = "Y", x1 = "X1", x2 = "X2", paired = "none")
-
+```
+```
 ------------------------------ TABLE -----------------------------
  
            X2 Group 1 Group 2 Group 3 Group 4 Group 5 Group 6
@@ -355,7 +358,8 @@ In R, the results are printed in a convenient way to allows maximum visibility f
 ```r
 View(compare_nlm(mpg ~ wt, mtcars)) # Easier to read and to search a model
 compare_nlm(mpg ~ wt, mtcars)       # Compact format as you can see below
-
+```
+```
   Rank  ID      Function        AIC     BIC    RMSE   Nb_coeffs   Coeff_1      Coeff_2      Coeff_3       Coeff_4     Coeff_5    Coeff_6    Coeff_7 
  ===== ==== ================= ======= ======= ====== ========== ============ =========== ============== =========== =========== ========== =========
     1   71       UCRS.5c       156.46  165.26  2.31    5 coeffs  b: -274.58    c: 93.75     d: 30.07      e: 2.26    f: 158.28                      
@@ -386,7 +390,8 @@ The confidence interval around the coefficients of the model of interest can eas
 ```r
 model = drm(mpg ~ wt, data = mtcars, fct = UCRS.5c())
 confint(model, level = 0.95)
-
+```
+```
                      2.5 %      97.5 %
 b:(Intercept) -2226.212509 1677.054628
 c:(Intercept)    67.247223  120.259724
@@ -412,7 +417,8 @@ Information on the non-linear model (e.g. formula, coefficients) can be directly
 The name of the package containing the function appear in front of the name of the model, if the argument *package* is switched to *TRUE*.
 ```r
 compare_nlm(mpg ~ wt, mtcars, package = T)
-
+```
+```
 # Part of the dataset obtained #
 7   16          drc::EXD.2         157.55  161.95  2.58    2 coeffs   d: 49.66     e: 3.41                                               
 8   99    aomisc::DRC.expoDecay    157.55  161.95  2.58    2 coeffs  init: 49.66   k: 0.29
@@ -468,7 +474,8 @@ The latency vary with the Self-Starter used, with the number of coefficients and
 ### DRC self-starter with the Delta method -> immediate result ###
 result = ci_nlm(mpg~ wt, fct = gaussian(), data = mtcars)
 head(result)
-
+```
+```
   Predictions Lower_CI Upper_CI
 1    22.39356 20.79063 23.99648
 2    20.68509 19.36893 22.00126
@@ -476,11 +483,12 @@ head(result)
 4    18.81245 17.61229 20.01262
 5    17.75349 16.52585 18.98113
 6    17.66496 16.43295 18.89697
-
+```r
 ### DRC self-starter with the Bootstrap method (default = 200 iterations) -> 10s ###
 result = ci_nlm(mpg~ wt, fct = gaussian(), data = mtcars, method = "boot")
 head(result)
-
+```
+```
 Predictions Lower_CI Upper_CI
 1    22.39356 21.30726 23.78245
 2    20.68509 19.65370 21.97412
@@ -488,10 +496,12 @@ Predictions Lower_CI Upper_CI
 4    18.81245 17.87121 19.96312
 5    17.75349 16.74902 18.81757
 6    17.66496 16.64668 18.71966
-
+```
+```r
 ### AOMISC self-starter with the Bootstrap method (default = 200 iterations) -> 2s ###
 result = ci_nlm(mpg~ wt, fct = DRC.expoDecay(), data = mtcars, method = "boot") 
-
+```
+```
   Predictions Lower_CI Upper_CI
 1    23.01207 22.19429 24.00978
 2    21.35223 20.59005 22.25067
@@ -507,7 +517,8 @@ The argument *keep_col* is very useful for plotting since it allows to add any o
 ci_nlm(mpg~ wt, fct = gaussian(), data = mtcars, keep_cols = c("all"))  # To keep all the columns of the initial dataframe
 result = ci_nlm(mpg~ wt, fct = gaussian(), data = mtcars, keep_cols = c("mpg", "wt"))  # To keep only the columns of interest
 head(result)
-
+```
+```
    mpg    wt Predictions Lower_CI Upper_CI
 1 21.0 2.620    22.39356 20.79063 23.99648
 2 21.0 2.875    20.68509 19.36893 22.00126
@@ -556,7 +567,8 @@ If *keep_cols* is activated, the selected columns are repeated as much as necess
 ```r
 result = ci_nlm(mpg~ wt, fct = gaussian(), data = mtcars, keep_cols = c("mpg","wt"), expand_x = c(-6,10))
 tail(result)
-
+```
+```
      mpg    wt    New_X Predictions   Lower_CI Upper_CI
 331 15.0 3.570 9.335000    5.679318  -9.279771 20.63841
 341 21.4 2.780 9.457219    5.554060  -9.839035 20.94715
@@ -573,7 +585,8 @@ replace_NA = function(prev_df, new_df, names) {
   }
 result_without_NA = replace_NA(mtcars, result, names = c("mpg", "wt"))
 tail(result_without_NA)
-
+```
+```
     mpg wt    New_X Predictions   Lower_CI Upper_CI
 331  NA NA 9.335000    5.679318  -9.279771 20.63841
 341  NA NA 9.457219    5.554060  -9.839035 20.94715
