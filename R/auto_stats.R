@@ -846,7 +846,7 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
             
             test1 = mantelhaen.test(tab_n)
             
-            test = paste("Cochran-Mantel-Haenszel Test: M^2^ = ", r(test1[[1]][[1]]), 
+            test = paste("Cochran-Mantel-Haenszel Test: M2^ = ", r(test1[[1]][[1]]), 
                          ", df = ", test1[[2]][[1]], ", p-value = ", r(test1[[3]][[1]]), s(test1[[3]][[1]]), sep = "")
             
             test_apa = paste("CMH Test: M^2^(", test1[[2]][[1]], ") = ", x_apa(test1[[1]][[1]]),
