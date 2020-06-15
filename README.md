@@ -1,6 +1,6 @@
 # Package "automation" - Eliot RUIZ
 
-The goal of this package is to provide functions automating time-consuming tasks in R: statistical testing & non-linear model choice/plotting. The package can be installed using this code, but since the auto_stats function is not finished, the package cannot be installed yet.
+The goal of this package is to provide functions automating time-consuming tasks in R: statistical testing & non-linear modeling/plotting. Run the following lines of code to install it on your computer:
 ```r
 ### Usual installation ###
 
@@ -22,9 +22,9 @@ updateR()
 
 # Fixing errors mentionning the "curl" package: 
 install.packages("curl")
-library(curl
+library(curl)
 
-# Fixing errors mentionsing the "mixOmics" package:
+# Fixing errors mentionning the "mixOmics" package:
 if (!requireNamespace("BiocManager", quietly = TRUE))
   install.packages("BiocManager")
 if (BiocManager::version() >= package_version('3.11')) {
@@ -36,107 +36,41 @@ library(mixOmics)
 ```
 <br>
 
-## Automation of usual statistical tests
+## Automation of usual statistical tests: *auto_stats*
 
-The Base R packages as well as the numerous external packages provide an extraordinary diversity of functions coding most statistical tests and associated operations, which allows to test the association between variables in almost every specific cases. However, this powerful tool requires a great knowledge of inferential statistics in order to use it fully and correctly. Indeed, finding the right statistical test with all its assumptions and associated computations, and assessing how to run such analysis can be very tedious and complex in R. Even running a complete analysis requires a lot of coding lines, which increase the risk of making errors. Finally, reporting all the results in a correct and compact format for a scientific report (APA format) is also very cumbersome!
+The Base R packages as well as the numerous external packages hosted on CRAN and Github provide an extraordinary diversity of functions coding most statistical tests and associated operations. This powerful tool widely used accross the scientific community allows to get a better understanding of the association between variables (inter alia) in almost every specific cases. However, this powerful tool requires a great knowledge of inferential statistics in order to use it fully and correctly. Indeed, finding the right statistical test with all its assumptions and associated computations while assessing how to run such analysis in R can be very tedious and complex. Even running a complete analysis requires a lot of coding lines, thus increasing the risk of errors and decreasing the time available for understanding the results. Finally, reporting all the results in a correct and compact format for a scientific report is also very cumbersome. For example, the official APA format asks to remove the zero (0.1 -> .1) only for numbers between -1 and 1, provide the results with the greeks letters (e.g. chi, phi, eta), or write the p of p-value in italic (*p*)!
 
-Doing all of that can takes days of hardwork when analysing a big dataset. I therefore decided to code a function running a complete analysis in a few seconds, and displaying the results in a format enabling to simply copy and paste it in a report. 
+Doing all of that can takes days of hardwork when analysing a big dataset. I therefore decided to code a function running a complete analysis instantly, and displaying the results in a format enabling to simply copy and paste it in a report. 
 
-The function *auto_stats* aims at choosing the appropriate statistical test for the data provided by the user. The data could consist in an independant variable (Y) explained by 0 to 2 factors (X). After checking each assumptions, the function compute the main test and all usually associated tasks (e.g. effect size, post-hoc tests, interaction plot).
+Currently, the function is fully operational for any type/number of factors (X), when the dependent variable (Y) is **qualitative**. I am working very hard on the quantitative part of the function, and it should therefore be soon released.
+
+In order to do that, the function first choose the right analysis, between of around 50 different main tests, 20 different measures of associations (e.g. effect size, odds ratio), and around 15 different type of post-hoc analysis. I recommend to check the regularly updated decision tree (link might change) to get a better understanding on how the function works, and notably how it decides which test is the most appropriate, using the variable type and many different validity tests (around 15). 
+
+Link: https://www.xmind.net/m/cx77Pm/
+
+The decision tree can also be downloaded by clicking on the top right corner button and then "Download". It can then then be opened in Xmind (prior download of the software necessary) to get access to the content of the boxes, and also see it in the text preview (linear tree with content of the boxes). Each box is annoted with the associated piece of code, because I understand that checking the 3000 lines of code (not all in Github yet) searching for something can be very difficult!
+![image](https://user-images.githubusercontent.com/15387266/84606390-164a6580-aea6-11ea-9d35-b1bc09836150.png)
+<br>
+
+Using the auto_stats function is very simple, since the user only has to fill with the name of the variable(s) the *y* argument, and possibly *x1* (and) *x2* arguments, while indicating the name of the dataframe in which they can be found in the *data* argument. If one (*"first"* or *"second"*) of both (*"both"*) factors (X) are repeated measures, the user must indicate it in the *paired* argument, the default being that the variables are independent (*"none"*). If the variable are paired, the user must provide the *id* argument with the name of one column of the dataframe containing the ID of the sujects. In case of an error of an entry error, I implemented multiple warning messages (displaying in red) covering most of the possible errors (I hope), to explain in details what went wrong and rapidly rectify it. 
 ```r
 ### Actual default values ###
-auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL, digits = 3, apa = F)
+auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL, digits = 3, apa = FALSE)
 ```
-It then returns all the results in APA format to ease insertion in a text document, except for the post-hoc analysis results. The output is separated into multiple sections (empty ones aren't displayed):
-  - Table (for qualitative Y only)
-  - Probabilities (for qualitative Y only)
-  - Asssumptions testing
-  - Main test(s)
-  - Measure(s) of association (e.g. effect size, odds ratio, correlation coefficients) 
-  - Other (rarely used)
-  - Post-hoc analysis
-  - Message(s)
-  
-The last section is of major importance since many different messages have been implemented in the function for transparency of the analysis (e.g. advices, problems with the data).
+After a few micro-seconds/seconds (depending on the analysis and the size of the dataframe), the *auto_stat* function will display the result in a convenient form, separated in multiple subsections, their type depending on the analysis. The **"MESSAGE(S)** section is of major importance since I implemented many different kind of messages (e.g. advices, general informations, note on the tests). 
 
-For more transparency due to the length of the function (approximately 1500 lines of code yet), I created on Xmind the decision tree the algorithm follows, for the statistical part. 
+Finally, the *digits* (number of decimals) and *apa* arguments, as their names indicates, serve to control the output. The latter only controls the **MAIN TEST(S)** and **MEASURE(S) OF ASSOCIATION** sections, since they are usually the only ones reported. For the main tests, the function will generate an "APA code" below, which just have to be pasted in an R Notebook (instructions below) to generate an appropriate result. Since the greek letters are characters, they can be copied/pasted in any kind of software. It will also round the measures of association results to 3 decimals, and remove the zero in front of numbers between -1 & 1. 
 
-This decision tree can be viewed online following this link: https://www.xmind.net/m/cx77Pm/
-
-The decision tree can also be downloaded by clicking on the top right corner button and then "Download". The decision tree could then be opened in Xmind (prior download of the software necessary) to get access to the content of the boxes (R code), and also see it in the text preview (as it is organized in the function).
-
-Here is an example of the default mode:
-```r
-### Significant difference between proportion of Yes and No ? ###
-Y = c("no","no","no","yes","no","no","no","no","yes","no")
-
-### Default displaying ###
-
-auto_stats(data = data.frame(Y), y = "Y")
-
------------------------------ Table ------------------------------
- 
-Y
- no yes 
- 11   3 
- 
--------------------------- Probabilities -------------------------
- 
-Probality of no = 0.786, 95% CI [0.524, 0.924]
-Probality of yes = 0.214 95% CI [0.076, 0.476]
- 
---------------------- Asssumptions testing ----------------------
- 
-Cochran's rule: 0% of expected counts are below 5 -> Satisfied
- 
--------------------------- Main test(s) --------------------------
- 
-One-sample Chi-squared Test = 4.571, df = 1, p-value = 0.033 (*)
- 
--------------------- Measure(s) of association -------------------
- 
-Cohen's h = 1.216
- 
-------------------------------------------------------------------
-```
-The same but with the APA mode activated:
-```r
-auto_stats(data = data.frame(Y), y = "Y", apa = TRUE)
-
------------------------------ Table ------------------------------
- 
-Y
- no yes 
- 11   3 
- 
--------------------------- Probabilities -------------------------
- 
-Probality of no = .786, 95% CI [.524, .924]
-Probality of yes = .214 95% CI [.076, .476]
- 
---------------------- Asssumptions testing ----------------------
- 
-Cochran's rule: 0% of expected counts are below 5 -> Satisfied
- 
--------------------------- Main test(s) --------------------------
- 
-One-sample Chi-squared Test = 4.571, df = 1, p-value = 0.033 (*)
- 
-APA code = &chi;²(1) = 4.571, *p* = .033
-(Copy it + Paste it in an R Notebook + Click on Knit + Copy it in your report)
- 
--------------------- Measure(s) of association -------------------
- 
-Cohen's h = .216
- 
-------------------------------------------------------------------
-```
-Appearance of the formula after following the instructions above : χ²(1) = 4.571, p = .033
+Example: χ2(2) = 2.667, *p* = .264, φ = 0.577
 <br>
 <br>
 <br>
+## Testing the *auto_stats* function: *test_auto_stats*
 
-## Automation of the comparison of non-linear models using different estimators & automatic plotting of the non-linear models of interest
+While I was developping the code, I had to create my own datasets, to fit every single branch of the tree. I stored them in the *test_auto_stats* function, designed to quickly test the *auto_stats* function for the appropried kind of data. Besides being very useful when debugging the function, it can also serves as a reference when detecting errors or for showing how to use the function correctly.
+
+
+## Automation of the comparison of non-linear models using different estimators & automatic plotting of the non-linear models of interest: *compare_nlm*
 
 In my experience, finding the best models and the best parameters for nonlinear models on R can be very cumbersome. Indeed, few Self-Starters (i.e. functions allowing to automatically determine "good" starting parameters for each models), are implemented in Base R. It takes a long time to find a package offering the appropriate functions, even for simple models such as the power laws. When your not an expert in mathematics, even thinking to a model who could fit well enough the data can be complicated. 
 
@@ -292,7 +226,7 @@ In case of error, different messages will be printed to explain to the user what
 <br>
 <br>
 
-## Calculation of non-linear models' confidence interval & predictions
+## Calculation of non-linear models' confidence interval & predictions: *ci_nlm*
 
 The package "drc" already provides methods to calculate the confidence interval around the non-linear models created with its Self-Starters (*predict.drc*). However, this feature is not available for the model created from "aomisc" self-starters, though some of them are often the best models (e.g. linear, exponential, logarithmic).
 
