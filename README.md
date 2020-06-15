@@ -10,7 +10,7 @@ library(devtools)
 install_github("OnofriAndreaPG/aomisc")
 
 # Installation of the "automation" package and all its dependencies:
-install_github("Eliot-RUIZ/automation")
+install_github("Eliot-RUIZ/automation") # Type multiple time on the Enter button to skip updates of package if asked
 library(automation) # Loading
 
 ### In case of error during the installation, first run the lines below, and then re-run those above ###
