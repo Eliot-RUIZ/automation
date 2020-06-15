@@ -303,7 +303,7 @@ change the position in the formula if this is the variable of main interest.
 ```
 <br>
 Finally, here is a table presenting the limits used to give a gross approximation of the magnitude (rule of thumb) of a measure of association (interpretation varying with the field of study):
-
+<br>
 <br>
 
 | Measure of association | Precision | No effect  | Negligible effect | Small effect | Medium effect | Large effect |
