@@ -60,9 +60,9 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
 ```
 After a few micro-seconds/seconds (depending on the analysis and the size of the dataframe), the *auto_stat* function will display the result in a convenient form, separated in multiple subsections, their type depending on the analysis. The **"MESSAGE(S)** section is of major importance since I implemented many different kind of messages (e.g. advices, general informations, note on the tests). 
 
-Finally, the *digits* (number of decimals) and *apa* arguments, as their names indicates, serve to control the output. The latter only controls the **MAIN TEST(S)** and **MEASURE(S) OF ASSOCIATION** sections, since they are usually the only ones reported. For the main tests, the function will generate an "APA code" below, which just have to be pasted in an R Notebook (instructions below) to generate an appropriate result. Since the greek letters are characters, they can be copied/pasted in any kind of software. It will also round the measures of association results to 3 decimals, and remove the zero in front of numbers between -1 & 1. 
+Finally, the *digits* (number of decimals) and *apa* arguments, as their names indicates, serve to control the output. The latter only controls the **MAIN TEST(S)** and **MEASURE(S) OF ASSOCIATION** sections, since they are usually the only ones reported. For the main tests, the function will generate an "APA code" below, which just have to be pasted in an R Notebook (instructions below) to generate an appropriate result. Since the greek letters and mathematial symbols are characters, they can be copied/pasted in any kind of word processor. It will also round the measures of association results to 3 decimals, and remove the zero in front of numbers between -1 & 1. 
 
-Example: χ2(2) = 2.667, *p* = .264, φ = 0.577
+Example: χ²(2) = 2.667, *p* = .264, φ = 0.577
 <br>
 <br>
 <br>
