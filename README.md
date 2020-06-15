@@ -302,7 +302,7 @@ change the position in the formula if this is the variable of main interest.
 ------------------------------------------------------------------
 ```
 <br>
-Finally, here is a table presenting the limits used to give a gross approximation of the magnitude (rule of thumb) of a measure of association (interpretation varying with the field of study):
+Finally, here is a table presenting the conventional rule of thumb used in *auto_stats* for interpreting the measures of associations  (⚠ interpretation varying with the field of study):
 <br>
 <br>
 
