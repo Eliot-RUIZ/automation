@@ -61,7 +61,7 @@ After a few micro-seconds/seconds (depending on the analysis and the size of the
 
 Finally, the *digits* (number of decimals) and *apa* arguments, as their names indicate, serve to control the output. The latter only controls the **MAIN TEST(S)** and **MEASURE(S) OF ASSOCIATION** sections, since they are usually the only ones reported. For the main tests, the function will generate an "APA code" below, which just have to be pasted in an R Notebook (instructions below) to generate an appropriate result. Since the greek letters and mathematical symbols are characters, they can be copied/pasted in any kind of word processor. It will also round the measures of association results to 3 decimals, and remove the zero in front of numbers between -1 & 1. 
 
-**Example: χ²(2) = 2.667, *p* = .264, φ = 0.577**
+**Example: χ²(2) = 2.667, *p* = .264, *φ* = 0.577**
 <br>
 <br>
 <br>
@@ -301,6 +301,19 @@ change the position in the formula if this is the variable of main interest.
  
 ------------------------------------------------------------------
 ```
+<br>
+Finally, here is a table presenting the limits used to give a gross approximation of the magnitude (rule of thumb) of a measure of association (interpretation varying with the field of study):
+| Measure of association | Other | No effect  | Negligible effect | Small effect | Medium effect | Large effect |
+|:-----------------------|:----------------|:----------------|:----------------|:----------------|:----------------|:----------------|
+| Cohen's *h* | NA | *h* = 0 | *h* < 0.2 | 0.2 ≥ *h* < 0.5 |0.5 ≥ *h* < 0.8 | *h* ≥ 0.8 |
+| Phi coefficient | NA | *φ* = 0 | *φ* < 0.1 | 0.1 ≥ *φ* < 0.3 | 0.3 ≥ *φ* < 0.5 | *φ* ≥ 0.5 |
+| Cramer's V | df = 2 | V = 0 | V < 0.07 | 0.07 ≥ V < 0.2 | 0.2 ≥ V < 0.35 | V ≥ 0.35 |
+| Cramer's V | df = 3 | V = 0 | V < 0.06 | 0.06 ≥ V < 0.17 | 0.17 ≥ V < 0.29 | V ≥ 0.29 |
+| Cramer's V | df = 4 | V = 0 | V < 0.05 | 0.05 ≥ V < 0.15 | 0.15 ≥ V < 0.25 | V ≥ 0.25 |
+| Cramer's V | df ≥ 5 (Warning if df > 5) | V = 0 | V < 0.05 | 0.05 ≥ V < 0.13 | 0.13 ≥ V < 0.22 | V ≥ 0.22 |
+| Cohen's *g* | NA | *g* = 0 | *g* < 0.05 | 0.05 ≥ *g* < 0.15 | 0.15 ≥ *g* < 0.25 | *g* ≥ 0.25 |
+| Odds ratio | Qualitative Y - Paired - N x N contigency tables | OR = 1 (OR < 1 -> "Less Odds") | OR < 1.22 | 1.22 ≥ OR < 1.86 | 1.86 ≥ OR < 3 | OR ≥ 3 |
+| Odds ratio | Qualitative Y - Independent | OR = 1 (OR < 1 -> "Less Odds") | OR < 1.55 | 1.55 ≥ OR < 2.8 | 2.8 ≥ OR < 5 | OR ≥ 5 |
 <br>
 <br>
 <br>
