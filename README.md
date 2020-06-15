@@ -50,7 +50,7 @@ Link: https://www.xmind.net/m/cx77Pm/
 
 The decision tree can also be downloaded by clicking on the top right corner button and then "Download". It can then then be opened in Xmind (prior download of the software necessary) to get access to the content of the boxes, and also see it in the text preview (linear tree with content of the boxes). Each box is annoted with the associated piece of code, because I understand that checking the 3000 lines of code (not all in Github yet) searching for something can be very difficult!
 
-![image](https://user-images.githubusercontent.com/15387266/84606390-164a6580-aea6-11ea-9d35-b1bc09836150.png)
+![Capture](https://user-images.githubusercontent.com/15387266/84607293-c327e100-aeac-11ea-83fa-e9ec31fee8b3.PNG)
 <br>
 
 Using the auto_stats function is very simple, since the user only has to fill with the name of the variable(s) the *y* argument, and possibly *x1* (and) *x2* arguments, while indicating the name of the dataframe in which they can be found in the *data* argument. If one (*"first"* or *"second"*) of both (*"both"*) factors (X) are repeated measures, the user must indicate it in the *paired* argument, the default being that the variables are independent (*"none"*). If the variable are paired, the user must provide the *id* argument with the name of one column of the dataframe containing the ID of the sujects. In case of an error of an entry error, I implemented multiple warning messages (displaying in red) covering most of the possible errors (I hope), to explain in details what went wrong and rapidly rectify it. 
