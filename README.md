@@ -89,7 +89,7 @@ Tests:
 ```
 As you can see, multiple commands running each part of the code in the section desired are displayed. Meanwhile, the different datasets have been loaded in the Global Environment and can be seen on the top right corner in RStudio. Their names aim at being the most explicit possible about which branch of the tree/code they were designed to test.
 
-Then, just copy the name (`````...``````) and run it to display the dataframe, or copy the entire command to get the final result:
+Then, just copy the name (``...``) and run it to display the dataframe, or copy the entire command to get the final result:
 ```r
 auto_stats(`QUALITATIVE: One paired X - Y with 2 levels & X1 with more than 2 levels`,
            y = "Y", x1 = "X1", id = "ID", paired = "first")
