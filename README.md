@@ -303,6 +303,7 @@ change the position in the formula if this is the variable of main interest.
 ```
 <br>
 Finally, here is a table presenting the limits used to give a gross approximation of the magnitude (rule of thumb) of a measure of association (interpretation varying with the field of study):
+
 | Measure of association | Other | No effect  | Negligible effect | Small effect | Medium effect | Large effect |
   |:------------------|:-------------|:----------------|:----------------------|:----------------------|:----------------------|:----------------------|
   | Cohen's *h* | NA | *h* = 0 | *h* < 0.2 | 0.2 ≥ *h* < 0.5 |0.5 ≥ *h* < 0.8 | *h* ≥ 0.8 |
