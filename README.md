@@ -1,6 +1,6 @@
 # Package "automation" - Eliot RUIZ
 
-The goal of this package is to provide functions automating time-consuming tasks in R: statistical testing & non-linear modeling/plotting. Run the following lines of code to install it on your computer:
+The goal of this package is to provide functions automating time-consuming tasks in R: statistical testing & non-linear modelling/plotting. Run the following lines of code to install it on your computer:
 ```r
 ### Usual installation ###
 
@@ -38,29 +38,29 @@ library(mixOmics)
 
 ## Automation of usual statistical tests: *auto_stats*
 
-The Base R packages as well as the numerous external packages hosted on CRAN and Github provide an extraordinary diversity of functions coding most statistical tests and associated operations. This powerful tool widely used accross the scientific community allows to get a better understanding of the association between variables (inter alia) in almost every specific cases. However, this powerful tool requires a great knowledge of inferential statistics in order to use it fully and correctly. Indeed, finding the right statistical test with all its assumptions and associated computations while assessing how to run such analysis in R can be very tedious and complex. Even running a complete analysis requires a lot of coding lines, thus increasing the risk of errors and decreasing the time available for understanding the results. Finally, reporting all the results in a correct and compact format for a scientific report is also very cumbersome. For example, the official APA format asks to remove the zero (0.1 -> .1) only for numbers between -1 and 1, provide the results with the greeks letters (e.g. chi, phi, eta), or write the p of p-value in italic (*p*)!
+The Base R packages as well, as the numerous external packages hosted on CRAN and Github (around 80,000) provide an extraordinary diversity of functions coding most statistical tests and associated operations. This powerful tool widely used across the scientific community allows to get a better understanding of the association between variables (inter alia) in almost every specific cases. However, this powerful tool requires a great knowledge of inferential statistics to use it fully and correctly. Indeed, finding the right statistical test with all its assumptions and associated computations while assessing how to run such analysis in R can be very tedious and complex. Even running a complete analysis requires a lot of coding lines, thus increasing the risk of errors and decreasing the time available for understanding the results. Finally, reporting all the results in a correct and compact format for a scientific report is also very cumbersome. For example, the official APA format asks to remove the zero (0.1 -> .1) only for numbers between -1 and 1, provide the results with the greek letters (e.g. chi, phi, eta), or write the p of p-value in italic (*p*)!
 
-Doing all of that can takes days of hardwork when analysing a big dataset. I therefore decided to code a function running a complete analysis instantly, and displaying the results in a format enabling to simply copy and paste it in a report. 
+Doing all of that can takes days of hard work when analysing a big dataset from my own experience. Therefore, I decided to code a function running a complete analysis instantly and displaying the results in a format enabling to simply copy and paste it in a report. 
 
-Currently, the function is fully operational for any type/number of factors (X), when the dependent variable (Y) is **qualitative**. I am working very hard on the quantitative part of the function, and it should therefore be soon released.
+Currently, the function is fully operational for any type/number of factors (X), when the dependent variable (Y) is **qualitative**. I am working very hard on the quantitative part of the function, and it should, therefore, soon be released.
 
-In order to do that, the function first choose the right analysis, between of around 50 different main tests, 20 different measures of associations (e.g. effect size, odds ratio), and around 15 different type of post-hoc analysis. I recommend to check the regularly updated decision tree (link might change) to get a better understanding on how the function works, and notably how it decides which test is the most appropriate, using the variable type and many different validity tests (around 15). 
+To do that, the function first chooses the right analysis between around 50 different main tests, 20 different measures of associations (e.g. effect size, odds ratio), and 15 different types of post-hoc analysis. I recommend to check the regularly updated decision tree (link might change) to get a better understanding on how the function works, and notably how it decides which test is the most appropriate, using the variable type and many different validity tests (around 15). 
 
 Link: https://www.xmind.net/m/cx77Pm/
 
-The decision tree can also be downloaded by clicking on the top right corner button and then "Download". It can then then be opened in Xmind (prior download of the software necessary) to get access to the content of the boxes, and also see it in the text preview (linear tree with content of the boxes). Each box is annoted with the associated piece of code, because I understand that checking the 3000 lines of code (not all in Github yet) searching for something can be very difficult, even if I made an effort on the appearance of the text (well-spaced out and structured) and on the number of comments!
+The decision tree can also be downloaded by clicking on the top right corner button and then "Download". It can then be opened in Xmind (prior download of the software necessary) to get access to the content of the boxes, and also see it in the text preview (linear tree showing the content of the boxes). Each box is annotated with the associated piece of code because I understand that checking the 3000 lines of code (not all in Github yet) can be very difficult, even if I made an effort on the appearance of the text (well-spaced out and structured) and on the number of comments!
 
 ![Capture](https://user-images.githubusercontent.com/15387266/84607293-c327e100-aeac-11ea-83fa-e9ec31fee8b3.PNG)
 <br>
 
-Using the auto_stats function is very simple, since the user only has to fill with the name of the variable(s) the *y* argument, and possibly *x1* (and) *x2* arguments, while indicating the name of the dataframe in which they can be found in the *data* argument. If one (*"first"* or *"second"*) of both (*"both"*) factors (X) are repeated measures, the user must indicate it in the *paired* argument, the default being that the variables are independent (*"none"*). If the variable are paired, the user must provide the *id* argument with the name of one column of the dataframe containing the ID of the sujects. In case of an error of an entry error, I implemented multiple warning messages (displaying in red) covering most of the possible errors (I hope), to explain in details what went wrong and rapidly rectify it. 
+Using the auto_stats function is very simple since the user only has to fill with the name of the variable(s) the *y* argument, and possibly the *x1* (and) *x2* arguments, while indicating the name of the dataframe in which they can be found in the *data* argument. If one (*"first"* or *"second"*) of both (*"both"*) factors (X) are repeated measures, the user must indicate it in the *paired* argument, the default being that the variables are independent (*"none"*). If the variables are paired, the user must provide the *id* argument with the name of one column of the dataframe containing the ID of the subjects. In case of an error of an entry error, I implemented multiple warning messages (displaying in red) covering most of the possible errors (I hope), to explain in details what went wrong and rapidly rectify it. 
 ```r
 ### Actual default values ###
 auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL, digits = 3, apa = FALSE)
 ```
-After a few micro-seconds/seconds (depending on the analysis and the size of the dataframe), the *auto_stat* function will display the result in a convenient form, separated in multiple subsections, their type depending on the analysis. The **"MESSAGE(S)** section is of major importance since I implemented many different kind of messages (e.g. advices, general informations, note on the tests). 
+After a few micro-seconds/seconds (depending on the analysis and the size of the dataframe), the *auto_stat* function will display the result in a convenient form, separated in multiple subsections varying with the type of analysis (e.g. **TABLE** only for qualitative Y). The **MESSAGE(S)** section is of major importance since I implemented many different kinds of advice, general information, notes on the tests etc, for more transparency. 
 
-Finally, the *digits* (number of decimals) and *apa* arguments, as their names indicates, serve to control the output. The latter only controls the **MAIN TEST(S)** and **MEASURE(S) OF ASSOCIATION** sections, since they are usually the only ones reported. For the main tests, the function will generate an "APA code" below, which just have to be pasted in an R Notebook (instructions below) to generate an appropriate result. Since the greek letters and mathematial symbols are characters, they can be copied/pasted in any kind of word processor. It will also round the measures of association results to 3 decimals, and remove the zero in front of numbers between -1 & 1. 
+Finally, the *digits* (number of decimals) and *apa* arguments, as their names indicate, serve to control the output. The latter only controls the **MAIN TEST(S)** and **MEASURE(S) OF ASSOCIATION** sections, since they are usually the only ones reported. For the main tests, the function will generate an "APA code" below, which just have to be pasted in an R Notebook (instructions below) to generate an appropriate result. Since the greek letters and mathematical symbols are characters, they can be copied/pasted in any kind of word processor. It will also round the measures of association results to 3 decimals, and remove the zero in front of numbers between -1 & 1. 
 
 **Example: χ²(2) = 2.667, *p* = .264, φ = 0.577**
 <br>
@@ -68,9 +68,9 @@ Finally, the *digits* (number of decimals) and *apa* arguments, as their names i
 <br>
 ## Testing the *auto_stats* function: *test_auto_stats*
 
-While I was developping the code, I had to create my own datasets, to fit every single branch of the tree. I stored them in the *test_auto_stats* function, designed to quickly test the *auto_stats* function for the appropried kind of data. Besides being very useful when debugging the function, it can also serves as a reference when detecting errors or for showing how to use the function correctly.
+While I was developing the code, I had to create datasets, to test every single branch of the tree/code. I stored them in the *test_auto_stats* function, designed to quickly provide the tests of interest. Besides being very useful when debugging the function, it can also serve to show how to use the function correctly, and notably in which form must be the dataframe to perform an analysis (e.g. long format instead of wide).
 
-This function is also intuitive to use this you just have to precise the type of dependent variable, the number of factors and if they are repeated measures or not.
+This function is also intuitive to use because you just have to precise the type of dependent variable, the number of factors and if they are repeated measures or not.
 ```r
 test_auto_stats(y = "qualitative", nb_x = 1, paired = "first")
 
@@ -88,9 +88,9 @@ Tests:
           auto_stats(`QUALITATIVE: One paired X - Y & X1 with more than 2 levels`,
                       y = "Y", x1 = "X1", id = "ID", paired = "first")
 ```
-The functions then display the code to run the different tests associated with this kind of data. Meanwhile, the different datasets have been loaded in the Global Environment and can be seen on top right corner in RStudio. Their names aims at being the most explicit possible about which branch of the tree/code they were designed to test.
+As you can see, multiple commands running each part of the code in the section desired are displayed. Meanwhile, the different datasets have been loaded in the Global Environment and can be seen on the top right corner in RStudio. Their names aim at being the most explicit possible about which branch of the tree/code they were designed to test.
 
-The different test can then be copied and run and here is an example with the third one:
+Then, just copy the name (`...`) and run it to display the dataframe, or copy the entire command to get the final result:
 ```r
 auto_stats(`QUALITATIVE: One paired X - Y with 2 levels & X1 with more than 2 levels`,
            y = "Y", x1 = "X1", id = "ID", paired = "first")
@@ -128,7 +128,7 @@ Pairwise two-sample permutation symmetry tests (fdr adjustment method)
 ------------------------------------------------------------------
 ```
 
-Now let's run another one with the *apa* argument activated:
+Here is the results obtained when activating the *apa* argument for a different dataframe:
 ```r
 auto_stats(`QUALITATIVE: One paired X - Y with more than 2 levels & X1 with 2 levels`,
             y = "Y", x1 = "X1", id = "ID", paired = "first", apa = TRUE)
@@ -237,7 +237,7 @@ Groupewise Exact Fisher's Tests (fdr adjustment method):
 ------------------------------------------------------------------
 ```
 
-Finally, here is a little example of a typical message and of the argument *digits* modified from its default value:
+Finally, we can increase the number of digits. Notice the message at the end of the analysis:
 ```r
 auto_stats(`QUALITATIVE: Two independent X - Y & X1 with 2 levels - Woolf test = OK`,
            y = "Y", x1 = "X1", x2 = "X2", paired = "none", digits = 5)
