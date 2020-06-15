@@ -305,7 +305,7 @@ change the position in the formula if this is the variable of main interest.
 Finally, here is a table presenting the limits used to give a gross approximation of the magnitude (rule of thumb) of a measure of association (interpretation varying with the field of study):
 <br>
 
-| Measure of association | Other | No effect  | Negligible effect | Small effect | Medium effect | Large effect |
+| Measure of association | Precision | No effect  | Negligible effect | Small effect | Medium effect | Large effect |
   |:------------------:|:-------------:|:----------------:|:----------------------:|:----------------------:|:----------------------:|:----------------------:|
   | Cohen's *h* | NA | *h* = 0 | *h* < 0.2 | 0.2 ≥ *h* < 0.5 |0.5 ≥ *h* < 0.8 | *h* ≥ 0.8 |
 | Phi coefficient | NA | *φ* = 0 | *φ* < 0.1 | 0.1 ≥ *φ* < 0.3 | 0.3 ≥ *φ* < 0.5 | *φ* ≥ 0.5 |
@@ -360,7 +360,7 @@ result = compare_nlm(mpg ~ wt, mtcars, digits = 1, increase = F, arrange = c("Nb
 kable(head(result, 15), row.names = F)
 ```
 |Rank  |ID   |    Function      |RMSE  | AIC   | BIC   |Nb_coeffs  | Coeff_1    | Coeff_2   |  Coeff_3     | Coeff_4   | Coeff_5   |Coeff_6   |Coeff_7  |
-|:-----|:----|:-----------------|:-----|:------|:------|:----------|:-----------|:----------|:-------------|:----------|:----------|:---------|:--------|
+|:-----:|:----:|:-----------------:|:-----:|:------:|:------:|:----------:|:-----------:|:----------:|:-------------:|:----------:|:----------:|:---------:|:--------:|
 |1     |65   |twophase          |2.5   |165.6  |177.3  |7 coeffs   |b1: 8       |c1: 9.3    |d1: 15.8      |e1: 0.3    |b2: 3.1    |d2: 26.3  |e2: 2.7  |
 |2     |15   |CRS.6             |2.4   |161.9  |172.2  |6 coeffs   |b: 1.5      |c: 5.2     |d: 87.9       |e: 1.1     |f: -394.3  |g: -2.7   |         |
 |3     |61   |multi2            |5.9   |216.8  |225.5  |5 coeffs   |b1: 1.6     |b2: 55.6   |b3: 46.4      |c: 17.7    |d: 20.1    |          |         |
@@ -451,7 +451,7 @@ compare_nlm(mpg ~ wt, mtcars, package = T)
 
 The names of the 21 remaining model (in package "aomisc") are displayed below, and more informations on them can be obtained following this [link1](https://www.statforbiology.com/2020/stat_nls_usefulfunctions/#exponential-function) and this [link2](https://www.statforbiology.com/nonlinearregression/usefulequations):
 |Aomisc functions used | Name of the model | Formula of the model  |
-|:----------------|:----------------------------------------------|:-----------------|
+|:----------------:|:----------------------------------------------:|:-----------------:|
 |DRC.asymReg      | Asymptotic Regression Model | ![Y = a - (a - b) \, \exp (- c  X) \quad \quad \quad](https://render.githubusercontent.com/render/math?math=Y%20%3D%20a%20-%20(a%20-%20b)%20%5C%2C%20%5Cexp%20(-%20c%20%20X)%20%5Cquad%20%5Cquad%20%5Cquad) |
 |DRC.beta         | Beta function | ![Y = d \,\left\{  \left( \frac{X - X_b}{X_o - X_b} \right) \left( \frac{X_c - X}{X_c - X_o} \right) ^ {\frac{X_c - X_o}{X_o - X_b}} \right\}^b \quad \quad \quad](https://render.githubusercontent.com/render/math?math=Y%20%3D%20d%20%5C%2C%5Cleft%5C%7B%20%20%5Cleft(%20%5Cfrac%7BX%20-%20X_b%7D%7BX_o%20-%20X_b%7D%20%5Cright)%20%5Cleft(%20%5Cfrac%7BX_c%20-%20X%7D%7BX_c%20-%20X_o%7D%20%5Cright)%20%5E%20%7B%5Cfrac%7BX_c%20-%20X_o%7D%7BX_o%20-%20X_b%7D%7D%20%5Cright%5C%7D%5Eb%20%5Cquad%20%5Cquad%20%5Cquad) |
 |DRC.bragg.3      | Bragg equation (3 parameters) | ![Y = d \, \exp \left\[ - b (X - e)^2 \right\] \quad \quad \quad](https://render.githubusercontent.com/render/math?math=Y%20%3D%20d%20%5C%2C%20%5Cexp%20%5Cleft%5B%20-%20b%20(X%20-%20e)%5E2%20%5Cright%5D%20%5Cquad%20%5Cquad%20%5Cquad) |
