@@ -222,6 +222,16 @@ X1 -> X-squared = 19.054, df = 1, p-value = 0 (***)
 X2 -> X-squared = 268.851, df = 5, p-value = 0 (***)
 X1:X2 -> X-squared = 20.204, df = 5, p-value = 0.001 (**)
  
+-------------------- MEASURE(S) OF ASSOCIATION -------------------
+ 
+        Odds ratio            Magnitude
+Group 1      0.349          (Less odds)
+Group 2      0.803          (Less odds)
+Group 3      1.133  (Negligible effect)
+Group 4      0.921          (Less odds)
+Group 5      1.222  (Negligible effect)
+Group 6      0.828          (Less odds)
+ 
 ------------------------ POST-HOC ANALYSIS -----------------------
  
 Groupewise Exact Fisher's Tests (fdr adjustment method):
@@ -268,11 +278,11 @@ Exact conditional test of independence: S = 4, p-value = 0.5 (ns)
  
 Odds ratio (conditional Maximum Likelihood Estimate) = Inf 95% CI [1.2066, Inf]
  
-             Odds ratio with continuity correction
-Adult female                               0.00000
-Adult male                                 2.19722
-Teenage boy                                2.19722
-Teenage girl                               0.00000
+             Odds ratio            Magnitude
+Adult female          1  (Negligible effect)
+Adult male            9       (Large effect)
+Teenage boy           9       (Large effect)
+Teenage girl          1  (Negligible effect)
  
 ------------------------ POST-HOC ANALYSIS -----------------------
  
@@ -287,7 +297,7 @@ Groupewise Exact Fisher's Tests (fdr adjustment method):
 -------------------------- MESSAGE(S) ---------------------------
  
 This test has been designed to know if there is an association between the 1st factor (X1)
-and the dependant variable (Y). As the 2nd factor (X2) is used for adjustement, you should
+and the dependant variable (Y). As the 2nd factor (X2) is used for adjustment, you should
 change the position in the formula if this is the variable of main interest.
  
 ------------------------------------------------------------------
