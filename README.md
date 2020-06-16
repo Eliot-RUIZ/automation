@@ -111,18 +111,18 @@ One factor (X1) with more than two levels of repeated measures.
  
 -------------------------- MAIN TEST(S) --------------------------
  
-Asymptotic General Symmetry Test: Z = 1, p-value = 0.577 (ns)
+Asymptotic General Symmetry Test (N = 9): Z = 1, p-value = 0.577 (ns)
  
-Cochran's Q test: Q = 1, df = 2, p-value = 0.607 (ns)
+Cochran's Q test (N = 9): Q = 1, df = 2, p-value = 0.607 (ns)
  
 ------------------------ POST-HOC ANALYSIS -----------------------
  
 Pairwise two-sample permutation symmetry tests (fdr adjustment method)
  
-           Comparison p-value
-1  After - Before = 0   1.000
-2  After - During = 0   0.476
-3 Before - During = 0   0.476
+          Comparison p-value
+  After - Before = 0   1.000
+  After - During = 0   0.476
+ Before - During = 0   0.476
  
 ------------------------------------------------------------------
 ```
@@ -148,13 +148,13 @@ One factor (X1) with two levels of repeated measures.
  
 -------------------------- MAIN TEST(S) --------------------------
  
-Asymptotic General Symmetry Test: Z = 1.414, p-value = 0.334 (ns)
+Asymptotic General Symmetry Test (N = 8): Z = 1.414, p-value = 0.334 (ns)
  
-APA code -> Asymptotic General Symmetry Test: Z = 1.414, *p* = .334
+APA code -> Asymptotic General Symmetry Test (N = 8): Z = 1.414, *p* = .334
  
-Stuart-Maxwell Marginal Homogeneity Test: X-squared = 2.667, df = 2, p-value = 0.264 (ns)
+Stuart-Maxwell Marginal Homogeneity Test (N = 8): X-squared = 2.667, df = 2, p-value = 0.264 (ns)
  
-APA code -> Stuart-Maxwell Marginal Homogeneity Test: &chi;^2^(2) = 2.667, *p* = .264
+APA code -> Stuart-Maxwell Marginal Homogeneity Test: &chi;^2^(2, N = 8) = 2.667, *p* = .264
  
 (Copy it + Paste it in an R Notebook + Click on Preview and save it + Click on Knit + Copy it anywhere else)
  
@@ -168,19 +168,19 @@ Odds ratio = 1 (Negligible effect)
  
 APA code -> OR = 1
  
-             Comparison Odds-ratio Cohen's G
-1   Maybe/Maybe : No/No        Inf       0.5
-2 Maybe/Maybe : Yes/Yes        Inf       0.5
-3       No/No : Yes/Yes        Inf       0.5
+            Comparison Odds-ratio Cohen's G
+   Maybe/Maybe : No/No        Inf       0.5
+ Maybe/Maybe : Yes/Yes        Inf       0.5
+       No/No : Yes/Yes        Inf       0.5
  
 ------------------------ POST-HOC ANALYSIS -----------------------
  
-
+Pairwise Symmetry Tests (fdr adjustment method):
  
-             Comparison p-value
-1   Maybe/Maybe : No/No       1
-2 Maybe/Maybe : Yes/Yes       1
-3       No/No : Yes/Yes       1
+            Comparison p-value
+   Maybe/Maybe : No/No       1
+ Maybe/Maybe : Yes/Yes       1
+       No/No : Yes/Yes       1
  
 ------------------------------------------------------------------
 ```
@@ -207,41 +207,41 @@ Male   No         313     207     205     279     138     351
 Variable type: Qualitative dependent variable (Y) with two levels
 Two independent factors (X).
  
-Woolf's Test: X-squared = 17.902, df = 5, p-value = 0.003 -> Not satisfied (p-value <= 0.05)
+Woolf's Test (N = 4526): X-squared = 17.902, df = 5, p-value = 0.003 -> Not satisfied (p-value <= 0.05)
 Note: Heterogeneity of odds ratios across levels of X2 (strata).
  
-Likelihood Ratio Test on Logistic Regression model:
+Likelihood Ratio Test on Logistic Regression model (N = 4526): 
 Deviance = 20.204, p-value = 0.001 -> Multiplicative model (significant difference)
 Note: Deviance between additive (Y ~ X1 + X2) & multiplicative model (Y ~ X1 * X2)
  
 -------------------------- MAIN TEST(S) --------------------------
  
-Likelihood Ratio Test on Logistic Regression model (Type III tests):
+Type III Likelihood Ratio Test on Logistic Regression model (N = 4526): 
 X1 -> X-squared = 19.054, df = 1, p-value = 0 (***)
 X2 -> X-squared = 268.851, df = 5, p-value = 0 (***)
 X1:X2 -> X-squared = 20.204, df = 5, p-value = 0.001 (**)
  
 -------------------- MEASURE(S) OF ASSOCIATION -------------------
  
-        Odds ratio            Magnitude
-Group 1      0.349          (Less odds)
-Group 2      0.803          (Less odds)
-Group 3      1.133  (Negligible effect)
-Group 4      0.921          (Less odds)
-Group 5      1.222  (Negligible effect)
-Group 6      0.828          (Less odds)
+ Odds ratio            Magnitude
+      0.349          (Less odds)
+      0.803          (Less odds)
+      1.133  (Negligible effect)
+      0.921          (Less odds)
+      1.222  (Negligible effect)
+      0.828          (Less odds)
  
 ------------------------ POST-HOC ANALYSIS -----------------------
  
 Groupewise Exact Fisher's Tests (fdr adjustment method):
  
-    Group p-value
-1 Group 1  0.0001
-2 Group 2  0.6770
-3 Group 3  0.6770
-4 Group 4  0.6770
-5 Group 5  0.6770
-6 Group 6  0.6770
+   Group p-value
+ Group 1  0.0001
+ Group 2  0.6770
+ Group 3  0.6770
+ Group 4  0.6770
+ Group 5  0.6770
+ Group 6  0.6770
  
 ------------------------------------------------------------------
 ```
@@ -266,32 +266,32 @@ Group 2 No                1          0           0            1
 Variable type: Qualitative dependent variable (Y) with two levels
 Two independent factors (X) and X1 has two levels.
  
-Woolf's Test: X-squared = 0.90521, df = 3, p-value = 0.82417 -> Satisfied (p-value > 0.05)
+Woolf's Test (N = 8): X-squared = 0.90521, df = 3, p-value = 0.82417 -> Satisfied (p-value > 0.05)
 Note: Homogeneity of odds ratios across levels of X2 (strata).
  
 -------------------------- MAIN TEST(S) --------------------------
  
-Exact conditional test of independence: S = 4, p-value = 0.5 (ns)
+Exact conditional test of independence (N = 8): S = 4, p-value = 0.5 (ns)
  
 -------------------- MEASURE(S) OF ASSOCIATION -------------------
  
-Odds ratio (conditional Maximum Likelihood Estimate) = Inf 95% CI [1.2066, Inf]
+Odds ratio (Mantel-Haenszel estimate) = Inf 95% CI [0.18781, Inf]
  
-             Odds ratio            Magnitude
-Adult female          1  (Negligible effect)
-Adult male            9       (Large effect)
-Teenage boy           9       (Large effect)
-Teenage girl          1  (Negligible effect)
+ Odds ratio            Magnitude
+          1  (Negligible effect)
+          9       (Large effect)
+          9       (Large effect)
+          1  (Negligible effect)
  
 ------------------------ POST-HOC ANALYSIS -----------------------
  
 Groupewise Exact Fisher's Tests (fdr adjustment method):
  
-         Group p-value
-1 Adult female       1
-2   Adult male       1
-3  Teenage boy       1
-4 Teenage girl       1
+        Group p-value
+ Adult female       1
+   Adult male       1
+  Teenage boy       1
+ Teenage girl       1
  
 -------------------------- MESSAGE(S) ---------------------------
  
