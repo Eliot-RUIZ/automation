@@ -18,6 +18,10 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
   
   Y = data[, y]
   
+  n = paste(" (N = ", length(Y), "): ", sep = "")
+  
+  n_apa = paste(", N = ", length(Y), ") = ", sep = "")
+  
   if(!is.null(x1))  X1 = data[, x1]
   
   if(!is.null(x2))  X2 = data[, x2]
@@ -253,7 +257,6 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
     
   }
   
-  
   ## Qualitative Y
   
   if(is.factor(y) || is.character(y)) {
@@ -288,7 +291,7 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
             
             test1 = suppressWarnings(prop.test(tab_n1)) 
             test2 = suppressWarnings(prop.test(tab_n2))
-            name = "One-sample Chi-squared Test with Yates' correction"
+            name = paste("One-sample Chi-squared Test with Yates' correction", n, sep = "")
             
           }
           
@@ -302,7 +305,7 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
             
             test1 = suppressWarnings(prop.test(tab_n1, correct = F)) 
             test2 = suppressWarnings(prop.test(tab_n2, correct = F)) 
-            name = "One-sample Chi-squared Test"
+            name = paste("One-sample Chi-squared Test", n, sep = "")
             
           }
           
@@ -329,9 +332,9 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
           prob_ci2_apa = paste("Probality of ", names(tab_n2)[1], " = ", x1_apa(prob2), 
                                " 95% CI [", x1_apa(ci2[1]), ", ", x1_apa(ci2[2]), "]", sep = "")
           
-          test = paste(name, ": X-squared = ", r(test1[[1]][[1]]), ", df = ", test1[[2]][[1]], ", p-value = ", r(test1[[3]]), s(test1[[3]]), sep = "")
+          test = paste(name, "X-squared = ", r(test1[[1]][[1]]), ", df = ", test1[[2]][[1]], ", p-value = ", r(test1[[3]]), s(test1[[3]]), sep = "")
           
-          test_apa = paste("&chi;^2^(", test1[[2]][[1]], ") = ", x_apa(test1[[1]][[1]]), ", *p* = ", p_apa(test1[[3]]), sep = "")
+          test_apa = paste("&chi;^2^(", test1[[2]][[1]], n_apa, x_apa(test1[[1]][[1]]), ", *p* = ", p_apa(test1[[3]]), sep = "")
           
           eff = paste("Cohen's h = ", r(effect_size), m(effect_size, lim1 = 0.2, lim2 = 0.5, lim3 = 0.8), sep = "")
           
@@ -430,13 +433,13 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
           
           var_type = "Variable type: Qualitative dependent variable (Y) with two levels.\nOne factor (X1) with two independent levels."
           
-          test = paste("Fisher's Exact Test: p-value = ", r(test1[[1]]), s(test1[[1]]), sep = "")
+          test = paste("Fisher's Exact Test", n, "p-value = ", r(test1[[1]]), s(test1[[1]]), sep = "")
           
-          test_apa = paste("Fisher's Exact Test: *p* = ", p_apa(test1[[1]]), sep = "")
+          test_apa = paste("Fisher's Exact Test", n, "*p* = ", p_apa(test1[[1]]), sep = "")
           
           eff = paste("Phi coefficient = ", r(phi), m(phi, lim1 = 0.1, lim2 = 0.3, lim3 = 0.5), sep = "")
           
-          eff_apa = paste("&phi; = ", x_apa(phi), sep = "")
+          eff_apa = paste("&phi; = ", x1_apa(phi), sep = "")
           
           odd = paste("Odds ratio = ", r(odds), ", 95% CI [", r(ci_odds[[1]]), ", ", 
                       r(ci_odds[[2]]), "]", m(odds, lim1 = 1.55, lim2 = 2.8, lim3 = 5, OR = T), sep = "")
@@ -536,9 +539,9 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
           
           ### Display results
           
-          test = paste("Fisher's Exact Test: p-value = ", r(test1[[1]]), s(test1[[1]]), sep = "")
+          test = paste("Fisher's Exact Test", n, "p-value = ", r(test1[[1]]), s(test1[[1]]), sep = "")
           
-          test_apa = paste("Fisher's Exact Test: *p* = ", p_apa(test1[[1]]), sep = "")
+          test_apa = paste("Fisher's Exact Test", n, "*p* = ", p_apa(test1[[1]]), sep = "")
           
           eff = paste("Cramer's V = ", r(v), magnitude, sep = "")
           
@@ -614,10 +617,10 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
               
               var_type = "Variable type: Qualitative dependent variable with two levels (Y)\nOne factor (X1) with two levels of repeated measures."
               
-              test = paste("Exact McNemar's Test: b = ", r(test1[[1]][[1]]), ", c = ", 
+              test = paste("Exact McNemar's Test", n, "b = ", r(test1[[1]][[1]]), ", c = ", 
                            r(test1[[2]][[1]]), ", p-value = ", r(test1[[3]][[1]]), s(test1[[3]][[1]]), sep = "")
               
-              test_apa = paste("Exact McNemar's Test: b = ", x_apa(test1[[1]][[1]]), ", c = ", 
+              test_apa = paste("Exact McNemar's Test", n, "b = ", x_apa(test1[[1]][[1]]), ", c = ", 
                                x_apa(test1[[2]][[1]]), ", *p* = ", p_apa(test1[[3]][[1]]), sep = "")
               
               eff = paste("Cohen's g = ", r(g), m(g, lim1 = 0.05, lim2 = 0.15, lim3 = 0.25), sep = "")
@@ -674,14 +677,14 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
               
               var_type = "Variable type: Qualitative dependent variable with more than two levels (Y)\nOne factor (X1) with two levels of repeated measures."
               
-              test1_n = paste("Asymptotic General Symmetry Test: Z = ", r(Z), ", p-value = ", r(p_value1), s(p_value1), sep = "")
+              test1_n = paste("Asymptotic General Symmetry Test", n, "Z = ", r(Z), ", p-value = ", r(p_value1), s(p_value1), sep = "")
               
-              test1_apa = paste("Asymptotic General Symmetry Test: Z = ", x_apa(Z), ", *p* = ", p_apa(p_value1), sep = "")
+              test1_apa = paste("Asymptotic General Symmetry Test", n, "Z = ", x_apa(Z), ", *p* = ", p_apa(p_value1), sep = "")
               
-              test2_n = paste("Stuart-Maxwell Marginal Homogeneity Test: X-squared = ", r(x_squared), ", df = ", df,
+              test2_n = paste("Stuart-Maxwell Marginal Homogeneity Test", n, "X-squared = ", r(x_squared), ", df = ", df,
                               ", p-value = ", r(p_value2), s(p_value2), sep = "")
               
-              test2_apa = paste("Stuart-Maxwell Marginal Homogeneity Test: &chi;^2^(", df, ") = ", x_apa(x_squared), 
+              test2_apa = paste("Stuart-Maxwell Marginal Homogeneity Test: &chi;^2^(", df, n_apa, x_apa(x_squared), 
                                 ", *p* = ", p_apa(p_value2), sep = "")
               
               g = paste("Cohen's g = ", r(g_global), m(g_global, lim1 = 0.05, lim2 = 0.15, lim3 = 0.25), sep = "")
@@ -730,18 +733,18 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
             
             var_type = "Variable type: Qualitative dependent variable with two levels (Y)\nOne factor (X1) with more than two levels of repeated measures."
             
-            test1_n = paste("Asymptotic General Symmetry Test: Z = ", r(Z), ", p-value = ", r(p_value1), s(p_value1), sep = "")
+            test1_n = paste("Asymptotic General Symmetry Test", n, "Z = ", r(Z), ", p-value = ", r(p_value1), s(p_value1), sep = "")
             
-            test1_apa = paste("Asymptotic General Symmetry Test: Z = ", x_apa(Z), ", *p* = ", p_apa(p_value1), sep = "")
+            test1_apa = paste("Asymptotic General Symmetry Test", n, "Z = ", x_apa(Z), ", *p* = ", p_apa(p_value1), sep = "")
             
             if(exists("test2", envir = fct.env)) 
-              assign("test2_n", paste("Cochran's Q test: Q = ", r(get("test2", envir = fct.env)[[3]][[1]]), ", df = ", 
+              assign("test2_n", paste("Cochran's Q test", n, "Q = ", r(get("test2", envir = fct.env)[[3]][[1]]), ", df = ", 
                                       get("test2", envir = fct.env)[[4]][[1]], ", p-value = ", 
                                       r(get("test2", envir = fct.env)[[7]][[1]]), 
                                       s(get("test2", envir = fct.env)[[7]][[1]]), sep = ""), envir = fct.env)
             
             if(exists("test2", envir = fct.env)) 
-              assign("test2_apa", paste("Cochran's Q test: Q(", get("test2", envir = fct.env)[[4]][[1]], ") = ", 
+              assign("test2_apa", paste("Cochran's Q test: Q(", get("test2", envir = fct.env)[[4]][[1]], n_apa, 
                                         x_apa(get("test2", envir = fct.env)[[3]][[1]]), ", *p* = ", 
                                         p_apa(get("test2", envir = fct.env)[[7]][[1]]), sep = ""), envir = fct.env)
             
@@ -821,10 +824,23 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
               
               test1 = mantelhaen.test(tab_n, exact = T)
               
-              test = paste("Exact conditional test of independence: S = ", r(test1[[1]][[1]]), ", p-value = ", r(test1[[2]][[1]]),
+              test = paste("Exact conditional test of independence", n, "S = ", r(test1[[1]][[1]]), ", p-value = ", r(test1[[2]][[1]]),
                            s(test1[[2]][[1]]), sep = "")
               
-              test_apa = paste("Exact M-H Test: S = ", test1[[2]][[1]], ", *p* = ", p_apa(test1[[2]][[1]]), sep = "")
+              test_apa = paste("Exact conditional test of independence", n, "S = ", test1[[2]][[1]], ", *p* = ", p_apa(test1[[2]][[1]]), sep = "")
+              
+              # General Odds ratio
+              
+              if(dim(tab_n)[2] == 2) {
+                
+                assign("o_g", paste("Odds ratio (Mantel-Haenszel estimate) = " , r(test1[[4]][[1]]), " 95% CI [", 
+                                    r(test1[[3]][1]), ", ", r(test1[[3]][2]), "]", 
+                                    m(test1[[4]][[1]], lim1 = 1.55, lim2 = 2.8, lim3 = 5, OR = T), sep = ""), envir = fct.env)
+                
+                assign("o_g_apa", paste("OR = ", x_apa(test1[[4]][[1]]), " 95% CI [", x_apa(test1[[3]][1]), ", ", 
+                                        x_apa(test1[[3]][2]), "]", sep = ""), fct.env)
+                
+              }
               
             }
             
@@ -834,11 +850,26 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
               
               test1 = mantelhaen.test(tab_n)
               
-              test = paste("Mantel-Haenszel Chi-squared Test with continuity correction: X-squared = ", r(test1[[1]][[1]]), 
+              test = paste("Mantel-Haenszel Chi-squared Test with continuity correction", n, "X-squared = ", r(test1[[1]][[1]]), 
                            ", df = ", test1[[2]][[1]], ", p-value = ", r(test1[[3]][[1]]), s(test1[[3]][[1]]), sep = "")
               
-              test_apa = paste("M-H c.c. Test: &chi;^2^(", test1[[2]][[1]], ") = ", x_apa(test1[[1]][[1]]),
+              print(test1)
+              
+              test_apa = paste("M-H c.c. Test: &chi;^2^(", test1[[2]][[1]], n_apa, x_apa(test1[[1]][[1]]),
                                ", *p* = ", p_apa(test1[[3]][[1]]), sep = "")
+              
+              # General Odds ratio
+              
+              if(dim(tab_n)[2] == 2) {
+                
+                assign("o_g", paste("Odds ratio (Mantel-Haenszel estimate) = " , r(test1[[5]][[1]]), " 95% CI [", 
+                                    r(test1[[4]][1]), ", ", r(test1[[4]][2]), "]", 
+                                    m(test1[[5]][[1]], lim1 = 1.55, lim2 = 2.8, lim3 = 5, OR = T), sep = ""), envir = fct.env)
+                
+                assign("o_g_apa", paste("OR = ", x_apa(test1[[5]][[1]]), " 95% CI [", x_apa(test1[[4]][1]), ", ", 
+                                        x_apa(test1[[4]][2]), "]", sep = ""), fct.env)
+                
+              }
               
             }
             
@@ -852,30 +883,17 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
             
             test1 = mantelhaen.test(tab_n)
             
-            test = paste("Cochran-Mantel-Haenszel Test: M2^ = ", r(test1[[1]][[1]]), 
+            test = paste("Cochran-Mantel-Haenszel Test", n, "M^2 = ", r(test1[[1]][[1]]), 
                          ", df = ", test1[[2]][[1]], ", p-value = ", r(test1[[3]][[1]]), s(test1[[3]][[1]]), sep = "")
             
-            test_apa = paste("CMH Test: M^2^(", test1[[2]][[1]], ") = ", x_apa(test1[[1]][[1]]),
+            test_apa = paste("CMH Test: M^2^(", test1[[2]][[1]], n_apa, x_apa(test1[[1]][[1]]),
                              ", *p* = ", p_apa(test1[[3]][[1]]), sep = "")
-            
-          }
-          
-          # General Odds ratio
-          
-          if(dim(tab_n)[2] == 2) {
-            
-            assign("o_g", paste("Odds ratio (conditional Maximum Likelihood Estimate) = " , r(exp(test1[[4]][[1]])), " 95% CI [", 
-                                r(exp(test1[[3]][1])), ", ", r(exp(test1[[3]][2])), "]", 
-                                m(exp(test1[[4]][[1]]), lim1 = 1.55, lim2 = 2.8, lim3 = 5, OR = T), sep = ""), envir = fct.env)
-            
-            assign("o_g_apa", paste("OR = ", x_apa(exp(test1[[4]][[1]])), " 95% CI [", x_apa(exp(test1[[4]][[1]])), ", ", 
-                                    x_apa(exp(test1[[4]][[1]])), "]", sep = ""), fct.env)
             
           }
           
           ### Displaying results
           
-          val = paste("Woolf's Test: X-squared = ", r(vali[[1]][[1]]), ", df = ", vali[[2]][[1]],
+          val = paste("Woolf's Test", n, "X-squared = ", r(vali[[1]][[1]]), ", df = ", vali[[2]][[1]],
                       ", p-value = ", r(vali[[3]][[1]]), " -> Satisfied (p-value > 0.05)\nNote: Homogeneity of odds ratios across levels of X2 (strata).", sep = "")
           
           mess1 = "This test has been designed to know if there is an association between the 1st factor (X1)\nand the dependant variable (Y). As the 2nd factor (X2) is used for adjustment, you should\nchange the position in the formula if this is the variable of main interest."
@@ -897,7 +915,7 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
             
             var_type = var_type = "Variable type: Qualitative dependent variable (Y) with two levels\nTwo independent factors (X)."
             
-            assign("vali2", paste("Woolf's Test: X-squared = ", r(vali[[1]][[1]]), ", df = ", vali[[2]][[1]],
+            assign("vali2", paste("Woolf's Test", n, "X-squared = ", r(vali[[1]][[1]]), ", df = ", vali[[2]][[1]],
                                   ", p-value = ", r(vali[[3]][[1]]), " -> Not satisfied (p-value <= 0.05)\nNote: Heterogeneity of odds ratios across levels of X2 (strata).", sep = ""))
           }
           
@@ -919,12 +937,12 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
             
             lrt = Anova(mod_simple, type = 2)
             
-            test = paste("Likelihood Ratio Test on Logistic Regression model (Type II tests):\nX1 -> X-squared = ", r(lrt[[1]][1]), ", df = ", lrt[[2]][1], 
+            test = paste("Type II Likelihood Ratio Test on Logistic Regression model", n, "\nX1 -> X-squared = ", r(lrt[[1]][1]), ", df = ", lrt[[2]][1], 
                          ", p-value = ", r(lrt[[3]][1]), s(lrt[[3]][1]), "\nX2 -> X-squared = ", r(lrt[[1]][2]), 
                          ", df = ", lrt[[2]][2], ", p-value = ", r(lrt[[3]][2]), s(lrt[[3]][2]), sep = "")
             
-            test_apa = paste("LRT Test:\nX1 -> &chi;^2^(", lrt[[2]][1], ") = ", x_apa(lrt[[1]][1]), ", *p* = ", 
-                             p_apa(lrt[[3]][1]), "\nX2 -> &chi;^2^(", lrt[[2]][2], ") = ", x_apa(lrt[[1]][2]), ", *p* = ", 
+            test_apa = paste("LRT Test:\nX1 -> &chi;^2^(", lrt[[2]][1], n_apa, x_apa(lrt[[1]][1]), ", *p* = ", 
+                             p_apa(lrt[[3]][1]), "\nX2 -> &chi;^2^(", lrt[[2]][2], n_apa, x_apa(lrt[[1]][2]), ", *p* = ", 
                              p_apa(lrt[[3]][2]), sep = "")
             
           }
@@ -937,7 +955,7 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
             
             if(Anova(mod_interaction, type = 3)[[3]][3] > 0.05) {
               
-              type = " (Type II tests)"
+              type = "Type II "
               
               lrt = Anova(mod_interaction, type = 2)
               
@@ -951,22 +969,22 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
               
             }
             
-            test = paste("Likelihood Ratio Test on Logistic Regression model", type, ":\nX1 -> X-squared = ", r(lrt[[1]][1]), ", df = ", lrt[[2]][1], 
+            test = paste(type, "Likelihood Ratio Test on Logistic Regression model", n, "\nX1 -> X-squared = ", r(lrt[[1]][1]), ", df = ", lrt[[2]][1], 
                          ", p-value = ", r(lrt[[3]][1]), s(lrt[[3]][1]), "\nX2 -> X-squared = ", r(lrt[[1]][2]), 
                          ", df = ", lrt[[2]][2], ", p-value = ", r(lrt[[3]][2]), s(lrt[[3]][2]), 
                          "\nX1:X2 -> X-squared = ", r(lrt[[1]][3]), ", df = ", lrt[[2]][3], ", p-value = ", 
                          r(lrt[[3]][3]), s(lrt[[3]][3]), sep = "")
             
-            test_apa = paste("LRT Test:\nX1 -> &chi;^2^(", lrt[[2]][1], ") = ", x_apa(lrt[[1]][1]), ", *p* = ", 
-                             p_apa(lrt[[3]][1]), "\nX2 -> &chi;^2^(", lrt[[2]][2], ") = ", x_apa(lrt[[1]][2]), ", *p* = ", 
-                             p_apa(lrt[[3]][2]), "\nX1:X2 -> &chi;^2^(", lrt[[2]][3], ") = ", x_apa(lrt[[1]][3]), ", *p* = ", 
+            test_apa = paste("LRT Test:\nX1 -> &chi;^2^(", lrt[[2]][1], n_apa, x_apa(lrt[[1]][1]), ", *p* = ", 
+                             p_apa(lrt[[3]][1]), "\nX2 -> &chi;^2^(", lrt[[2]][2], n_apa, x_apa(lrt[[1]][2]), ", *p* = ", 
+                             p_apa(lrt[[3]][2]), "\nX1:X2 -> &chi;^2^(", lrt[[2]][3], n_apa, x_apa(lrt[[1]][3]), ", *p* = ", 
                              p_apa(lrt[[3]][3]), sep = "")
             
           }
           
           ### Displaying results
           
-          vali3 = paste("Likelihood Ratio Test on Logistic Regression model:\nDeviance = ", 
+          vali3 = paste("Likelihood Ratio Test on Logistic Regression model", n, "\nDeviance = ", 
                         r(dev[[4]][2]), ", p-value = ", ifelse(is.na(dev[[5]][2]), 1, r(dev[[5]][2])), 
                         vali3_type, "\nNote: Deviance between additive (Y ~ X1 + X2) & multiplicative model (Y ~ X1 * X2)", sep = "")
           
