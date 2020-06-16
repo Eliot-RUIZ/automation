@@ -44,8 +44,7 @@ ci_nlm = function(formula, fct, data, method = "delta", level = 0.05, nb_boot = 
     # Pour informer que calculer l'IC avec predict n'est possible qu'avec les S-S du package drc.
     {if(is.null(ncol(New_CI_tab)) || ncol(New_CI_tab) == 1 || ncol(New_CI_tab) == 2) stop('        
       Please consider using the equivalent bootstrap method (method = "boot").
-      Delta method is only available for Self-Starters in the DRC package.
-      To get the list, add the option package = TRUE in compare_nlm().
+      Delta method is not available for this Self-Starters (list on the Github page).
       ') 
       else if(ncol(New_CI_tab) == 3) names(New_CI_tab) = c("Predictions","Lower_CI","Upper_CI") ## Renommage des colonnes.
       else names(New_CI_tab) = c("New_X","Predictions","Lower_CI","Upper_CI")  }  }
