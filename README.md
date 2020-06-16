@@ -216,7 +216,7 @@ Note: Deviance between additive (Y ~ X1 + X2) & multiplicative model (Y ~ X1 * X
  
 -------------------------- MAIN TEST(S) --------------------------
  
- (Type III tests)Likelihood Ratio Test on Logistic Regression model (N = 4526): 
+Type III Likelihood Ratio Test on Logistic Regression model (N = 4526): 
 X1 -> X-squared = 19.054, df = 1, p-value = 0 (***)
 X2 -> X-squared = 268.851, df = 5, p-value = 0 (***)
 X1:X2 -> X-squared = 20.204, df = 5, p-value = 0.001 (**)
