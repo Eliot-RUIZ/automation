@@ -118,8 +118,8 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
         cat(paste("APA code ->", apa_asso2), fill = T)}
       if(!is.null(other_asso)) {
         if(!is.null(asso1) || !is.null(asso2)) {cat(" ", fill = T)
-        print(other_asso)}
-        else print(other_asso) }
+        print(other_asso, row.names = F)}
+        else print(other_asso, row.names = F) }
       cat(" ", fill = T)
     }
     
@@ -128,15 +128,15 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
       cat(" ", fill = T)
       cat(name_ph1,fill = T)
       cat(" ", fill = T)
-      print(ph1, digits = dig)
+      print(ph1, digits = dig, row.names = F)
       if(!is.null(ph2)) {cat(" ", fill = T) 
         cat(name_ph2,fill = T)
         cat(" ", fill = T)
-        print(ph2, digits = dig)}
+        print(ph2, digits = dig, row.names = F)}
       if(!is.null(ph3)) {cat(" ", fill = T) 
         cat(name_ph3,fill = T)
         cat(" ", fill = T)
-        print(ph3, digits = dig)}
+        print(ph3, digits = dig, row.names = F)}
       cat(" ", fill = T)
     }
     if(!is.null(mes1) || !is.null(mes2) || !is.null(mes3) || !is.null(mes4)) {
@@ -699,7 +699,7 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
               
               if(apa) display(tab = tab_n, vali1 = var_type, test1 = test1_n, apa_test1 = test1_apa, test2 = test2_n,
                               apa_test2 = test2_apa, asso1 = g, apa_asso1 = g_apa, asso2 = o, apa_asso2 = o_apa,
-                              other_asso = eff_pairwise, ph1 = ph)
+                              other_asso = eff_pairwise, name_ph1 = name_ph, ph1 = ph)
               
               else display(tab = tab_n, vali1 = var_type, test1 = test1_n, test2 = test2_n, asso1 = g, asso2 = o,
                            other_asso = eff_pairwise, name_ph1 = name_ph, ph1 = ph)
@@ -853,8 +853,6 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
               test = paste("Mantel-Haenszel Chi-squared Test with continuity correction", n, "X-squared = ", r(test1[[1]][[1]]), 
                            ", df = ", test1[[2]][[1]], ", p-value = ", r(test1[[3]][[1]]), s(test1[[3]][[1]]), sep = "")
               
-              print(test1)
-              
               test_apa = paste("M-H c.c. Test: &chi;^2^(", test1[[2]][[1]], n_apa, x_apa(test1[[1]][[1]]),
                                ", *p* = ", p_apa(test1[[3]][[1]]), sep = "")
               
@@ -963,7 +961,7 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
             
             else {
               
-              type = " (Type III tests)"
+              type = "Type III "
               
               lrt = Anova(mod_interaction, type = 3)
               
