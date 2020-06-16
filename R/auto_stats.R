@@ -56,22 +56,22 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
   
   ## Functions
   
-  display = function(tab = NULL, prob1 = NULL, prob2 = NULL, vali1 = NULL, vali2 = NULL, vali3 = NULL, vali4 = NULL, 
-                     test1 = NULL, test2 = NULL, apa_test1 = NULL, apa_test2 = NULL, asso1 = NULL, asso2 = NULL, apa_asso1 = NULL,
-                     apa_asso2 = NULL, other_asso = NULL, name_ph1 = NULL, name_ph2 = NULL, name_ph3 = NULL, ph1 = NULL, 
-                     ph2 = NULL, ph3 = NULL, mes1 = NULL, mes2 = NULL, mes3 = NULL, mes4 = NULL, dig = digits) {
+  display = function(tab = NULL, gs1 = NULL, gs2 = NULL, vali1 = NULL, vali2 = NULL, vali3 = NULL, vali4 = NULL, 
+                     test1 = NULL, test2 = NULL, apa_test1 = NULL, apa_test2 = NULL, asso1 = NULL, asso2 = NULL, 
+                     apa_asso1 = NULL, apa_asso2 = NULL, other_asso = NULL, name_ph1 = NULL, name_ph2 = NULL, name_ph3 = NULL,
+                     ph1 = NULL, ph2 = NULL, ph3 = NULL, mes1 = NULL, mes2 = NULL, mes3 = NULL, mes4 = NULL, dig = digits) {
     if(!is.null(tab)) {
       cat("------------------------------", "TABLE", "-----------------------------", fill = T)
       cat(" ", fill = T)
       print(tab, digits = dig)
       cat(" ", fill = T)
     }
-    if(!is.null(prob1)) {
-      cat("--------------------------", "PROBABILITIES", "-------------------------", fill = T)
+    if(!is.null(gs1)) {
+      cat("---------------------------", "GLOBAL STATS", "-------------------------", fill = T)
       cat(" ", fill = T)
-      cat(prob1, fill = T)
-      cat(" ", fill = T)
-      cat(prob2, fill = T)
+      cat(gs1, fill = T)
+      if(!is.null(gs2)) {cat(" ", fill = T) 
+        cat(gs2, fill = T)} 
       cat(" ", fill = T)
     }
     if(!is.null(vali1)) {
@@ -118,7 +118,7 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
         cat(paste("APA code ->", apa_asso2), fill = T)}
       if(!is.null(other_asso)) {
         if(!is.null(asso1) || !is.null(asso2)) {cat(" ", fill = T)
-        print(other_asso, row.names = F)}
+          print(other_asso, row.names = F)}
         else print(other_asso, row.names = F) }
       cat(" ", fill = T)
     }
@@ -327,23 +327,28 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
           prob_ci1 = paste("Probality of ", names(tab_n1)[1], " = ", r(prob1), " 95% CI [", r(ci1[1]), ", ", r(ci1[2]), "]", sep = "")
           prob_ci2 = paste("Probality of ", names(tab_n2)[1], " = ", r(prob2), " 95% CI [", r(ci2[1]), ", ", r(ci2[2]), "]", sep = "")
           
+          prob_ci1 = paste("Probality of ", names(tab_n1)[1], " = ", r(prob1), ", 95% CI [", r(ci1[1]), ", ", r(ci1[2]), "]", sep = "")
+          
+          prob_ci2 = paste("Probality of ", names(tab_n2)[1], " = ", r(prob2), " 95% CI [", r(ci2[1]), ", ", r(ci2[2]), "]", sep = "")
+          
           prob_ci1_apa = paste("Probality of ", names(tab_n1)[1], " = ", x1_apa(prob1), 
                                ", 95% CI [", x1_apa(ci1[1]), ", ", x1_apa(ci1[2]), "]", sep = "")
+          
           prob_ci2_apa = paste("Probality of ", names(tab_n2)[1], " = ", x1_apa(prob2), 
                                " 95% CI [", x1_apa(ci2[1]), ", ", x1_apa(ci2[2]), "]", sep = "")
           
           test = paste(name, "X-squared = ", r(test1[[1]][[1]]), ", df = ", test1[[2]][[1]], ", p-value = ", r(test1[[3]]), s(test1[[3]]), sep = "")
           
-          test_apa = paste("&chi;^2^(", test1[[2]][[1]], n_apa, x_apa(test1[[1]][[1]]), ", *p* = ", p_apa(test1[[3]]), sep = "")
+          test_apa = paste("&chi;^2^(", test1[[2]][[1]], n_apa, x_apa(test1[[1]][[1]]), ", *p* ", p_apa(test1[[3]]), sep = "")
           
           eff = paste("Cohen's h = ", r(effect_size), m(effect_size, lim1 = 0.2, lim2 = 0.5, lim3 = 0.8), sep = "")
           
           eff_apa = paste("Cohen's *h* = ", x_apa(effect_size), sep = "")
           
-          if(apa) display(tab = tab_n1, prob1 = prob_ci1_apa, prob2 = prob_ci2_apa, vali1 = var_type, vali2 = vali, 
+          if(apa) display(tab = tab_n1, apa_gs1 = prob_ci1_apa, apa_gs2 = prob_ci2_apa, vali1 = var_type, vali2 = vali, 
                           test1 = test, apa_test1 = test_apa, asso1 = eff_apa)
           
-          else display(tab = tab_n1, prob = prob_ci1, prob2 = prob_ci2, vali1 = var_type, vali2 = vali, test1 = test, asso1 = eff)
+          else display(tab = tab_n1, gs1 = prob_ci1, gs2 = prob_ci2, vali1 = var_type, vali2 = vali, test1 = test, asso1 = eff)
           
         } 
         
@@ -435,7 +440,7 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
           
           test = paste("Fisher's Exact Test", n, "p-value = ", r(test1[[1]]), s(test1[[1]]), sep = "")
           
-          test_apa = paste("Fisher's Exact Test", n, "*p* = ", p_apa(test1[[1]]), sep = "")
+          test_apa = paste("Fisher's Exact Test", n, "*p* ", p_apa(test1[[1]]), sep = "")
           
           eff = paste("Phi coefficient = ", r(phi), m(phi, lim1 = 0.1, lim2 = 0.3, lim3 = 0.5), sep = "")
           
@@ -541,7 +546,7 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
           
           test = paste("Fisher's Exact Test", n, "p-value = ", r(test1[[1]]), s(test1[[1]]), sep = "")
           
-          test_apa = paste("Fisher's Exact Test", n, "*p* = ", p_apa(test1[[1]]), sep = "")
+          test_apa = paste("Fisher's Exact Test", n, "*p* ", p_apa(test1[[1]]), sep = "")
           
           eff = paste("Cramer's V = ", r(v), magnitude, sep = "")
           
@@ -621,7 +626,7 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
                            r(test1[[2]][[1]]), ", p-value = ", r(test1[[3]][[1]]), s(test1[[3]][[1]]), sep = "")
               
               test_apa = paste("Exact McNemar's Test", n, "b = ", x_apa(test1[[1]][[1]]), ", c = ", 
-                               x_apa(test1[[2]][[1]]), ", *p* = ", p_apa(test1[[3]][[1]]), sep = "")
+                               x_apa(test1[[2]][[1]]), ", *p* ", p_apa(test1[[3]][[1]]), sep = "")
               
               eff = paste("Cohen's g = ", r(g), m(g, lim1 = 0.05, lim2 = 0.15, lim3 = 0.25), sep = "")
               
@@ -679,13 +684,13 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
               
               test1_n = paste("Asymptotic General Symmetry Test", n, "Z = ", r(Z), ", p-value = ", r(p_value1), s(p_value1), sep = "")
               
-              test1_apa = paste("Asymptotic General Symmetry Test", n, "Z = ", x_apa(Z), ", *p* = ", p_apa(p_value1), sep = "")
+              test1_apa = paste("Asymptotic General Symmetry Test", n, "Z = ", x_apa(Z), ", *p* ", p_apa(p_value1), sep = "")
               
               test2_n = paste("Stuart-Maxwell Marginal Homogeneity Test", n, "X-squared = ", r(x_squared), ", df = ", df,
                               ", p-value = ", r(p_value2), s(p_value2), sep = "")
               
               test2_apa = paste("Stuart-Maxwell Marginal Homogeneity Test: &chi;^2^(", df, n_apa, x_apa(x_squared), 
-                                ", *p* = ", p_apa(p_value2), sep = "")
+                                ", *p* ", p_apa(p_value2), sep = "")
               
               g = paste("Cohen's g = ", r(g_global), m(g_global, lim1 = 0.05, lim2 = 0.15, lim3 = 0.25), sep = "")
               
@@ -735,7 +740,7 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
             
             test1_n = paste("Asymptotic General Symmetry Test", n, "Z = ", r(Z), ", p-value = ", r(p_value1), s(p_value1), sep = "")
             
-            test1_apa = paste("Asymptotic General Symmetry Test", n, "Z = ", x_apa(Z), ", *p* = ", p_apa(p_value1), sep = "")
+            test1_apa = paste("Asymptotic General Symmetry Test", n, "Z = ", x_apa(Z), ", *p* ", p_apa(p_value1), sep = "")
             
             if(exists("test2", envir = fct.env)) 
               assign("test2_n", paste("Cochran's Q test", n, "Q = ", r(get("test2", envir = fct.env)[[3]][[1]]), ", df = ", 
@@ -745,7 +750,7 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
             
             if(exists("test2", envir = fct.env)) 
               assign("test2_apa", paste("Cochran's Q test: Q(", get("test2", envir = fct.env)[[4]][[1]], n_apa, 
-                                        x_apa(get("test2", envir = fct.env)[[3]][[1]]), ", *p* = ", 
+                                        x_apa(get("test2", envir = fct.env)[[3]][[1]]), ", *p* ", 
                                         p_apa(get("test2", envir = fct.env)[[7]][[1]]), sep = ""), envir = fct.env)
             
             if(apa) display(tab = tab_f, vali1 = var_type, test1 = test1_n, apa_test1 = test1_apa, 
@@ -827,7 +832,7 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
               test = paste("Exact conditional test of independence", n, "S = ", r(test1[[1]][[1]]), ", p-value = ", r(test1[[2]][[1]]),
                            s(test1[[2]][[1]]), sep = "")
               
-              test_apa = paste("Exact conditional test of independence", n, "S = ", test1[[2]][[1]], ", *p* = ", p_apa(test1[[2]][[1]]), sep = "")
+              test_apa = paste("Exact conditional test of independence", n, "S = ", test1[[2]][[1]], ", *p* ", p_apa(test1[[2]][[1]]), sep = "")
               
               # General Odds ratio
               
@@ -854,7 +859,7 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
                            ", df = ", test1[[2]][[1]], ", p-value = ", r(test1[[3]][[1]]), s(test1[[3]][[1]]), sep = "")
               
               test_apa = paste("M-H c.c. Test: &chi;^2^(", test1[[2]][[1]], n_apa, x_apa(test1[[1]][[1]]),
-                               ", *p* = ", p_apa(test1[[3]][[1]]), sep = "")
+                               ", *p* ", p_apa(test1[[3]][[1]]), sep = "")
               
               # General Odds ratio
               
@@ -885,7 +890,7 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
                          ", df = ", test1[[2]][[1]], ", p-value = ", r(test1[[3]][[1]]), s(test1[[3]][[1]]), sep = "")
             
             test_apa = paste("CMH Test: M^2^(", test1[[2]][[1]], n_apa, x_apa(test1[[1]][[1]]),
-                             ", *p* = ", p_apa(test1[[3]][[1]]), sep = "")
+                             ", *p* ", p_apa(test1[[3]][[1]]), sep = "")
             
           }
           
@@ -939,8 +944,8 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
                          ", p-value = ", r(lrt[[3]][1]), s(lrt[[3]][1]), "\nX2 -> X-squared = ", r(lrt[[1]][2]), 
                          ", df = ", lrt[[2]][2], ", p-value = ", r(lrt[[3]][2]), s(lrt[[3]][2]), sep = "")
             
-            test_apa = paste("LRT Test:\nX1 -> &chi;^2^(", lrt[[2]][1], n_apa, x_apa(lrt[[1]][1]), ", *p* = ", 
-                             p_apa(lrt[[3]][1]), "\nX2 -> &chi;^2^(", lrt[[2]][2], n_apa, x_apa(lrt[[1]][2]), ", *p* = ", 
+            test_apa = paste("LRT Test:\nX1 -> &chi;^2^(", lrt[[2]][1], n_apa, x_apa(lrt[[1]][1]), ", *p* ", 
+                             p_apa(lrt[[3]][1]), "\nX2 -> &chi;^2^(", lrt[[2]][2], n_apa, x_apa(lrt[[1]][2]), ", *p* ", 
                              p_apa(lrt[[3]][2]), sep = "")
             
           }
@@ -973,9 +978,9 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
                          "\nX1:X2 -> X-squared = ", r(lrt[[1]][3]), ", df = ", lrt[[2]][3], ", p-value = ", 
                          r(lrt[[3]][3]), s(lrt[[3]][3]), sep = "")
             
-            test_apa = paste("LRT Test:\nX1 -> &chi;^2^(", lrt[[2]][1], n_apa, x_apa(lrt[[1]][1]), ", *p* = ", 
-                             p_apa(lrt[[3]][1]), "\nX2 -> &chi;^2^(", lrt[[2]][2], n_apa, x_apa(lrt[[1]][2]), ", *p* = ", 
-                             p_apa(lrt[[3]][2]), "\nX1:X2 -> &chi;^2^(", lrt[[2]][3], n_apa, x_apa(lrt[[1]][3]), ", *p* = ", 
+            test_apa = paste("LRT Test:\nX1 -> &chi;^2^(", lrt[[2]][1], n_apa, x_apa(lrt[[1]][1]), ", *p* ", 
+                             p_apa(lrt[[3]][1]), "\nX2 -> &chi;^2^(", lrt[[2]][2], n_apa, x_apa(lrt[[1]][2]), ", *p* ", 
+                             p_apa(lrt[[3]][2]), "\nX1:X2 -> &chi;^2^(", lrt[[2]][3], n_apa, x_apa(lrt[[1]][3]), ", *p* ", 
                              p_apa(lrt[[3]][3]), sep = "")
             
           }
