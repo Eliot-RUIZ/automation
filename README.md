@@ -61,7 +61,7 @@ After a few micro-seconds/seconds (depending on the analysis and the size of the
 
 Finally, the *digits* (number of decimals) and *apa* arguments, as their names indicate, serve to control the output. The latter only controls the **MAIN TEST(S)** and **MEASURE(S) OF ASSOCIATION** sections, since they are usually the only ones reported. For the main tests, the function will generate an "APA code" below, which just have to be pasted in an R Notebook (instructions below) to generate an appropriate result. Since the greek letters and mathematical symbols are characters, they can be copied/pasted in any kind of word processor. It will also round the measures of association results to 3 decimals, and remove the zero in front of numbers between -1 & 1. 
 
-**Example: χ²(1, N = 5) = 0.8, *p* = .371, *φ* = 0.577**
+**Example: χ²(1, N = 5) = 0.8, *p* = .371, *φ* = .577**
 <br>
 <br>
 <br>
