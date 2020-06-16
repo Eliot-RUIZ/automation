@@ -111,9 +111,9 @@ One factor (X1) with more than two levels of repeated measures.
  
 -------------------------- MAIN TEST(S) --------------------------
  
-Asymptotic General Symmetry Test: Z = 1, p-value = 0.577 (ns)
+Asymptotic General Symmetry Test (N = 9): Z = 1, p-value = 0.577 (ns)
  
-Cochran's Q test: Q = 1, df = 2, p-value = 0.607 (ns)
+Cochran's Q test (N = 9): Q = 1, df = 2, p-value = 0.607 (ns)
  
 ------------------------ POST-HOC ANALYSIS -----------------------
  
@@ -148,13 +148,13 @@ One factor (X1) with two levels of repeated measures.
  
 -------------------------- MAIN TEST(S) --------------------------
  
-Asymptotic General Symmetry Test: Z = 1.414, p-value = 0.334 (ns)
+Asymptotic General Symmetry Test (N = 8): Z = 1.414, p-value = 0.333 (ns)
  
-APA code -> Asymptotic General Symmetry Test: Z = 1.414, *p* = .334
+APA code -> Asymptotic General Symmetry Test (N = 8): Z = 1.414, *p* = .333
  
-Stuart-Maxwell Marginal Homogeneity Test: X-squared = 2.667, df = 2, p-value = 0.264 (ns)
+Stuart-Maxwell Marginal Homogeneity Test (N = 8): X-squared = 2.667, df = 2, p-value = 0.264 (ns)
  
-APA code -> Stuart-Maxwell Marginal Homogeneity Test: &chi;^2^(2) = 2.667, *p* = .264
+APA code -> Stuart-Maxwell Marginal Homogeneity Test: &chi;^2^(2, N = 8) = 2.667, *p* = .264
  
 (Copy it + Paste it in an R Notebook + Click on Preview and save it + Click on Knit + Copy it anywhere else)
  
@@ -175,7 +175,7 @@ APA code -> OR = 1
  
 ------------------------ POST-HOC ANALYSIS -----------------------
  
-
+Pairwise Symmetry Tests (fdr adjustment method):
  
              Comparison p-value
 1   Maybe/Maybe : No/No       1
@@ -207,16 +207,16 @@ Male   No         313     207     205     279     138     351
 Variable type: Qualitative dependent variable (Y) with two levels
 Two independent factors (X).
  
-Woolf's Test: X-squared = 17.902, df = 5, p-value = 0.003 -> Not satisfied (p-value <= 0.05)
+Woolf's Test (N = 4526): X-squared = 17.902, df = 5, p-value = 0.003 -> Not satisfied (p-value <= 0.05)
 Note: Heterogeneity of odds ratios across levels of X2 (strata).
  
-Likelihood Ratio Test on Logistic Regression model:
+Likelihood Ratio Test on Logistic Regression model (N = 4526): 
 Deviance = 20.204, p-value = 0.001 -> Multiplicative model (significant difference)
 Note: Deviance between additive (Y ~ X1 + X2) & multiplicative model (Y ~ X1 * X2)
  
 -------------------------- MAIN TEST(S) --------------------------
  
-Likelihood Ratio Test on Logistic Regression model (Type III tests):
+ (Type III tests)Likelihood Ratio Test on Logistic Regression model (N = 4526): 
 X1 -> X-squared = 19.054, df = 1, p-value = 0 (***)
 X2 -> X-squared = 268.851, df = 5, p-value = 0 (***)
 X1:X2 -> X-squared = 20.204, df = 5, p-value = 0.001 (**)
@@ -266,16 +266,16 @@ Group 2 No                1          0           0            1
 Variable type: Qualitative dependent variable (Y) with two levels
 Two independent factors (X) and X1 has two levels.
  
-Woolf's Test: X-squared = 0.90521, df = 3, p-value = 0.82417 -> Satisfied (p-value > 0.05)
+Woolf's Test (N = 8): X-squared = 0.90521, df = 3, p-value = 0.82417 -> Satisfied (p-value > 0.05)
 Note: Homogeneity of odds ratios across levels of X2 (strata).
  
 -------------------------- MAIN TEST(S) --------------------------
  
-Exact conditional test of independence: S = 4, p-value = 0.5 (ns)
+Exact conditional test of independence (N = 8): S = 4, p-value = 0.5 (ns)
  
 -------------------- MEASURE(S) OF ASSOCIATION -------------------
  
-Odds ratio (conditional Maximum Likelihood Estimate) = Inf 95% CI [1.2066, Inf]
+Odds ratio (Mantel-Haenszel estimate) = Inf 95% CI [0.18781, Inf]
  
              Odds ratio            Magnitude
 Adult female          1  (Negligible effect)
