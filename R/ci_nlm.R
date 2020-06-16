@@ -1,10 +1,10 @@
-ci_nlm = function(formula, fct, data, method = "delta", level = 0.05, nb_boot = 200, expand_x = NA, keep_cols = NULL, ...) {
+ci_nlm = function(formula, fct, data, method = "delta", level = 0.05, nb_boot = 200, expand_x = NA, keep_cols = NULL) {
   
   mf = match.call(expand.dots = FALSE)                                                     
   m = match(c("formula", "data"), names(mf), 0L)                                     
   mf = mf[c(1L, m)]                                   
   mf$drop.unused.levels = TRUE            
-  mf[[1L]] = quote(stats::model.frame)                                                          ## Même chose que ci-dessus pour toute cette partie.  
+  mf[[1L]] = quote(stats::model.frame)                                                          ## Même chose que compare_nlm pour toute cette partie.  
   mf = eval(mf, parent.frame())        
   mt = attr(mf, "terms")                                                       
   x = model.matrix(mt, mf)[,2]                                        
