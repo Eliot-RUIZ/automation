@@ -119,10 +119,10 @@ Cochran's Q test (N = 9): Q = 1, df = 2, p-value = 0.607 (ns)
  
 Pairwise two-sample permutation symmetry tests (fdr adjustment method)
  
-           Comparison p-value
-1  After - Before = 0   1.000
-2  After - During = 0   0.476
-3 Before - During = 0   0.476
+          Comparison p-value
+  After - Before = 0   1.000
+  After - During = 0   0.476
+ Before - During = 0   0.476
  
 ------------------------------------------------------------------
 ```
@@ -148,9 +148,9 @@ One factor (X1) with two levels of repeated measures.
  
 -------------------------- MAIN TEST(S) --------------------------
  
-Asymptotic General Symmetry Test (N = 8): Z = 1.414, p-value = 0.333 (ns)
+Asymptotic General Symmetry Test (N = 8): Z = 1.414, p-value = 0.334 (ns)
  
-APA code -> Asymptotic General Symmetry Test (N = 8): Z = 1.414, *p* = .333
+APA code -> Asymptotic General Symmetry Test (N = 8): Z = 1.414, *p* = .334
  
 Stuart-Maxwell Marginal Homogeneity Test (N = 8): X-squared = 2.667, df = 2, p-value = 0.264 (ns)
  
@@ -168,19 +168,19 @@ Odds ratio = 1 (Negligible effect)
  
 APA code -> OR = 1
  
-             Comparison Odds-ratio Cohen's G
-1   Maybe/Maybe : No/No        Inf       0.5
-2 Maybe/Maybe : Yes/Yes        Inf       0.5
-3       No/No : Yes/Yes        Inf       0.5
+            Comparison Odds-ratio Cohen's G
+   Maybe/Maybe : No/No        Inf       0.5
+ Maybe/Maybe : Yes/Yes        Inf       0.5
+       No/No : Yes/Yes        Inf       0.5
  
 ------------------------ POST-HOC ANALYSIS -----------------------
  
 Pairwise Symmetry Tests (fdr adjustment method):
  
-             Comparison p-value
-1   Maybe/Maybe : No/No       1
-2 Maybe/Maybe : Yes/Yes       1
-3       No/No : Yes/Yes       1
+            Comparison p-value
+   Maybe/Maybe : No/No       1
+ Maybe/Maybe : Yes/Yes       1
+       No/No : Yes/Yes       1
  
 ------------------------------------------------------------------
 ```
@@ -223,25 +223,25 @@ X1:X2 -> X-squared = 20.204, df = 5, p-value = 0.001 (**)
  
 -------------------- MEASURE(S) OF ASSOCIATION -------------------
  
-        Odds ratio            Magnitude
-Group 1      0.349          (Less odds)
-Group 2      0.803          (Less odds)
-Group 3      1.133  (Negligible effect)
-Group 4      0.921          (Less odds)
-Group 5      1.222  (Negligible effect)
-Group 6      0.828          (Less odds)
+ Odds ratio            Magnitude
+      0.349          (Less odds)
+      0.803          (Less odds)
+      1.133  (Negligible effect)
+      0.921          (Less odds)
+      1.222  (Negligible effect)
+      0.828          (Less odds)
  
 ------------------------ POST-HOC ANALYSIS -----------------------
  
 Groupewise Exact Fisher's Tests (fdr adjustment method):
  
-    Group p-value
-1 Group 1  0.0001
-2 Group 2  0.6770
-3 Group 3  0.6770
-4 Group 4  0.6770
-5 Group 5  0.6770
-6 Group 6  0.6770
+   Group p-value
+ Group 1  0.0001
+ Group 2  0.6770
+ Group 3  0.6770
+ Group 4  0.6770
+ Group 5  0.6770
+ Group 6  0.6770
  
 ------------------------------------------------------------------
 ```
@@ -277,21 +277,21 @@ Exact conditional test of independence (N = 8): S = 4, p-value = 0.5 (ns)
  
 Odds ratio (Mantel-Haenszel estimate) = Inf 95% CI [0.18781, Inf]
  
-             Odds ratio            Magnitude
-Adult female          1  (Negligible effect)
-Adult male            9       (Large effect)
-Teenage boy           9       (Large effect)
-Teenage girl          1  (Negligible effect)
+ Odds ratio            Magnitude
+          1  (Negligible effect)
+          9       (Large effect)
+          9       (Large effect)
+          1  (Negligible effect)
  
 ------------------------ POST-HOC ANALYSIS -----------------------
  
 Groupewise Exact Fisher's Tests (fdr adjustment method):
  
-         Group p-value
-1 Adult female       1
-2   Adult male       1
-3  Teenage boy       1
-4 Teenage girl       1
+        Group p-value
+ Adult female       1
+   Adult male       1
+  Teenage boy       1
+ Teenage girl       1
  
 -------------------------- MESSAGE(S) ---------------------------
  
