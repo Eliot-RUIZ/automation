@@ -1,5 +1,5 @@
-compare_nlm = function(formula, data, digits = 2, arrange = c("AIC", "RMSE", "BIC"), increase = T, plot_model = NA, package = F, ...) {
-  ## Ci-dessus : Nommage de la fonction et définition de ses arguments et des valeurs par défaut + acceptation d'éventuels arguments extérieurs (...).
+compare_nlm = function(formula, data, digits = 2, arrange = c("AIC", "RMSE", "BIC"), increase = T, plot_model = NA, package = F) {
+  ## Ci-dessus : Nommage de la fonction et définition de ses arguments et des valeurs par défaut.
   
   mf = match.call(expand.dots = FALSE)                                     ## Pour ne pas stopper la fonction si l'un des arguments n'est pas spécifié.
   m = match(c("formula", "data"), names(mf), 0L)                        ## Création d'un vecteur rescensant si formula et data sont présents (0 sinon).  
