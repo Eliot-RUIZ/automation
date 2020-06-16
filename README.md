@@ -635,7 +635,7 @@ I believe the Delta method is more accurate in this case since it seems logic th
 
 ## Appendix
 
-Name of the 21Self-Starters in the drc package not working with the *predict.drc*, and therefore requiring a calculation of their CI with the Bootstrap method: 
+Names of the 21 Self-Starters in the drc package not working with the *predict.drc*, and therefore requiring a calculation of their CI with the Bootstrap method: 
 
 baro5, CRS.6, NEC.2, NEC.3, NEC.4, twophase, UCRS.4a, UCRS.4b, UCRS.4c, UCRS.5a, UCRS.5b, UCRS.5c, uml3a, uml3b, uml3c, uml4a, uml4b, uml4c, W2x.3, W2x.4 & weibull2x.
 
