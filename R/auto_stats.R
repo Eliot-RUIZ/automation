@@ -183,7 +183,7 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
       p = "< .001"
     
     else 
-      p = substr(round(p, digits = 3), 2, 5)
+      p = paste("=", substr(round(p, digits = 3), 2, 5))
     p
     
   }
@@ -339,11 +339,11 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
           
           test = paste(name, "X-squared = ", r(test1[[1]][[1]]), ", df = ", test1[[2]][[1]], ", p-value = ", r(test1[[3]]), s(test1[[3]]), sep = "")
           
-          test_apa = paste("&chi;^2^(", test1[[2]][[1]], n_apa, x_apa(test1[[1]][[1]]), ", *p* ", p_apa(test1[[3]]), sep = "")
+          test_apa = paste("*&chi;*^2^(", test1[[2]][[1]], n_apa, x_apa(test1[[1]][[1]]), ", *p* ", p_apa(test1[[3]]), sep = "")
           
           eff = paste("Cohen's h = ", r(effect_size), m(effect_size, lim1 = 0.2, lim2 = 0.5, lim3 = 0.8), sep = "")
           
-          eff_apa = paste("Cohen's *h* = ", x_apa(effect_size), sep = "")
+          eff_apa = paste("*h* = ", x_apa(effect_size), sep = "")
           
           if(apa) display(tab = tab_n1, gs1 = prob_ci1_apa, gs2 = prob_ci2_apa, vali1 = var_type, vali2 = vali, 
                           test1 = test, apa_test1 = test_apa, asso1 = eff_apa)
@@ -444,7 +444,7 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
           
           eff = paste("Phi coefficient = ", r(phi), m(phi, lim1 = 0.1, lim2 = 0.3, lim3 = 0.5), sep = "")
           
-          eff_apa = paste("&phi; = ", x1_apa(phi), sep = "")
+          eff_apa = paste("*&phi*; = ", x1_apa(phi), sep = "")
           
           odd = paste("Odds ratio = ", r(odds), ", 95% CI [", r(ci_odds[[1]]), ", ", 
                       r(ci_odds[[2]]), "]", m(odds, lim1 = 1.55, lim2 = 2.8, lim3 = 5, OR = T), sep = "")
@@ -550,7 +550,7 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
           
           eff = paste("Cramer's V = ", r(v), magnitude, sep = "")
           
-          eff_apa = paste("Cramer's V = ", x1_apa(v), magnitude, sep = "")
+          eff_apa = paste("*V* = ", x1_apa(v), magnitude, sep = "")
           
           name_ph = "Pairwise Fisher's exact test (fdr adjustment method) :"
           
@@ -630,7 +630,7 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
               
               eff = paste("Cohen's g = ", r(g), m(g, lim1 = 0.05, lim2 = 0.15, lim3 = 0.25), sep = "")
               
-              eff_apa = paste("Cohen's *g* = ", x1_apa(g), sep = "")
+              eff_apa = paste("*g* = ", x1_apa(g), sep = "")
               
               odds = paste("Odds ratio = ", r(o), ", 95% CI [", r(ci_o[[1]]), ", ", r(ci_o[[2]]), "]",
                            m(o, lim1 = 1.22, lim2 = 1.86, lim3 = 3, OR = T), sep = "")
@@ -684,17 +684,17 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
               
               test1_n = paste("Asymptotic General Symmetry Test", n, "Z = ", r(Z), ", p-value = ", r(p_value1), s(p_value1), sep = "")
               
-              test1_apa = paste("Asymptotic General Symmetry Test", n, "Z = ", x_apa(Z), ", *p* ", p_apa(p_value1), sep = "")
+              test1_apa = paste("Asymptotic General Symmetry Test", n, "*Z* = ", x_apa(Z), ", *p* ", p_apa(p_value1), sep = "")
               
               test2_n = paste("Stuart-Maxwell Marginal Homogeneity Test", n, "X-squared = ", r(x_squared), ", df = ", df,
                               ", p-value = ", r(p_value2), s(p_value2), sep = "")
               
-              test2_apa = paste("Stuart-Maxwell Marginal Homogeneity Test: &chi;^2^(", df, n_apa, x_apa(x_squared), 
+              test2_apa = paste("Stuart-Maxwell Marginal Homogeneity Test: *&chi;*^2^(", df, n_apa, x_apa(x_squared), 
                                 ", *p* ", p_apa(p_value2), sep = "")
               
               g = paste("Cohen's g = ", r(g_global), m(g_global, lim1 = 0.05, lim2 = 0.15, lim3 = 0.25), sep = "")
               
-              g_apa = paste("Cohen's *g* = ", x1_apa(g_global), sep = "")
+              g_apa = paste("*g* = ", x1_apa(g_global), sep = "")
               
               o = paste("Odds ratio = ", r(o_global), m(o_global, lim1 = 1.22, lim2 = 1.86, lim3 = 3, OR = T), sep = "")
               
@@ -740,7 +740,7 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
             
             test1_n = paste("Asymptotic General Symmetry Test", n, "Z = ", r(Z), ", p-value = ", r(p_value1), s(p_value1), sep = "")
             
-            test1_apa = paste("Asymptotic General Symmetry Test", n, "Z = ", x_apa(Z), ", *p* ", p_apa(p_value1), sep = "")
+            test1_apa = paste("Asymptotic General Symmetry Test", n, "*Z* = ", x_apa(Z), ", *p* ", p_apa(p_value1), sep = "")
             
             if(exists("test2", envir = fct.env)) 
               assign("test2_n", paste("Cochran's Q test", n, "Q = ", r(get("test2", envir = fct.env)[[3]][[1]]), ", df = ", 
@@ -832,7 +832,7 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
               test = paste("Exact conditional test of independence", n, "S = ", r(test1[[1]][[1]]), ", p-value = ", r(test1[[2]][[1]]),
                            s(test1[[2]][[1]]), sep = "")
               
-              test_apa = paste("Exact conditional test of independence", n, "S = ", test1[[2]][[1]], ", *p* ", p_apa(test1[[2]][[1]]), sep = "")
+              test_apa = paste("Exact conditional test of independence", n, "*S* = ", test1[[2]][[1]], ", *p* ", p_apa(test1[[2]][[1]]), sep = "")
               
               # General Odds ratio
               
@@ -858,7 +858,7 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
               test = paste("Mantel-Haenszel Chi-squared Test with continuity correction", n, "X-squared = ", r(test1[[1]][[1]]), 
                            ", df = ", test1[[2]][[1]], ", p-value = ", r(test1[[3]][[1]]), s(test1[[3]][[1]]), sep = "")
               
-              test_apa = paste("M-H c.c. Test: &chi;^2^(", test1[[2]][[1]], n_apa, x_apa(test1[[1]][[1]]),
+              test_apa = paste("M-H c.c. Test: *&chi;*^2^(", test1[[2]][[1]], n_apa, x_apa(test1[[1]][[1]]),
                                ", *p* ", p_apa(test1[[3]][[1]]), sep = "")
               
               # General Odds ratio
@@ -889,7 +889,7 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
             test = paste("Cochran-Mantel-Haenszel Test", n, "M^2 = ", r(test1[[1]][[1]]), 
                          ", df = ", test1[[2]][[1]], ", p-value = ", r(test1[[3]][[1]]), s(test1[[3]][[1]]), sep = "")
             
-            test_apa = paste("CMH Test: M^2^(", test1[[2]][[1]], n_apa, x_apa(test1[[1]][[1]]),
+            test_apa = paste("CMH Test: *M^2^*(", test1[[2]][[1]], n_apa, x_apa(test1[[1]][[1]]),
                              ", *p* ", p_apa(test1[[3]][[1]]), sep = "")
             
           }
@@ -944,8 +944,8 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
                          ", p-value = ", r(lrt[[3]][1]), s(lrt[[3]][1]), "\nX2 -> X-squared = ", r(lrt[[1]][2]), 
                          ", df = ", lrt[[2]][2], ", p-value = ", r(lrt[[3]][2]), s(lrt[[3]][2]), sep = "")
             
-            test_apa = paste("LRT Test:\nX1 -> &chi;^2^(", lrt[[2]][1], n_apa, x_apa(lrt[[1]][1]), ", *p* ", 
-                             p_apa(lrt[[3]][1]), "\nX2 -> &chi;^2^(", lrt[[2]][2], n_apa, x_apa(lrt[[1]][2]), ", *p* ", 
+            test_apa = paste("LRT Test:\nX1 -> *&chi;*^2^(", lrt[[2]][1], n_apa, x_apa(lrt[[1]][1]), ", *p* ", 
+                             p_apa(lrt[[3]][1]), "\nX2 -> *&chi;*^2^(", lrt[[2]][2], n_apa, x_apa(lrt[[1]][2]), ", *p* ", 
                              p_apa(lrt[[3]][2]), sep = "")
             
           }
@@ -978,9 +978,9 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
                          "\nX1:X2 -> X-squared = ", r(lrt[[1]][3]), ", df = ", lrt[[2]][3], ", p-value = ", 
                          r(lrt[[3]][3]), s(lrt[[3]][3]), sep = "")
             
-            test_apa = paste("LRT Test:\nX1 -> &chi;^2^(", lrt[[2]][1], n_apa, x_apa(lrt[[1]][1]), ", *p* ", 
-                             p_apa(lrt[[3]][1]), "\nX2 -> &chi;^2^(", lrt[[2]][2], n_apa, x_apa(lrt[[1]][2]), ", *p* ", 
-                             p_apa(lrt[[3]][2]), "\nX1:X2 -> &chi;^2^(", lrt[[2]][3], n_apa, x_apa(lrt[[1]][3]), ", *p* ", 
+            test_apa = paste("LRT Test:\nX1 -> *&chi;*^2^(", lrt[[2]][1], n_apa, x_apa(lrt[[1]][1]), ", *p* ", 
+                             p_apa(lrt[[3]][1]), "\nX2 -> *&chi;*^2^(", lrt[[2]][2], n_apa, x_apa(lrt[[1]][2]), ", *p* ", 
+                             p_apa(lrt[[3]][2]), "\nX1:X2 -> *&chi;*^2^(", lrt[[2]][3], n_apa, x_apa(lrt[[1]][3]), ", *p* ", 
                              p_apa(lrt[[3]][3]), sep = "")
             
           }
