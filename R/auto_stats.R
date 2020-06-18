@@ -345,7 +345,7 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
           
           eff_apa = paste("Cohen's *h* = ", x_apa(effect_size), sep = "")
           
-          if(apa) display(tab = tab_n1, apa_gs1 = prob_ci1_apa, apa_gs2 = prob_ci2_apa, vali1 = var_type, vali2 = vali, 
+          if(apa) display(tab = tab_n1, gs1 = prob_ci1_apa, gs2 = prob_ci2_apa, vali1 = var_type, vali2 = vali, 
                           test1 = test, apa_test1 = test_apa, asso1 = eff_apa)
           
           else display(tab = tab_n1, gs1 = prob_ci1, gs2 = prob_ci2, vali1 = var_type, vali2 = vali, test1 = test, asso1 = eff)
