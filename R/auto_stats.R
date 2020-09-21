@@ -1020,7 +1020,7 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
   
   ## Quantitative Y
   
-  if(is.numeric(Y) || is.integer(Y)) {
+  else if(is.numeric(Y) || is.integer(Y)) {
     
     # No X
     
