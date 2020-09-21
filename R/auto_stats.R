@@ -94,14 +94,14 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
         cat(" ", fill = T)
         cat(paste("APA code ->", apa_test1), fill = T)
         if(is.null(apa_test2)) { cat(" ", fill = T)
-          cat("(Copy it + Paste it in an R Notebook + Click on Preview and save it + Click on Knit + Copy it anywhere else)", fill = T)}}
+          cat("(Copy it + Paste it in an R Notebook + Click on Preview and save + Click on Open in browser + Copy/paste it)", fill = T)}}
       if(!is.null(test2)) {cat(" ", fill = T) 
         cat(test2, fill = T)}
       if(!is.null(apa_test2)) {
         cat(" ", fill = T)
         cat(paste("APA code ->", apa_test2), fill = T)
         cat(" ", fill = T)
-        cat("(Copy it + Paste it in an R Notebook + Click on Preview and save it + Click on Knit + Copy it anywhere else)", fill = T)}
+        cat("(Copy it + Paste it in an R Notebook + Click on Preview and save + Click on Open in browser + Copy/paste it)", fill = T)}
       cat(" ", fill = T)
     }
     if(!is.null(asso1) || !is.null(other_asso)) {
