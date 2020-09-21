@@ -1018,4 +1018,128 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
             It will soon be available if Y is quantitative.
             ")
   
+  ## Quantitative Y
+  
+  if(is.numeric(Y) || is.integer(Y)) {
+    
+    # No X
+    
+    if(is.null(x1) && is.null(x2)) {
+      
+      # Independence
+      
+      if(paired == "none") {
+        
+        var_type = "Variable type: Quantitative dependent variable without factors -> Comparison with a theoric mean."
+        
+        if(theoric_mean == "default") {
+          
+          theoric_mean = 0
+          
+          assign("message1", "No theoric mean have been provided to compare it with the mean of Y.\nTherefore, the theoric mean was automatically set to 0.", envir = fct.env)
+          
+        }
+        
+        # Non-normality of Y (Shapiro-Wilk Test) and/or outliers (Boxplot Method)
+        
+        if(shapiro.test(Y)[2] <= 0.05 || nrow(identify_outliers(as.data.frame(Y))) != 0) {
+          
+          vali = paste("Shapiro-Wilk Test on Y: W = ", r(shapiro.test(Y)[[1]]), ", p-value = ", 
+                       r(shapiro.test(Y)[[2]]), " -> Non-normality (p-value <= 0.05)", sep = "")
+          
+          if(nrow(identify_outliers(as.data.frame(Y))) != 0) assign("message2", "There was outliers: please check for measurement and/or experimental errors.\nIf so, remove those values from the dataframe. Otherwise, a non-parametric\nmethod (more robust) was used to deal with those outliers.", envir = fct.env)
+          
+          # Pseudo-median of Y and its CI
+          
+          pseudo_median = suppressWarnings(wilcox.test(Y, mu = theoric_mean, conf.int = T))[[9]][[1]]
+          
+          ci1 = suppressWarnings(wilcox.test(Y, mu = theoric_mean, conf.int = T))[[8]][1:2]
+          
+          # One-sample Wilcoxon's Test 
+          
+          test1 = suppressWarnings(wilcox.test(Y, mu = theoric_mean))
+          
+          # Effect size : r
+          
+          effect_size = wilcox_effsize(Y ~ 1, mu = theoric_mean, data = data.frame(Y))
+          
+          ### Displaying results
+          
+          med = paste("Pseudo-median = ", r(pseudo_median), ", 95% CI [", r(ci1[1]), ", ", r(ci1[2]), "]", sep = "")
+          
+          med_apa = paste("Mdn = ", x_apa(pseudo_median), ", 95% CI [", x_apa(ci1[1]), ", ", x_apa(ci1[2]), "]", sep = "")
+          
+          test = paste("One-sample Wilcoxon's Test", n, "V = ", r(test1[[1]]), ", p-value = ", 
+                       r(test1[[3]]), s(test1[[3]]), sep = "")
+          
+          test_apa = paste("*V*<sub>Wilcoxon</sub>(N = ", length(Y), ") = ", x_apa(test1[[1]]), ", *p* ", 
+                           p_apa(test1[[3]]), sep = "")
+          
+          eff = paste("Wilcoxon r = ", r(effect_size[[4]]), m(effect_size[[4]], lim1 = 0.1, lim2 = 0.3, lim3 = 0.5), sep = "")
+          
+          eff_apa = paste("*r* = ", x1_apa(effect_size[[4]]), sep = "")
+          
+          if(apa) display(gs1 = med_apa, vali1 = var_type, vali2 = vali, test1 = test, apa_test1 = test_apa, 
+                          asso1 = eff, apa_asso1 = eff_apa, mes1 = cm("message1"), mes2 = cm("message2"))
+          
+          else display(gs1 = med, vali1 = var_type, vali2 = vali, test1 = test, asso1 = eff, mes1 = cm("message1"), mes2 = cm("message2"))
+          
+        }
+        
+        # Normality of Y (Shapiro-Wilk Test) and no outliers (Boxplot Method)
+        
+        else {
+          
+          vali = paste("Shapiro-Wilk Test on Y: W = ", r(shapiro.test(Y)[[1]]), ", p-value = ", 
+                       r(shapiro.test(Y)[[2]]), " -> Normality (p-value > 0.05)", sep = "")
+          
+          # Mean of Y and its CI
+          
+          mean = t.test(Y, mu = theoric_mean)[[5]][[1]]
+          
+          ci1 = t.test(Y, mu = theoric_mean)[[4]][1:2]
+          
+          # One-sample Student's T-Test
+          
+          test1 = t.test(Y, mu = theoric_mean)
+          
+          # Effect size: Cohen's D
+          
+          effect_size = cohens_d(Y ~ 1, mu = theoric_mean, data = data.frame(Y))
+          
+          ### Displaying results
+          
+          m = paste("Mean = ", r(mean), ", 95% CI [", r(ci1[1]), ", ", r(ci1[2]), "]", sep = "")
+          
+          m_apa = paste("M = ", x_apa(mean), ", 95% CI [", x_apa(ci1[1]), ", ", x_apa(ci1[2]), "]", sep = "")
+          
+          test = paste("One-sample Student's T-Test", n, "t = ", r(test1[[1]]), ", df = ", test1[[2]], ", p-value = ", 
+                       r(test1[[3]]), s(test1[[3]]), sep = "")
+          
+          test_apa = paste("*t*(", test1[[2]], n_apa, x_apa(test1[[1]]), ", *p* ", p_apa(test1[[3]]), sep = "")
+          
+          print(x1_apa(test1[[3]]))
+          print(test1[[3]])
+          
+          eff = paste("Cohen's d = ", r(effect_size[[4]]), m(effect_size[[4]], lim1 = 0.2, lim2 = 0.5, lim3 = 0.8), sep = "")
+          
+          eff_apa = paste("*d* = ", x_apa(effect_size[[4]]), sep = "")
+          
+          if(apa) display(gs1 = m_apa, vali1 = var_type, vali2 = vali, test1 = test, apa_test1 = test_apa, 
+                          asso1 = eff, apa_asso1 = eff_apa, mes1 = cm("message1"), mes2 = cm("message2"))
+          
+          else display(gs1 = m, vali1 = var_type, vali2 = vali, test1 = test, asso1 = eff, mes1 = cm("message1"), mes2 = cm("message2"))
+          
+        }
+        
+      }
+      
+      # Repeated measures: ERROR
+      
+      else  stop("Y cannot be paired. Add a repeated factor in the formula.")
+      
+    }
+    
+  }
+  
 }
