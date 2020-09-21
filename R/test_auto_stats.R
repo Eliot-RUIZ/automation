@@ -23,11 +23,11 @@ test_auto_stats = function(y, nb_x, paired) {
     if(nb_x == 0 && paired == "none") {
       
       y1_cochran_not_ok = c("No", "No", "No", "Yes", "No")
-      `QUALITATIVE: No X - Y with 2 levels - Cochran Rule = OK` <<-
+      `QUALITATIVE: No X - Y with 2 levels - Cochran Rule = NOT OK` <<-
         data.frame(Y = y1_cochran_not_ok)
       
       y1_cochran_ok = rep(y1_cochran_not_ok, 3)
-      `QUALITATIVE: No X - Y with 2 levels - Cochran Rule = NOT OK` <<- 
+      `QUALITATIVE: No X - Y with 2 levels - Cochran Rule = OK` <<- 
         data.frame(Y = y1_cochran_ok)
       
       # Display
