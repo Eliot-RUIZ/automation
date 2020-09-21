@@ -1,4 +1,4 @@
-auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL, digits = 3, apa = F) {
+auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL, digits = 3, apa = F, theoric_mean = "default") {
   
   ## Initialisation
   
@@ -259,7 +259,7 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
   
   ## Qualitative Y
   
-  if(is.factor(y) || is.character(y)) {
+  if(is.factor(Y) || is.character(Y)) {
     
     ### No X
     
@@ -1010,13 +1010,6 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
     }
     
   }
-  
-  ### Quantitative Y
-  
-  else stop("
-            For the moment, the auto_stats function can only analyse data if Y is qualitative.
-            It will soon be available if Y is quantitative.
-            ")
   
   ## Quantitative Y
   
