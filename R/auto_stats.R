@@ -324,18 +324,15 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
           
           var_type = "Variable type: Qualitative dependent variable (Y) with two levels.\nNo factors (X)."
           
-          prob_ci1 = paste("Probality of ", names(tab_n1)[1], " = ", r(prob1), " 95% CI [", r(ci1[1]), ", ", r(ci1[2]), "]", sep = "")
-          prob_ci2 = paste("Probality of ", names(tab_n2)[1], " = ", r(prob2), " 95% CI [", r(ci2[1]), ", ", r(ci2[2]), "]", sep = "")
-          
           prob_ci1 = paste("Probality of ", names(tab_n1)[1], " = ", r(prob1), ", 95% CI [", r(ci1[1]), ", ", r(ci1[2]), "]", sep = "")
           
-          prob_ci2 = paste("Probality of ", names(tab_n2)[1], " = ", r(prob2), " 95% CI [", r(ci2[1]), ", ", r(ci2[2]), "]", sep = "")
+          prob_ci2 = paste("Probality of ", names(tab_n2)[1], " = ", r(prob2), ", 95% CI [", r(ci2[1]), ", ", r(ci2[2]), "]", sep = "")
           
           prob_ci1_apa = paste("Probality of ", names(tab_n1)[1], " = ", x1_apa(prob1), 
                                ", 95% CI [", x1_apa(ci1[1]), ", ", x1_apa(ci1[2]), "]", sep = "")
           
           prob_ci2_apa = paste("Probality of ", names(tab_n2)[1], " = ", x1_apa(prob2), 
-                               " 95% CI [", x1_apa(ci2[1]), ", ", x1_apa(ci2[2]), "]", sep = "")
+                               ", 95% CI [", x1_apa(ci2[1]), ", ", x1_apa(ci2[2]), "]", sep = "")
           
           test = paste(name, "X-squared = ", r(test1[[1]][[1]]), ", df = ", test1[[2]][[1]], ", p-value = ", r(test1[[3]]), s(test1[[3]]), sep = "")
           
@@ -444,7 +441,7 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
           
           eff = paste("Phi coefficient = ", r(phi), m(phi, lim1 = 0.1, lim2 = 0.3, lim3 = 0.5), sep = "")
           
-          eff_apa = paste("*&phi*; = ", x1_apa(phi), sep = "")
+          eff_apa = paste("*&phi;* = ", x1_apa(phi), sep = "")
           
           odd = paste("Odds ratio = ", r(odds), ", 95% CI [", r(ci_odds[[1]]), ", ", 
                       r(ci_odds[[2]]), "]", m(odds, lim1 = 1.55, lim2 = 2.8, lim3 = 5, OR = T), sep = "")
@@ -510,8 +507,6 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
           df = suppressWarnings(chisq.test(tab_n))[[2]][[1]]
           
           magnitude = mv(v = v, df = df)
-          
-          # Post-hoc
           
           # X has two levels
           
