@@ -587,13 +587,25 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
           
           data_wide = data_long %>% spread(X1, Y)
           
-          tab_n = table(data_wide[,-1])
-          
-          tab_f = ftable(data_wide[,-1])
-          
           # X has two levels
           
           if(length(unique(X1)) == 2) {
+          
+          na_tab = table(data_wide[,-1], useNA = "always")
+          
+          tab_n = na_tab[1:2,1:2]
+          
+          if(nrow(na_tab) > 2) {
+            
+            if(colnames(tab_n)[1] == rownames(tab_n)[1]) colnames(tab_n)[2] = rownames(tab_n)[2] 
+            
+            else if(colnames(tab_n)[2] == rownames(tab_n)[2]) colnames(tab_n)[1] = rownames(tab_n)[1] }
+          
+          else if(ncol(na_tab) > 2) {
+            
+            if(rownames(tab_n)[1] == colnames(tab_n)[1]) rownames(tab_n)[2] = colnames(tab_n)[2]
+            
+            else if(rownames(tab_n)[2] == colnames(tab_n)[2]) rownames(tab_n)[1] = colnames(tab_n)[1] }
             
             # Y has two levels (2 x 2)
             
@@ -711,6 +723,10 @@ auto_stats = function(data, y, x1 = NULL, x2 = NULL, paired = "none", id = NULL,
           # X has more than two levels
           
           else {
+            
+            tab_n = table(data_wide[,-1])
+            
+            tab_f = ftable(data_wide[,-1])
             
             # Asymptotic General Symmetry Test
             
